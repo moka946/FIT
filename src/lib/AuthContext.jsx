@@ -64,7 +64,8 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       if (shouldRedirect) {
-        window.location.href = '/';
+        const isGitHubPages = window.location.pathname.includes('/FIT/');
+        window.location.href = isGitHubPages ? '/FIT/' : '/';
       }
     } catch (error) {
       console.error("Logout failed", error);
