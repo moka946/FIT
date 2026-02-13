@@ -72,11 +72,13 @@ const AuthenticatedApp = () => {
 
 
 function App() {
+  const isGitHubPages = window.location.pathname.includes('/FIT/');
+  const basename = isGitHubPages ? '/FIT' : '';
 
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
-        <Router>
+        <Router basename={basename}>
           <NavigationTracker />
           <AuthenticatedApp />
         </Router>
@@ -84,7 +86,7 @@ function App() {
         <HotToaster position="top-center" />
       </QueryClientProvider>
     </AuthProvider>
-  )
+  );
 }
 
 export default App
