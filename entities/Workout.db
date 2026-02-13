@@ -1,0 +1,68 @@
+{
+  "name": "Workout",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the workout"
+    },
+    "day": {
+      "type": "string",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "description": "Day of the week"
+    },
+    "muscle_group": {
+      "type": "string",
+      "enum": [
+        "Chest",
+        "Back",
+        "Shoulders",
+        "Arms",
+        "Legs",
+        "Core",
+        "Full Body",
+        "Cardio"
+      ],
+      "description": "Target muscle group"
+    },
+    "exercises": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "sets": {
+            "type": "number"
+          },
+          "reps": {
+            "type": "string"
+          },
+          "video_url": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "duration_minutes": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "name",
+    "day",
+    "muscle_group"
+  ]
+}

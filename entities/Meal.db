@@ -1,0 +1,50 @@
+{
+  "name": "Meal",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the meal"
+    },
+    "meal_type": {
+      "type": "string",
+      "enum": [
+        "Breakfast",
+        "Lunch",
+        "Dinner",
+        "Snack",
+        "Pre-Workout",
+        "Post-Workout"
+      ],
+      "description": "Type of meal"
+    },
+    "calories": {
+      "type": "number"
+    },
+    "protein": {
+      "type": "number"
+    },
+    "carbs": {
+      "type": "number"
+    },
+    "fats": {
+      "type": "number"
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "instructions": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "meal_type"
+  ]
+}
