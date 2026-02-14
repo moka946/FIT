@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function CoachChat() {
   const { t, isRTL, language } = useLanguage();
@@ -13,12 +14,20 @@ export default function CoachChat() {
     ? "أهلاً يا بطل! 💪 أنا المدرب، مساعدك الشخصي للياقة البدنية. اسألني أي شيء عن التمارين أو التغذية أو رحلتك الرياضية. يلا نحقق أهدافك!"
     : "Hey champ! 💪 I'm Coach, your personal fitness AI. Ask me anything about workouts, nutrition, or your fitness journey. Let's crush those goals together!";
 
-  const [messages, setMessages] = useState([
-    {
+  const { user } = useAuth();
+  const storageKey = user ? `coach_chat_${user.uid}` : null;
+
+  const [messages, setMessages] = useState(() => {
+    if (storageKey) {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) return JSON.parse(saved);
+    }
+    return [{
       role: 'coach',
       content: getInitialMessage()
-    }
-  ]);
+    }];
+  });
+
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [speaking, setSpeaking] = useState(null);
@@ -29,8 +38,11 @@ export default function CoachChat() {
   };
 
   useEffect(() => {
+    if (storageKey && messages.length > 0) {
+      localStorage.setItem(storageKey, JSON.stringify(messages));
+    }
     scrollToBottom();
-  }, [messages]);
+  }, [messages, storageKey]);
 
   const speakText = (text, index) => {
     if ('speechSynthesis' in window) {
