@@ -48,7 +48,8 @@ const egyptianMeals = [
     protein: 14,
     carbs: 10,
     fats: 20,
-    image_url: 'https://images.unsplash.com/photo-1598103442097-8b74394b85c3?w=800',
+    image_url: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800',
+
     ingredients: ['Eggs', 'Onions', 'Ghee', 'Salt', 'Black pepper'],
     instructions: 'Caramelize onions in ghee until golden, add beaten eggs and scramble together.'
   },
@@ -59,7 +60,8 @@ const egyptianMeals = [
     protein: 12,
     carbs: 8,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=800',
+    image_url: 'https://images.unsplash.com/photo-1510629954389-c1e0da47d414?w=800',
+
     ingredients: ['Egyptian white cheese', 'Fresh tomatoes', 'Olive oil', 'Mint', 'Baladi bread'],
     instructions: 'Slice cheese and tomatoes, drizzle with olive oil and sprinkle with mint. Serve with bread.'
   },
