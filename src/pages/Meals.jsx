@@ -162,7 +162,7 @@ const egyptianMeals = [
     protein: 38,
     carbs: 52,
     fats: 24,
-    image_url: 'https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=400',
+    image_url: 'https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=800',
     ingredients: ['Lamb or beef', 'Rice', 'Crispy bread', 'Garlic vinegar sauce', 'Tomato sauce'],
     instructions: 'Layer crispy bread with rice and tender meat. Top with garlic vinegar and tomato sauce.'
   },
@@ -173,7 +173,7 @@ const egyptianMeals = [
     protein: 32,
     carbs: 45,
     fats: 23,
-    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400',
+    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800',
     ingredients: ['Ground beef kofta', 'Egyptian rice', 'Grilled vegetables', 'Tahini sauce', 'Fresh salad'],
     instructions: 'Grill kofta skewers over charcoal. Serve with vermicelli rice and grilled tomatoes.'
   },
@@ -197,7 +197,7 @@ const egyptianMeals = [
     protein: 8,
     carbs: 24,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1606924995157-4a6a495c7eb6?w=400',
+    image_url: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=800',
     ingredients: ['Almonds', 'Walnuts', 'Dried apricots', 'Dates', 'Hazelnuts'],
     instructions: 'Mix your favorite nuts and dried fruits. Great for sustained energy!'
   },
@@ -208,7 +208,7 @@ const egyptianMeals = [
     protein: 4,
     carbs: 12,
     fats: 12,
-    image_url: 'https://images.unsplash.com/photo-1541013406133-94ed77ee8ba8?w=400',
+    image_url: 'https://images.unsplash.com/photo-1534422298391-e4f8c170db06?w=800',
     ingredients: ['Roasted eggplant', 'Tahini', 'Garlic', 'Lemon', 'Fresh vegetables'],
     instructions: 'Blend roasted eggplant with tahini and garlic. Serve with cucumber and carrot sticks.'
   },
@@ -219,7 +219,7 @@ const egyptianMeals = [
     protein: 8,
     carbs: 22,
     fats: 10,
-    image_url: 'https://images.unsplash.com/photo-1577805947697-89e18249d767?w=400',
+    image_url: 'https://images.unsplash.com/photo-1577906030551-5b916ebca73e?w=800',
     ingredients: ['Chickpeas', 'Tahini', 'Lemon', 'Garlic', 'Pita bread'],
     instructions: 'Blend chickpeas with tahini and lemon. Serve with warm pita triangles.'
   },
