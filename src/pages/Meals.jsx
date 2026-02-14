@@ -15,7 +15,7 @@ const egyptianMeals = [
     protein: 16,
     carbs: 35,
     fats: 12,
-    image_url: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400',
+    image_url: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800',
     ingredients: ['Fava beans (ful)', 'Olive oil', 'Cumin', 'Lemon', 'Garlic', 'Baladi bread'],
     instructions: 'Mash fava beans with cumin, garlic, and olive oil. Serve with warm baladi bread.'
   },
@@ -26,7 +26,7 @@ const egyptianMeals = [
     protein: 13,
     carbs: 31,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1593001874117-c99c800e3eb7?w=400',
+    image_url: 'https://images.unsplash.com/photo-1593001874117-c99c800e3eb7?w=800',
     ingredients: ['Fava beans', 'Fresh herbs', 'Onions', 'Garlic', 'Spices', 'Baladi bread'],
     instructions: 'Blend fava beans with herbs and spices. Deep fry until golden. Serve in bread with tahini.'
   },
@@ -37,7 +37,7 @@ const egyptianMeals = [
     protein: 10,
     carbs: 52,
     fats: 24,
-    image_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400',
+    image_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800',
     ingredients: ['Flour', 'Ghee', 'Eggs', 'Honey or cheese'],
     instructions: 'Layer thin dough with ghee, fold and bake until golden and flaky. Serve with honey or cheese.'
   },
@@ -48,7 +48,7 @@ const egyptianMeals = [
     protein: 14,
     carbs: 10,
     fats: 20,
-    image_url: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400',
+    image_url: 'https://images.unsplash.com/photo-1598103442097-8b74394b85c3?w=800',
     ingredients: ['Eggs', 'Onions', 'Ghee', 'Salt', 'Black pepper'],
     instructions: 'Caramelize onions in ghee until golden, add beaten eggs and scramble together.'
   },
@@ -59,7 +59,7 @@ const egyptianMeals = [
     protein: 12,
     carbs: 8,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400',
+    image_url: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=800',
     ingredients: ['Egyptian white cheese', 'Fresh tomatoes', 'Olive oil', 'Mint', 'Baladi bread'],
     instructions: 'Slice cheese and tomatoes, drizzle with olive oil and sprinkle with mint. Serve with bread.'
   },
@@ -72,7 +72,7 @@ const egyptianMeals = [
     protein: 22,
     carbs: 32,
     fats: 16,
-    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400',
+    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800',
     ingredients: ['Ground beef', 'Onions', 'Peppers', 'Spices', 'Baladi bread'],
     instructions: 'Stuff bread with spiced minced meat mixture, bake until crispy and meat is cooked through.'
   },
@@ -83,7 +83,7 @@ const egyptianMeals = [
     protein: 35,
     carbs: 20,
     fats: 17,
-    image_url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400',
+    image_url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800',
     ingredients: ['Beef liver', 'Bell peppers', 'Garlic', 'Cumin', 'Chili', 'Baladi bread'],
     instructions: 'Slice liver thin, sauté with peppers and spices until just cooked. Serve in sandwiches.'
   },
@@ -94,7 +94,7 @@ const egyptianMeals = [
     protein: 32,
     carbs: 35,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1561651823-34feb02250e4?w=400',
+    image_url: 'https://images.unsplash.com/photo-1561651823-34feb02250e4?w=800',
     ingredients: ['Chicken or beef', 'Spices', 'Onions', 'Tahini', 'Pickles', 'Bread'],
     instructions: 'Marinate meat in spices, grill and slice thin. Serve in bread with tahini and pickles.'
   },
@@ -105,7 +105,7 @@ const egyptianMeals = [
     protein: 18,
     carbs: 30,
     fats: 22,
-    image_url: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?w=400',
+    image_url: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?w=800',
     ingredients: ['Egyptian sausages', 'Tomatoes', 'Peppers', 'Tahini', 'Baladi bread'],
     instructions: 'Grill sausages with peppers and tomatoes. Serve in bread with tahini sauce.'
   },
@@ -116,7 +116,7 @@ const egyptianMeals = [
     protein: 38,
     carbs: 45,
     fats: 22,
-    image_url: 'https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=400',
+    image_url: 'https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800',
     ingredients: ['Chicken pieces', 'Egyptian spices', 'Rice', 'Vegetables'],
     instructions: 'Season and fry chicken until golden and crispy. Serve with vermicelli rice.'
   },
@@ -129,7 +129,7 @@ const egyptianMeals = [
     protein: 16,
     carbs: 70,
     fats: 12,
-    image_url: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400',
+    image_url: 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=800',
     ingredients: ['Rice', 'Lentils', 'Macaroni', 'Chickpeas', 'Tomato sauce', 'Crispy onions', 'Vinegar garlic sauce'],
     instructions: 'Layer rice, lentils, and pasta. Top with spicy tomato sauce and crispy onions.'
   },
@@ -140,7 +140,7 @@ const egyptianMeals = [
     protein: 42,
     carbs: 35,
     fats: 14,
-    image_url: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400',
+    image_url: 'https://images.unsplash.com/photo-1626082927389-6cd1bdacc066?w=800',
     ingredients: ['Molokhia leaves', 'Chicken', 'Garlic', 'Coriander', 'White rice'],
     instructions: 'Cook molokhia with garlic sauce. Serve over rice with tender chicken pieces.'
   },
@@ -151,7 +151,7 @@ const egyptianMeals = [
     protein: 8,
     carbs: 59,
     fats: 8,
-    image_url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400',
+    image_url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800',
     ingredients: ['Bell peppers', 'Zucchini', 'Grape leaves', 'Rice filling', 'Tomato sauce', 'Herbs'],
     instructions: 'Stuff vegetables with herbed rice mixture. Cook in tomato broth until tender.'
   },
