@@ -243,7 +243,7 @@ const egyptianMeals = [
     protein: 12,
     carbs: 52,
     fats: 8,
-    image_url: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400',
+    image_url: 'https://images.unsplash.com/photo-1571115160391-45f8f87e83e9?w=800',
     ingredients: ['Banana', 'Oats', 'Milk', 'Honey', 'Cinnamon'],
     instructions: 'Blend all ingredients until smooth. Drink 30-45 minutes before workout.'
   },
@@ -254,7 +254,7 @@ const egyptianMeals = [
     protein: 6,
     carbs: 48,
     fats: 5,
-    image_url: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400',
+    image_url: 'https://images.unsplash.com/photo-1599321955726-e04842a394bb?w=800',
     ingredients: ['Egyptian baladi bread', 'Raw honey', 'Banana slices'],
     instructions: 'Spread honey on warm bread, top with banana. Quick energy boost!'
   },
@@ -265,7 +265,7 @@ const egyptianMeals = [
     protein: 5,
     carbs: 32,
     fats: 9,
-    image_url: 'https://images.unsplash.com/photo-1583953323275-3ac4af2e3cf0?w=400',
+    image_url: 'https://images.unsplash.com/photo-1596567130026-6239bc7a6acb?w=800',
     ingredients: ['Medjool dates', 'Raw almonds'],
     instructions: 'Eat 3-4 dates with a handful of almonds 30 minutes before training.'
   },
@@ -289,7 +289,7 @@ const egyptianMeals = [
     protein: 15,
     carbs: 41,
     fats: 3,
-    image_url: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400',
+    image_url: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800',
     ingredients: ['Red lentils', 'Onions', 'Cumin', 'Lemon', 'Baladi bread'],
     instructions: 'Cook lentils until soft, blend smooth. Serve with cumin oil and crispy bread.'
   },
