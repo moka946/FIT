@@ -15,7 +15,7 @@ const egyptianMeals = [
     protein: 16,
     carbs: 35,
     fats: 12,
-    image_url: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800',
+    image_url: 'https://images.unsplash.com/photo-1541518763669-27f7045d46bb?w=800',
     ingredients: ['Fava beans (ful)', 'Olive oil', 'Cumin', 'Lemon', 'Garlic', 'Baladi bread'],
     instructions: 'Mash fava beans with cumin, garlic, and olive oil. Serve with warm baladi bread.'
   },
@@ -26,7 +26,7 @@ const egyptianMeals = [
     protein: 13,
     carbs: 31,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1593001874117-c99c800e3eb7?w=800',
+    image_url: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=800',
     ingredients: ['Fava beans', 'Fresh herbs', 'Onions', 'Garlic', 'Spices', 'Baladi bread'],
     instructions: 'Blend fava beans with herbs and spices. Deep fry until golden. Serve in bread with tahini.'
   },
@@ -37,7 +37,7 @@ const egyptianMeals = [
     protein: 10,
     carbs: 52,
     fats: 24,
-    image_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800',
+    image_url: 'https://images.unsplash.com/photo-1626074353765-517a681e40be?w=800',
     ingredients: ['Flour', 'Ghee', 'Eggs', 'Honey or cheese'],
     instructions: 'Layer thin dough with ghee, fold and bake until golden and flaky. Serve with honey or cheese.'
   },
@@ -105,7 +105,7 @@ const egyptianMeals = [
     protein: 18,
     carbs: 30,
     fats: 22,
-    image_url: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?w=800',
+    image_url: 'https://images.unsplash.com/photo-1553909489-cd47e0907d3f?w=800',
     ingredients: ['Egyptian sausages', 'Tomatoes', 'Peppers', 'Tahini', 'Baladi bread'],
     instructions: 'Grill sausages with peppers and tomatoes. Serve in bread with tahini sauce.'
   },
@@ -116,7 +116,7 @@ const egyptianMeals = [
     protein: 38,
     carbs: 45,
     fats: 22,
-    image_url: 'https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800',
+    image_url: 'https://images.unsplash.com/photo-1569058242253-6239f556883e?w=800',
     ingredients: ['Chicken pieces', 'Egyptian spices', 'Rice', 'Vegetables'],
     instructions: 'Season and fry chicken until golden and crispy. Serve with vermicelli rice.'
   },
