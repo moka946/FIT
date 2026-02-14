@@ -63,27 +63,32 @@ export default function ExerciseCard({ exercise, index, language = 'en', isRTL =
             className="overflow-hidden"
           >
             <div className="mt-4 rounded-xl overflow-hidden bg-zinc-800 relative min-h-[200px] flex items-center justify-center">
-              {exercise.gif_url.match(/\.(mp4|webm|mov)$/) ? (
-                <video
-                  src={exercise.gif_url}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-auto"
-                />
-              ) : (
-                <img
-                  src={exercise.gif_url}
-                  alt={exercise.name}
-                  className="w-full h-auto"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    target.src = 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop';
-                    target.className = "w-full h-48 object-cover opacity-50 grayscale";
-                  }}
-                />
-              )}
+              {(() => {
+                const baseUrl = import.meta.env.BASE_URL || '/';
+                const assetUrl = (baseUrl + exercise.gif_url).replace(/\/+/g, '/');
+
+                return exercise.gif_url.match(/\.(mp4|webm|mov)$/) ? (
+                  <video
+                    src={assetUrl}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto"
+                  />
+                ) : (
+                  <img
+                    src={assetUrl}
+                    alt={exercise.name}
+                    className="w-full h-auto"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.src = 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop';
+                      target.className = "w-full h-48 object-cover opacity-50 grayscale";
+                    }}
+                  />
+                );
+              })()}
             </div>
             {exercise.description && (
               <p className={`mt-3 text-zinc-400 text-sm ${isRTL ? 'text-right' : ''}`}>{exercise.description}</p>
