@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Dumbbell, Utensils, MessageCircle, ChevronRight, Flame, Target, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
+import FooterCredit from '@/components/FooterCredit';
 import LanguageToggle from '@/components/LanguageToggle';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
@@ -140,6 +141,8 @@ export default function Home() {
           </p>
         </motion.div>
       </div>
+
+      <FooterCredit />
 
       <BottomNav currentPage="Home" />
     </div>

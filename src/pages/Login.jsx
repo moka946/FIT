@@ -3,6 +3,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dumbbell, Chrome, Mail, Lock, ArrowRight, Loader2, UserPlus, LogIn } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import FooterCredit from '@/components/FooterCredit';
 
 export default function Login() {
     const { login, loginWithEmail, signUpWithEmail } = useAuth();
@@ -169,10 +170,7 @@ export default function Login() {
                     </p>
                 </div>
 
-                {/* Footer Info */}
-                <p className="text-center text-zinc-600 text-[10px] mt-12 uppercase tracking-widest font-medium">
-                    Powered by Firebase • Claude AI
-                </p>
+                <FooterCredit />
             </motion.div>
         </div>
     );

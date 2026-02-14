@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Ruler, Weight, Sparkles, Loader2, ClipboardList, Utensils } from 'lucide-react';
 import BottomNav from '@/components/navigation/BottomNav';
+import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
 import { Groq } from "groq-sdk";
 import ReactMarkdown from 'react-markdown';
@@ -161,6 +162,7 @@ Please respond in ${language === 'ar' ? 'Arabic' : 'English'} and format with cl
                 </AnimatePresence>
             </div>
 
+            <FooterCredit />
             <BottomNav currentPage="More" />
         </div>
     );

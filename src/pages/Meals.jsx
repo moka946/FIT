@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Utensils } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
+import FooterCredit from '@/components/FooterCredit';
 import MealCard from '@/components/meals/MealCard';
 import { useLanguage } from '@/components/LanguageContext';
 
@@ -319,11 +320,11 @@ const mealTypeKeys = {
 export default function Meals() {
   const { t, isRTL } = useLanguage();
   const [selectedType, setSelectedType] = useState('Dinner');
-  
+
   // Sort meals by type order when showing all
   const mealTypeOrder = { 'Breakfast': 1, 'Dinner': 2, 'Lunch': 3, 'Snack': 4, 'Pre-Workout': 5, 'Post-Workout': 6 };
-  
-  const filteredMeals = selectedType === 'All' 
+
+  const filteredMeals = selectedType === 'All'
     ? [...egyptianMeals].sort((a, b) => mealTypeOrder[a.meal_type] - mealTypeOrder[b.meal_type])
     : egyptianMeals.filter(meal => meal.meal_type === selectedType);
 
@@ -350,11 +351,10 @@ export default function Meals() {
               <button
                 key={type}
                 onClick={() => setSelectedType(type)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedType === type
-                    ? 'bg-orange-500 text-black'
-                    : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedType === type
+                  ? 'bg-orange-500 text-black'
+                  : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
+                  }`}
               >
                 {t(mealTypeKeys[type])}
               </button>
@@ -379,6 +379,7 @@ export default function Meals() {
         </div>
       </div>
 
+      <FooterCredit />
       <BottomNav currentPage="Meals" />
     </div>
   );

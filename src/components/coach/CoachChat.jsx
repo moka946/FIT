@@ -3,6 +3,7 @@ import { Send, Volume2, VolumeX, Loader2, Bot, User } from 'lucide-react';
 import { Groq } from "groq-sdk";
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
 
 export default function CoachChat() {
@@ -198,6 +199,7 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
         )}
 
         <div ref={messagesEndRef} />
+        <FooterCredit />
       </div>
 
       {/* Input */}

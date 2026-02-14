@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dumbbell, Calendar, Clock, ChevronLeft, ChevronRight, Flame, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
+import FooterCredit from '@/components/FooterCredit';
 import ExerciseCard from '@/components/workout/ExerciseCard';
 import { useLanguage } from '@/components/LanguageContext';
 
@@ -211,6 +212,7 @@ export default function Workouts() {
         )}
       </div>
 
+      <FooterCredit />
       <BottomNav currentPage="Workouts" />
     </div>
   );
