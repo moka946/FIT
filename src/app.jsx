@@ -4,7 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import NavigationTracker from '@/lib/NavigationTracker'
 import { pagesConfig } from './pages.config'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
@@ -67,13 +67,10 @@ const AuthenticatedApp = () => {
 
 
 function App() {
-  const isGitHubPages = window.location.pathname.includes('/FIT/');
-  const basename = isGitHubPages ? '/FIT' : '';
-
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
-        <Router basename={basename}>
+        <Router>
           <NavigationTracker />
           <AuthenticatedApp />
         </Router>
