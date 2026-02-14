@@ -72,7 +72,7 @@ const egyptianMeals = [
     protein: 22,
     carbs: 32,
     fats: 16,
-    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800',
+    image_url: 'https://images.unsplash.com/photo-1562607384-ad6229497e70?w=800',
     ingredients: ['Ground beef', 'Onions', 'Peppers', 'Spices', 'Baladi bread'],
     instructions: 'Stuff bread with spiced minced meat mixture, bake until crispy and meat is cooked through.'
   },
@@ -83,7 +83,7 @@ const egyptianMeals = [
     protein: 35,
     carbs: 20,
     fats: 17,
-    image_url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800',
+    image_url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
     ingredients: ['Beef liver', 'Bell peppers', 'Garlic', 'Cumin', 'Chili', 'Baladi bread'],
     instructions: 'Slice liver thin, sauté with peppers and spices until just cooked. Serve in sandwiches.'
   },
@@ -94,7 +94,7 @@ const egyptianMeals = [
     protein: 32,
     carbs: 35,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1561651823-34feb02250e4?w=800',
+    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800',
     ingredients: ['Chicken or beef', 'Spices', 'Onions', 'Tahini', 'Pickles', 'Bread'],
     instructions: 'Marinate meat in spices, grill and slice thin. Serve in bread with tahini and pickles.'
   },
