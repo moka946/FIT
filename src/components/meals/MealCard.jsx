@@ -17,7 +17,11 @@ export default function MealCard({ meal, index }) {
       >
         {meal.image_url && (
           <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
-            <img src={meal.image_url} alt={meal.name} className="w-full h-full object-cover" />
+            <img
+              src={(import.meta.env.BASE_URL + meal.image_url).replace(/\/+/g, '/')}
+              alt={meal.name}
+              className="w-full h-full object-cover"
+            />
           </div>
         )}
         <div className="flex-1 min-w-0">
@@ -41,13 +45,13 @@ export default function MealCard({ meal, index }) {
       {meal.image_url && (
         <div className="h-40 w-full overflow-hidden">
           <img
-            src={meal.image_url}
+            src={(import.meta.env.BASE_URL + meal.image_url).replace(/\/+/g, '/')}
             alt={meal.name}
             className="w-full h-full object-cover"
           />
         </div>
       )}
-      
+
       <div className="p-4">
         <div className="flex items-start justify-between">
           <div>
@@ -112,7 +116,7 @@ export default function MealCard({ meal, index }) {
                   </ul>
                 </div>
               )}
-              
+
               {meal.instructions && (
                 <div className="mt-4">
                   <h4 className="text-zinc-400 text-sm font-medium mb-2">How to prepare</h4>
