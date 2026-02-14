@@ -15,7 +15,7 @@ const egyptianMeals = [
     protein: 16,
     carbs: 35,
     fats: 12,
-    image_url: 'https://images.unsplash.com/photo-1541518763669-27f7045d46bb?w=800',
+    image_url: '/meal-images/full.jpg',
     ingredients: ['Fava beans (ful)', 'Olive oil', 'Cumin', 'Lemon', 'Garlic', 'Baladi bread'],
     instructions: 'Mash fava beans with cumin, garlic, and olive oil. Serve with warm baladi bread.'
   },
@@ -26,7 +26,7 @@ const egyptianMeals = [
     protein: 13,
     carbs: 31,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=800',
+    image_url: '/meal-images/falafel.jpg',
     ingredients: ['Fava beans', 'Fresh herbs', 'Onions', 'Garlic', 'Spices', 'Baladi bread'],
     instructions: 'Blend fava beans with herbs and spices. Deep fry until golden. Serve in bread with tahini.'
   },
@@ -37,7 +37,7 @@ const egyptianMeals = [
     protein: 10,
     carbs: 52,
     fats: 24,
-    image_url: 'https://images.unsplash.com/photo-1626074353765-517a681e40be?w=800',
+    image_url: '/meal-images/feteer.jpg',
     ingredients: ['Flour', 'Ghee', 'Eggs', 'Honey or cheese'],
     instructions: 'Layer thin dough with ghee, fold and bake until golden and flaky. Serve with honey or cheese.'
   },
@@ -48,7 +48,7 @@ const egyptianMeals = [
     protein: 14,
     carbs: 10,
     fats: 20,
-    image_url: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800',
+    image_url: '/meal-images/eggs.jpg',
 
     ingredients: ['Eggs', 'Onions', 'Ghee', 'Salt', 'Black pepper'],
     instructions: 'Caramelize onions in ghee until golden, add beaten eggs and scramble together.'
@@ -60,7 +60,7 @@ const egyptianMeals = [
     protein: 12,
     carbs: 8,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1510629954389-c1e0da47d414?w=800',
+    image_url: '/meal-images/gebna.jpg',
 
     ingredients: ['Egyptian white cheese', 'Fresh tomatoes', 'Olive oil', 'Mint', 'Baladi bread'],
     instructions: 'Slice cheese and tomatoes, drizzle with olive oil and sprinkle with mint. Serve with bread.'
@@ -74,7 +74,7 @@ const egyptianMeals = [
     protein: 22,
     carbs: 32,
     fats: 16,
-    image_url: 'https://images.unsplash.com/photo-1562607384-ad6229497e70?w=800',
+    image_url: '/meal-images/hawawshi.jpg',
     ingredients: ['Ground beef', 'Onions', 'Peppers', 'Spices', 'Baladi bread'],
     instructions: 'Stuff bread with spiced minced meat mixture, bake until crispy and meat is cooked through.'
   },
@@ -85,7 +85,7 @@ const egyptianMeals = [
     protein: 35,
     carbs: 20,
     fats: 17,
-    image_url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+    image_url: '/meal-images/kebda.jpg',
     ingredients: ['Beef liver', 'Bell peppers', 'Garlic', 'Cumin', 'Chili', 'Baladi bread'],
     instructions: 'Slice liver thin, sauté with peppers and spices until just cooked. Serve in sandwiches.'
   },
@@ -96,7 +96,7 @@ const egyptianMeals = [
     protein: 32,
     carbs: 35,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800',
+    image_url: '/meal-images/shawerma.jpg',
     ingredients: ['Chicken or beef', 'Spices', 'Onions', 'Tahini', 'Pickles', 'Bread'],
     instructions: 'Marinate meat in spices, grill and slice thin. Serve in bread with tahini and pickles.'
   },
@@ -107,7 +107,7 @@ const egyptianMeals = [
     protein: 18,
     carbs: 30,
     fats: 22,
-    image_url: 'https://images.unsplash.com/photo-1553909489-cd47e0907d3f?w=800',
+    image_url: '/meal-images/sausedge.jpg',
     ingredients: ['Egyptian sausages', 'Tomatoes', 'Peppers', 'Tahini', 'Baladi bread'],
     instructions: 'Grill sausages with peppers and tomatoes. Serve in bread with tahini sauce.'
   },
@@ -118,7 +118,7 @@ const egyptianMeals = [
     protein: 38,
     carbs: 45,
     fats: 22,
-    image_url: 'https://images.unsplash.com/photo-1569058242253-6239f556883e?w=800',
+    image_url: '/meal-images/chicken_rice.jpg',
     ingredients: ['Chicken pieces', 'Egyptian spices', 'Rice', 'Vegetables'],
     instructions: 'Season and fry chicken until golden and crispy. Serve with vermicelli rice.'
   },
@@ -131,7 +131,7 @@ const egyptianMeals = [
     protein: 16,
     carbs: 70,
     fats: 12,
-    image_url: 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=800',
+    image_url: '/meal-images/koshary.jpg',
     ingredients: ['Rice', 'Lentils', 'Macaroni', 'Chickpeas', 'Tomato sauce', 'Crispy onions', 'Vinegar garlic sauce'],
     instructions: 'Layer rice, lentils, and pasta. Top with spicy tomato sauce and crispy onions.'
   },
@@ -142,7 +142,7 @@ const egyptianMeals = [
     protein: 42,
     carbs: 35,
     fats: 14,
-    image_url: 'https://images.unsplash.com/photo-1626082927389-6cd1bdacc066?w=800',
+    image_url: '/meal-images/molokhya.jpg',
     ingredients: ['Molokhia leaves', 'Chicken', 'Garlic', 'Coriander', 'White rice'],
     instructions: 'Cook molokhia with garlic sauce. Serve over rice with tender chicken pieces.'
   },
@@ -153,7 +153,7 @@ const egyptianMeals = [
     protein: 8,
     carbs: 59,
     fats: 8,
-    image_url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800',
+    image_url: '/meal-images/mahshy.jpg',
     ingredients: ['Bell peppers', 'Zucchini', 'Grape leaves', 'Rice filling', 'Tomato sauce', 'Herbs'],
     instructions: 'Stuff vegetables with herbed rice mixture. Cook in tomato broth until tender.'
   },
@@ -164,7 +164,7 @@ const egyptianMeals = [
     protein: 38,
     carbs: 52,
     fats: 24,
-    image_url: 'https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=800',
+    image_url: '/meal-images/fatta.jpg',
     ingredients: ['Lamb or beef', 'Rice', 'Crispy bread', 'Garlic vinegar sauce', 'Tomato sauce'],
     instructions: 'Layer crispy bread with rice and tender meat. Top with garlic vinegar and tomato sauce.'
   },
@@ -175,7 +175,7 @@ const egyptianMeals = [
     protein: 32,
     carbs: 45,
     fats: 23,
-    image_url: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800',
+    image_url: '/meal-images/kofta.jpg',
     ingredients: ['Ground beef kofta', 'Egyptian rice', 'Grilled vegetables', 'Tahini sauce', 'Fresh salad'],
     instructions: 'Grill kofta skewers over charcoal. Serve with vermicelli rice and grilled tomatoes.'
   },
@@ -188,7 +188,7 @@ const egyptianMeals = [
     protein: 21,
     carbs: 33,
     fats: 2,
-    image_url: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400',
+    image_url: '/meal-images/dates.jpg',
     ingredients: ['Greek yogurt', 'Medjool dates', 'Almonds', 'Honey'],
     instructions: 'Top yogurt with chopped dates and almonds. Drizzle with honey.'
   },
@@ -199,7 +199,7 @@ const egyptianMeals = [
     protein: 8,
     carbs: 24,
     fats: 18,
-    image_url: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=800',
+    image_url: '/meal-images/nuts.jpg',
     ingredients: ['Almonds', 'Walnuts', 'Dried apricots', 'Dates', 'Hazelnuts'],
     instructions: 'Mix your favorite nuts and dried fruits. Great for sustained energy!'
   },
@@ -210,7 +210,7 @@ const egyptianMeals = [
     protein: 4,
     carbs: 12,
     fats: 12,
-    image_url: 'https://images.unsplash.com/photo-1534422298391-e4f8c170db06?w=800',
+    image_url: '/meal-images/ganoosh.jpg',
     ingredients: ['Roasted eggplant', 'Tahini', 'Garlic', 'Lemon', 'Fresh vegetables'],
     instructions: 'Blend roasted eggplant with tahini and garlic. Serve with cucumber and carrot sticks.'
   },
@@ -221,7 +221,7 @@ const egyptianMeals = [
     protein: 8,
     carbs: 22,
     fats: 10,
-    image_url: 'https://images.unsplash.com/photo-1577906030551-5b916ebca73e?w=800',
+    image_url: '/meal-images/hummus.jpg',
     ingredients: ['Chickpeas', 'Tahini', 'Lemon', 'Garlic', 'Pita bread'],
     instructions: 'Blend chickpeas with tahini and lemon. Serve with warm pita triangles.'
   },
@@ -232,7 +232,7 @@ const egyptianMeals = [
     protein: 2,
     carbs: 28,
     fats: 1,
-    image_url: 'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=400',
+    image_url: '/meal-images/banana.jpg',
     ingredients: ['Watermelon', 'Mango', 'Grapes', 'Pomegranate', 'Orange'],
     instructions: 'Slice and arrange seasonal Egyptian fruits on a plate.'
   },
@@ -245,7 +245,7 @@ const egyptianMeals = [
     protein: 12,
     carbs: 52,
     fats: 8,
-    image_url: 'https://images.unsplash.com/photo-1571115160391-45f8f87e83e9?w=800',
+    image_url: '/meal-images/banana.jpg',
     ingredients: ['Banana', 'Oats', 'Milk', 'Honey', 'Cinnamon'],
     instructions: 'Blend all ingredients until smooth. Drink 30-45 minutes before workout.'
   },
@@ -256,7 +256,7 @@ const egyptianMeals = [
     protein: 6,
     carbs: 48,
     fats: 5,
-    image_url: 'https://images.unsplash.com/photo-1599321955726-e04842a394bb?w=800',
+    image_url: '/meal-images/bread.jpg',
     ingredients: ['Egyptian baladi bread', 'Raw honey', 'Banana slices'],
     instructions: 'Spread honey on warm bread, top with banana. Quick energy boost!'
   },
@@ -267,7 +267,7 @@ const egyptianMeals = [
     protein: 5,
     carbs: 32,
     fats: 9,
-    image_url: 'https://images.unsplash.com/photo-1596567130026-6239bc7a6acb?w=800',
+    image_url: '/meal-images/dates.jpg',
     ingredients: ['Medjool dates', 'Raw almonds'],
     instructions: 'Eat 3-4 dates with a handful of almonds 30 minutes before training.'
   },
@@ -280,7 +280,7 @@ const egyptianMeals = [
     protein: 45,
     carbs: 38,
     fats: 14,
-    image_url: 'https://images.unsplash.com/photo-1561651823-34feb02250e4?w=400',
+    image_url: '/meal-images/shawerma.jpg',
     ingredients: ['Chicken shawarma', 'Rice', 'Pickles', 'Garlic sauce', 'Tomatoes', 'Onions'],
     instructions: 'Layer rice with shawarma chicken, top with pickles and garlic sauce. Protein-packed recovery meal!'
   },
@@ -291,7 +291,7 @@ const egyptianMeals = [
     protein: 15,
     carbs: 41,
     fats: 3,
-    image_url: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800',
+    image_url: '/meal-images/3ats.jpg',
     ingredients: ['Red lentils', 'Onions', 'Cumin', 'Lemon', 'Baladi bread'],
     instructions: 'Cook lentils until soft, blend smooth. Serve with cumin oil and crispy bread.'
   },
@@ -302,7 +302,7 @@ const egyptianMeals = [
     protein: 40,
     carbs: 42,
     fats: 8,
-    image_url: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400',
+    image_url: '/meal-images/sweet_potato.jpg',
     ingredients: ['Chicken breast', 'Sweet potato', 'Olive oil', 'Herbs'],
     instructions: 'Grill chicken and roast sweet potato. Perfect post-workout combo for muscle recovery.'
   }
