@@ -13,16 +13,17 @@
         // to the new url with only a query string and hash fragment,
         // e.g. http://www.foo.tld/one/two?a=b#anchor becomes
         // http://www.foo.tld/?/one/two&a=b#anchor
-        var pathSegmentsToKeep = 1;
-
+        // Simple redirect for HashRouter on GitHub Pages
         var l = window.location;
-        l.replace(
-            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-            l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-            l.pathname.split('/').slice(1 + pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-            l.hash
-        );
+        var repoName = '/FIT/';
+
+        // If we are at /FIT/something, redirect to /FIT/#/something
+        if (l.pathname.startsWith(repoName)) {
+            var path = l.pathname.slice(repoName.length);
+            if (path) {
+                l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + repoName + '#' + (path.startsWith('/') ? '' : '/') + path + l.search + l.hash);
+            }
+        }
     </script>
 </head>
 
