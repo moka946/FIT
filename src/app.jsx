@@ -21,6 +21,34 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
   <Layout currentPageName={currentPageName}>{children}</Layout>
   : <>{children}</>;
 
+const FirebaseConfigErrorScreen = ({ authError }) => {
+  const missingKeys = Array.isArray(authError?.missingKeys) ? authError.missingKeys : [];
+
+  return (
+    <div className="min-h-screen bg-black flex items-center justify-center p-6">
+      <div className="w-full max-w-lg bg-zinc-900 border border-zinc-800 rounded-2xl p-6 text-white">
+        <h1 className="text-2xl font-bold mb-3">Configuration Error</h1>
+        <p className="text-zinc-300 mb-4">
+          Firebase settings are missing in your deployed environment, so the app cannot start authentication.
+        </p>
+        {missingKeys.length > 0 && (
+          <div className="mb-4">
+            <p className="text-sm text-zinc-400 mb-2">Missing keys:</p>
+            <ul className="text-sm text-orange-400 space-y-1 list-disc list-inside">
+              {missingKeys.map((key) => (
+                <li key={key}>{key}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <p className="text-sm text-zinc-400">
+          Add the `VITE_FIREBASE_*` secrets in your GitHub repository settings, then redeploy.
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const AuthenticatedApp = () => {
   const { isAuthenticated, isLoadingAuth, authError, navigateToLogin } = useAuth();
   const { hasCompletedOnboarding, isLoading: isLoadingOnboarding } = useExerciseDays();
@@ -36,6 +64,8 @@ const AuthenticatedApp = () => {
   if (authError) {
     if (authError.type === 'user_not_registered') {
       return <UserNotRegisteredError />;
+    } else if (authError.type === 'firebase_config') {
+      return <FirebaseConfigErrorScreen authError={authError} />;
     } else if (authError.type === 'auth_required') {
       navigateToLogin();
       return null;

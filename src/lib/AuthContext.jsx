@@ -1,7 +1,6 @@
 
-
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { auth } from './firebase';
+import { auth, firebaseInitError, missingFirebaseConfigKeys } from './firebase';
 import {
   onAuthStateChanged,
   signOut,
@@ -19,7 +18,27 @@ export const AuthProvider = ({ children }) => {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
   const [authError, setAuthError] = useState(null);
 
+  const createConfigError = () => ({
+    type: 'firebase_config',
+    message: firebaseInitError?.message || 'Firebase is not configured correctly.',
+    missingKeys: missingFirebaseConfigKeys
+  });
+
+  const ensureAuthIsReady = () => {
+    if (!auth || firebaseInitError) {
+      const error = createConfigError();
+      setAuthError(error);
+      throw error;
+    }
+  };
+
   useEffect(() => {
+    if (!auth || firebaseInitError) {
+      setAuthError(createConfigError());
+      setIsLoadingAuth(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setIsAuthenticated(!!user);
@@ -31,37 +50,47 @@ export const AuthProvider = ({ children }) => {
 
   const login = async () => {
     try {
+      ensureAuthIsReady();
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
     } catch (error) {
       console.error("Login failed", error);
-      setAuthError(error);
+      if (!error.type) {
+        setAuthError(error);
+      }
       throw error;
     }
   };
 
   const loginWithEmail = async (email, password) => {
     try {
+      ensureAuthIsReady();
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.error("Email login failed", error);
-      setAuthError(error);
+      if (!error.type) {
+        setAuthError(error);
+      }
       throw error;
     }
   };
 
   const signUpWithEmail = async (email, password) => {
     try {
+      ensureAuthIsReady();
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.error("Signup failed", error);
-      setAuthError(error);
+      if (!error.type) {
+        setAuthError(error);
+      }
       throw error;
     }
   };
 
   const logout = async (shouldRedirect = true) => {
     try {
+      ensureAuthIsReady();
       await signOut(auth);
       if (shouldRedirect) {
         const isGitHubPages = window.location.pathname.includes('/FIT/');
@@ -69,6 +98,9 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Logout failed", error);
+      if (!error.type) {
+        setAuthError(error);
+      }
     }
   };
 
