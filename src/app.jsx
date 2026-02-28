@@ -9,6 +9,9 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Login from '@/pages/Login';
+import ExerciseDaysOnboarding from '@/pages/ExerciseDaysOnboarding';
+import { useExerciseDays } from '@/lib/useExerciseDays';
+import { LanguageProvider } from '@/components/LanguageContext';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -20,8 +23,9 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
 
 const AuthenticatedApp = () => {
   const { isAuthenticated, isLoadingAuth, authError, navigateToLogin } = useAuth();
+  const { hasCompletedOnboarding, isLoading: isLoadingOnboarding } = useExerciseDays();
 
-  if (isLoadingAuth) {
+  if (isLoadingAuth || isLoadingOnboarding) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
         <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
@@ -42,6 +46,11 @@ const AuthenticatedApp = () => {
     return <Login />;
   }
 
+  // Show onboarding if user hasn't completed it
+  if (!hasCompletedOnboarding) {
+    return <ExerciseDaysOnboarding />;
+  }
+
   return (
     <Routes>
       <Route path="/" element={
@@ -60,6 +69,7 @@ const AuthenticatedApp = () => {
           }
         />
       ))}
+      <Route path="/settings/schedule" element={<ExerciseDaysOnboarding />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
@@ -70,10 +80,12 @@ function App() {
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <NavigationTracker />
-          <AuthenticatedApp />
-        </Router>
+        <LanguageProvider>
+          <Router>
+            <NavigationTracker />
+            <AuthenticatedApp />
+          </Router>
+        </LanguageProvider>
         <Toaster />
         <HotToaster position="top-center" />
       </QueryClientProvider>

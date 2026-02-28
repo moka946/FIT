@@ -5,6 +5,7 @@ import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import ExerciseCard from '@/components/workout/ExerciseCard';
 import { useLanguage } from '@/components/LanguageContext';
+import { useExerciseDays } from '@/lib/useExerciseDays';
 
 const workoutData = {
   Sunday: {
@@ -105,11 +106,21 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 
 export default function Workouts() {
   const { t, language, isRTL } = useLanguage();
+  const { isTrainingDay } = useExerciseDays();
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const [selectedDay, setSelectedDay] = useState(today);
 
   const workout = workoutData[selectedDay];
   const currentIndex = days.indexOf(selectedDay);
+
+  // Check if this day is a training day
+  const isDayTraining = isTrainingDay(selectedDay);
+
+  // If it's not a training day, show rest day workout data
+  const displayWorkout = isDayTraining ? workout : {
+    ...workout,
+    exercises: []
+  };
 
   const goToPrevDay = () => {
     const newIndex = (currentIndex - 1 + 7) % 7;
@@ -164,16 +175,16 @@ export default function Workouts() {
           animate={{ opacity: 1, y: 0 }}
           className={`bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-6 mb-6 ${isRTL ? 'text-right' : ''}`}
         >
-          <h2 className="text-2xl font-bold text-white">{language === 'ar' ? workout.nameAr : workout.name}</h2>
+          <h2 className="text-2xl font-bold text-white">{language === 'ar' ? displayWorkout.nameAr : displayWorkout.name}</h2>
           <div className={`flex items-center gap-4 mt-3 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-white/70" />
-              <span className="text-white/70 text-sm">{language === 'ar' ? workout.muscleGroupAr : workout.muscle_group}</span>
+              <span className="text-white/70 text-sm">{language === 'ar' ? displayWorkout.muscleGroupAr : displayWorkout.muscle_group}</span>
             </div>
-            {workout.duration_minutes > 0 && (
+            {displayWorkout.duration_minutes > 0 && (
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-white/70" />
-                <span className="text-white/70 text-sm">{workout.duration_minutes} {t('min')}</span>
+                <span className="text-white/70 text-sm">{displayWorkout.duration_minutes} {t('min')}</span>
               </div>
             )}
           </div>
@@ -194,10 +205,10 @@ export default function Workouts() {
         </motion.div>
 
         {/* Exercises */}
-        {workout.exercises.length > 0 ? (
+        {displayWorkout.exercises.length > 0 ? (
           <div className="space-y-4">
             <h3 className={`text-lg font-bold text-white ${isRTL ? 'text-right' : ''}`}>{t('exercises')}</h3>
-            {workout.exercises.map((exercise, index) => (
+            {displayWorkout.exercises.map((exercise, index) => (
               <ExerciseCard key={index} exercise={exercise} index={index} language={language} isRTL={isRTL} t={t} />
             ))}
           </div>

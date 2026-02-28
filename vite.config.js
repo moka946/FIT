@@ -3,8 +3,10 @@ import { defineConfig } from 'vite'
 import path from 'path'
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/FIT/', // This must match your repo name exactly
+export default defineConfig(({ mode }) => ({
+  // Use root base locally to avoid blank page issues in dev.
+  // Keep /FIT/ for GitHub Pages production deploys.
+  base: mode === 'production' ? '/FIT/' : '/',
   plugins: [
     react(),
   ],
@@ -16,4 +18,4 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   }
-});
+}));

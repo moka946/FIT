@@ -1,9 +1,7 @@
 import React from 'react';
-import { LanguageProvider } from '@/components/LanguageContext';
 
 export default function Layout({ children }) {
   return (
-    <LanguageProvider>
     <div className="min-h-screen bg-black">
       <style>{`
         :root {
@@ -60,6 +58,5 @@ export default function Layout({ children }) {
       `}</style>
       {children}
     </div>
-    </LanguageProvider>
   );
 }

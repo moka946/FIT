@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { Send, Volume2, VolumeX, Loader2, Bot, User } from 'lucide-react';
-import { Groq } from "groq-sdk";
+import { Groq } from 'groq-sdk';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import FooterCredit from '@/components/FooterCredit';
@@ -8,11 +8,9 @@ import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
 
 export default function CoachChat() {
-  const { t, isRTL, language } = useLanguage();
+  const { t, isRTL, getAIResponseLanguageName } = useLanguage();
 
-  const getInitialMessage = () => language === 'ar'
-    ? "أهلاً يا بطل! 💪 أنا المدرب، مساعدك الشخصي للياقة البدنية. اسألني أي شيء عن التمارين أو التغذية أو رحلتك الرياضية. يلا نحقق أهدافك!"
-    : "Hey champ! 💪 I'm Coach, your personal fitness AI. Ask me anything about workouts, nutrition, or your fitness journey. Let's crush those goals together!";
+  const getInitialMessage = () => t('coachInitialMessage');
 
   const { user } = useAuth();
   const storageKey = user ? `coach_chat_${user.uid}` : null;
@@ -22,10 +20,7 @@ export default function CoachChat() {
       const saved = localStorage.getItem(storageKey);
       if (saved) return JSON.parse(saved);
     }
-    return [{
-      role: 'coach',
-      content: getInitialMessage()
-    }];
+    return [{ role: 'coach', content: getInitialMessage() }];
   });
 
   const [input, setInput] = useState('');
@@ -68,16 +63,16 @@ export default function CoachChat() {
     if (!input.trim() || loading) return;
 
     const userMessage = { role: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     const currentInput = input;
     setInput('');
     setLoading(true);
 
     const apiKey = import.meta.env.VITE_GROQ_API_KEY?.trim();
     if (!apiKey || apiKey === 'YOUR_GROQ_API_KEY') {
-      setMessages(prev => [...prev, {
+      setMessages((prev) => [...prev, {
         role: 'coach',
-        content: "Champ, I don't have your Groq API key yet! Please add it to the `.env` file as `VITE_GROQ_API_KEY`."
+        content: t('coachMissingApiKey'),
       }]);
       setLoading(false);
       return;
@@ -90,48 +85,48 @@ export default function CoachChat() {
 - Motivation and fitness goals
 - Form correction and injury prevention
 
-Be enthusiastic, supportive, and use fitness terminology. Keep responses concise but helpful. Respond in ${language === 'ar' ? 'Arabic' : 'English'}.`;
+Be enthusiastic, supportive, and use fitness terminology. Keep responses concise but helpful. Respond in ${getAIResponseLanguageName()}.`;
 
       const groq = new Groq({
-        apiKey: apiKey,
-        dangerouslyAllowBrowser: true // Required for client-side usage
+        apiKey,
+        dangerouslyAllowBrowser: true,
       });
 
       const chatHistory = messages
-        .filter(m => m.content !== getInitialMessage())
-        .map(m => ({
-          role: (m.role === 'coach' ? 'assistant' : 'user'),
+        .filter((m) => m.content !== getInitialMessage())
+        .map((m) => ({
+          role: m.role === 'coach' ? 'assistant' : 'user',
           content: m.content,
         }));
 
       const completion = await groq.chat.completions.create({
         messages: [
-          { role: "system", content: systemPrompt },
+          { role: 'system', content: systemPrompt },
           ...chatHistory,
-          { role: "user", content: currentInput }
+          { role: 'user', content: currentInput },
         ],
-        model: "llama-3.3-70b-versatile",
+        model: 'llama-3.3-70b-versatile',
       });
 
-      const responseText = completion.choices[0]?.message?.content || "Sorry champ, I lost my train of thought.";
+      const responseText = completion.choices[0]?.message?.content || t('coachLostThought');
 
-      setMessages(prev => [...prev, { role: 'coach', content: responseText }]);
+      setMessages((prev) => [...prev, { role: 'coach', content: responseText }]);
     } catch (error) {
-      console.error("Groq AI Error:", error);
+      console.error('Groq AI Error:', error);
       const errorStr = String(error);
-      let errorMessage = `Sorry champ, I had trouble connecting to my brain: ${errorStr.substring(0, 150)}`;
+      let errorMessage = `${t('coachErrorPrefix')} ${errorStr.substring(0, 150)}`;
 
       if (errorStr.includes('401')) {
-        errorMessage = "Your Groq API key seems invalid, champ! Check it in the `.env` file.";
+        errorMessage = t('coachInvalidApiKey');
       } else if (errorStr.includes('429')) {
-        errorMessage = "I'm hitting a rate limit! Let's take a quick breather and try again.";
+        errorMessage = t('coachRateLimit');
       } else if (errorStr.includes('fetch')) {
-        errorMessage = "I had trouble connecting! Please check your internet or disable any adblockers.";
+        errorMessage = t('coachNetworkIssue');
       }
 
-      setMessages(prev => [...prev, {
+      setMessages((prev) => [...prev, {
         role: 'coach',
-        content: errorMessage
+        content: errorMessage,
       }]);
     } finally {
       setLoading(false);
@@ -140,7 +135,6 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
 
   return (
     <div className="flex flex-col h-full bg-black">
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         <AnimatePresence>
           {messages.map((msg, index) => (
@@ -150,8 +144,7 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
               animate={{ opacity: 1, y: 0 }}
               className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''} ${isRTL && msg.role === 'coach' ? 'flex-row-reverse' : ''}`}
             >
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${msg.role === 'coach' ? 'bg-orange-500' : 'bg-zinc-800'
-                }`}>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${msg.role === 'coach' ? 'bg-orange-500' : 'bg-zinc-800'}`}>
                 {msg.role === 'coach' ? (
                   <Bot className="w-5 h-5 text-black" />
                 ) : (
@@ -160,10 +153,7 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
               </div>
 
               <div className={`max-w-[75%] ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                <div className={`rounded-2xl px-4 py-3 ${msg.role === 'coach'
-                  ? 'bg-zinc-900 border border-zinc-800'
-                  : 'bg-orange-500 text-black'
-                  }`}>
+                <div className={`rounded-2xl px-4 py-3 ${msg.role === 'coach' ? 'bg-zinc-900 border border-zinc-800' : 'bg-orange-500 text-black'}`}>
                   <ReactMarkdown className={`text-sm ${msg.role === 'coach' ? 'text-white' : 'text-black'} prose prose-sm prose-invert max-w-none`}>
                     {msg.content}
                   </ReactMarkdown>
@@ -214,7 +204,6 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
         <FooterCredit />
       </div>
 
-      {/* Input */}
       <div className="p-4 border-t border-zinc-800">
         <div className="flex gap-3">
           <input
@@ -238,3 +227,4 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
     </div>
   );
 }
+

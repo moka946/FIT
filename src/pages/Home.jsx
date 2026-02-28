@@ -5,12 +5,12 @@ import { Dumbbell, Utensils, MessageCircle, ChevronRight, Flame, Target, LogOut 
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
-import LanguageToggle from '@/components/LanguageToggle';
+import SettingsMenu from '@/components/SettingsMenu';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
 
 export default function Home() {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, getDailyMotivationQuote } = useLanguage();
   const { logout } = useAuth();
 
   const handleLogout = () => {
@@ -58,7 +58,7 @@ export default function Home() {
               <h1 className="text-3xl font-bold text-white mt-1">{t('champion')}</h1>
             </motion.div>
             <div className="flex items-center gap-2">
-              <LanguageToggle />
+              <SettingsMenu />
               <button
                 onClick={handleLogout}
                 className="w-10 h-10 rounded-xl bg-zinc-800/80 backdrop-blur flex items-center justify-center hover:bg-red-500/20 transition-colors"
@@ -137,7 +137,7 @@ export default function Home() {
         >
           <p className="text-white/80 text-sm font-medium mb-2">{t('todaysMotivation')}</p>
           <p className="text-white text-xl font-bold leading-relaxed">
-            {t('motivationQuote')}
+            {getDailyMotivationQuote()}
           </p>
         </motion.div>
       </div>

@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Flame, Beef, Wheat, Droplet, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/components/LanguageContext';
+
+const mealTypeKeys = {
+  Breakfast: 'breakfast',
+  Dinner: 'dinner',
+  Lunch: 'lunch',
+  Snack: 'snack',
+  'Pre-Workout': 'preWorkout',
+  'Post-Workout': 'postWorkout',
+};
 
 export default function MealCard({ meal, index }) {
   const [expanded, setExpanded] = useState(false);
+  const { t, isRTL } = useLanguage();
   const isSnack = meal.meal_type === 'Snack';
 
-  // Compact card for snacks
   if (isSnack) {
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1 }}
-        className="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 flex items-center gap-3 p-3"
+        className={`bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 flex items-center gap-3 p-3 ${isRTL ? 'flex-row-reverse' : ''}`}
       >
         {meal.image_url && (
           <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
@@ -24,11 +34,11 @@ export default function MealCard({ meal, index }) {
             />
           </div>
         )}
-        <div className="flex-1 min-w-0">
+        <div className={`flex-1 min-w-0 ${isRTL ? 'text-right' : ''}`}>
           <h3 className="text-white font-semibold text-sm truncate">{meal.name}</h3>
-          <div className="flex items-center gap-3 mt-1">
-            <span className="text-orange-500 text-xs font-medium">{meal.calories} kcal</span>
-            <span className="text-zinc-500 text-xs">{meal.protein}g protein</span>
+          <div className={`flex items-center gap-3 mt-1 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
+            <span className="text-orange-500 text-xs font-medium">{meal.calories} {t('kcal')}</span>
+            <span className="text-zinc-500 text-xs">{meal.protein}g {t('protein')}</span>
           </div>
         </div>
       </motion.div>
@@ -53,10 +63,10 @@ export default function MealCard({ meal, index }) {
       )}
 
       <div className="p-4">
-        <div className="flex items-start justify-between">
-          <div>
+        <div className={`flex items-start justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+          <div className={isRTL ? 'text-right' : ''}>
             <span className="text-xs font-medium text-orange-500 uppercase tracking-wider">
-              {meal.meal_type}
+              {t(mealTypeKeys[meal.meal_type] || meal.meal_type)}
             </span>
             <h3 className="text-white font-bold text-lg mt-1">{meal.name}</h3>
           </div>
@@ -76,22 +86,22 @@ export default function MealCard({ meal, index }) {
           <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
             <Flame className="w-4 h-4 text-orange-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.calories || 0}</p>
-            <p className="text-zinc-500 text-xs">kcal</p>
+            <p className="text-zinc-500 text-xs">{t('kcal')}</p>
           </div>
           <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
             <Beef className="w-4 h-4 text-red-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.protein || 0}g</p>
-            <p className="text-zinc-500 text-xs">Protein</p>
+            <p className="text-zinc-500 text-xs">{t('protein')}</p>
           </div>
           <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
             <Wheat className="w-4 h-4 text-yellow-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.carbs || 0}g</p>
-            <p className="text-zinc-500 text-xs">Carbs</p>
+            <p className="text-zinc-500 text-xs">{t('carbs')}</p>
           </div>
           <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
             <Droplet className="w-4 h-4 text-blue-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.fats || 0}g</p>
-            <p className="text-zinc-500 text-xs">Fats</p>
+            <p className="text-zinc-500 text-xs">{t('fats')}</p>
           </div>
         </div>
 
@@ -105,10 +115,10 @@ export default function MealCard({ meal, index }) {
             >
               {meal.ingredients?.length > 0 && (
                 <div className="mt-4">
-                  <h4 className="text-zinc-400 text-sm font-medium mb-2">Ingredients</h4>
+                  <h4 className="text-zinc-400 text-sm font-medium mb-2">{t('ingredients')}</h4>
                   <ul className="space-y-1">
                     {meal.ingredients.map((ing, i) => (
-                      <li key={i} className="text-white text-sm flex items-center gap-2">
+                      <li key={i} className={`text-white text-sm flex items-center gap-2 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
                         <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                         {ing}
                       </li>
@@ -119,8 +129,8 @@ export default function MealCard({ meal, index }) {
 
               {meal.instructions && (
                 <div className="mt-4">
-                  <h4 className="text-zinc-400 text-sm font-medium mb-2">How to prepare</h4>
-                  <p className="text-zinc-300 text-sm">{meal.instructions}</p>
+                  <h4 className="text-zinc-400 text-sm font-medium mb-2">{t('howToPrepare')}</h4>
+                  <p className={`text-zinc-300 text-sm ${isRTL ? 'text-right' : ''}`}>{meal.instructions}</p>
                 </div>
               )}
             </motion.div>
@@ -130,3 +140,4 @@ export default function MealCard({ meal, index }) {
     </motion.div>
   );
 }
+

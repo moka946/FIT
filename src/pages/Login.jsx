@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dumbbell, Chrome, Mail, Lock, ArrowRight, Loader2, UserPlus, LogIn } from 'lucide-react';
+import { Dumbbell, Chrome, Mail, Lock, ArrowRight, Loader2, UserPlus } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import FooterCredit from '@/components/FooterCredit';
+import { useLanguage } from '@/components/LanguageContext';
 
 export default function Login() {
     const { login, loginWithEmail, signUpWithEmail } = useAuth();
+    const { t } = useLanguage();
     const [isLoading, setIsLoading] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
     const [email, setEmail] = useState('');
@@ -17,7 +19,7 @@ export default function Login() {
         try {
             await login();
         } catch (error) {
-            toast.error('Google login failed. Please try again.');
+            toast.error(t('googleLoginFailed'));
         } finally {
             setIsLoading(false);
         }
@@ -26,7 +28,7 @@ export default function Login() {
     const handleEmailAuth = async (e) => {
         e.preventDefault();
         if (!email || !password) {
-            toast.error('Please fill in all fields');
+            toast.error(t('pleaseFillAllFields'));
             return;
         }
 
@@ -34,17 +36,17 @@ export default function Login() {
         try {
             if (isSignUp) {
                 await signUpWithEmail(email, password);
-                toast.success('Account created successfully!');
+                toast.success(t('accountCreatedExercisePrompt'));
             } else {
                 await loginWithEmail(email, password);
-                toast.success('Welcome back!');
+                toast.success(t('welcomeBackToast'));
             }
         } catch (error) {
             const message = error.code === 'auth/email-already-in-use'
-                ? 'This email is already registered.'
+                ? t('emailAlreadyRegistered')
                 : error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found'
-                    ? 'Invalid email or password.'
-                    : 'Authentication failed. Please check your credentials.';
+                    ? t('invalidCredentials')
+                    : t('authFailed');
             toast.error(message);
         } finally {
             setIsLoading(false);
@@ -73,7 +75,7 @@ export default function Login() {
                         <Dumbbell className="w-10 h-10 text-black" />
                     </motion.div>
                     <h1 className="text-4xl font-black text-white tracking-tighter mb-2">FIT EGYPT</h1>
-                    <p className="text-zinc-500 font-medium">Your Elite AI Fitness Coach</p>
+                    <p className="text-zinc-500 font-medium">{t('appTagline')}</p>
                 </div>
 
                 {/* Action Card */}
@@ -87,7 +89,7 @@ export default function Login() {
                             transition={{ duration: 0.2 }}
                         >
                             <h2 className="text-2xl font-bold text-white mb-8 text-center">
-                                {isSignUp ? 'Join the Team' : 'Welcome, Champion'}
+                                {isSignUp ? t('joinTeamTitle') : t('welcomeChampionTitle')}
                             </h2>
 
                             <form onSubmit={handleEmailAuth} className="space-y-4">
@@ -102,7 +104,7 @@ export default function Login() {
                                     ) : (
                                         <>
                                             <Chrome className="w-5 h-5" />
-                                            {isSignUp ? 'Sign up' : 'Continue'} with Google
+                                            {isSignUp ? t('signUp') : t('continue')} {t('withGoogle')}
                                         </>
                                     )}
                                 </button>
@@ -112,7 +114,7 @@ export default function Login() {
                                         <div className="w-full border-t border-zinc-800"></div>
                                     </div>
                                     <div className="relative flex justify-center text-xs uppercase">
-                                        <span className="bg-zinc-900 px-2 text-zinc-500">Or use email</span>
+                                        <span className="bg-zinc-900 px-2 text-zinc-500">{t('orUseEmail')}</span>
                                     </div>
                                 </div>
 
@@ -123,7 +125,7 @@ export default function Login() {
                                             type="email"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="Email address"
+                                            placeholder={t('emailAddress')}
                                             className="w-full h-14 bg-zinc-800/50 border border-zinc-700/50 rounded-2xl pl-12 pr-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500 transition-all"
                                             required
                                         />
@@ -134,7 +136,7 @@ export default function Login() {
                                             type="password"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="Password"
+                                            placeholder={t('password')}
                                             className="w-full h-14 bg-zinc-800/50 border border-zinc-700/50 rounded-2xl pl-12 pr-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500 transition-all"
                                             required
                                         />
@@ -150,7 +152,7 @@ export default function Login() {
                                         <Loader2 className="w-5 h-5 animate-spin text-black" />
                                     ) : (
                                         <>
-                                            {isSignUp ? 'Create Account' : 'Start Training'}
+                                            {isSignUp ? t('createAccount') : t('startTraining')}
                                             {isSignUp ? <UserPlus className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
                                         </>
                                     )}
@@ -160,12 +162,12 @@ export default function Login() {
                     </AnimatePresence>
 
                     <p className="text-center text-zinc-500 text-sm mt-8">
-                        {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
+                        {isSignUp ? t('alreadyHaveAccount') : t('dontHaveAccount')}{' '}
                         <button
                             onClick={() => setIsSignUp(!isSignUp)}
                             className="text-orange-500 font-bold cursor-pointer hover:underline focus:outline-none"
                         >
-                            {isSignUp ? 'Sign in' : 'Join the team'}
+                            {isSignUp ? t('signIn') : t('joinTheTeam')}
                         </button>
                     </p>
                 </div>
