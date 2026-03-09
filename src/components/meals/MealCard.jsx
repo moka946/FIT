@@ -14,8 +14,17 @@ const mealTypeKeys = {
 
 export default function MealCard({ meal, index }) {
   const [expanded, setExpanded] = useState(false);
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, language } = useLanguage();
   const isSnack = meal.meal_type === 'Snack';
+
+  const display = {
+    name: language === 'ar' && meal.nameAr ? meal.nameAr : (meal.titleKey ? t(meal.titleKey) : meal.name),
+    portion: language === 'ar' && meal.portion_size_ar ? meal.portion_size_ar : meal.portion_size,
+    howMuch: language === 'ar' && meal.how_much_to_eat_ar ? meal.how_much_to_eat_ar : meal.how_much_to_eat,
+    tip: language === 'ar' && meal.diet_tip_ar ? meal.diet_tip_ar : meal.diet_tip,
+    ingredients: language === 'ar' && meal.ingredients_ar ? meal.ingredients_ar : meal.ingredients,
+    instructions: language === 'ar' && meal.instructions_ar ? meal.instructions_ar : meal.instructions
+  };
 
   if (isSnack) {
     return (
@@ -29,13 +38,13 @@ export default function MealCard({ meal, index }) {
           <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
             <img
               src={(import.meta.env.BASE_URL + meal.image_url).replace(/\/+/g, '/')}
-              alt={meal.name}
+              alt={display.name}
               className="w-full h-full object-cover"
             />
           </div>
         )}
         <div className={`flex-1 min-w-0 ${isRTL ? 'text-right' : ''}`}>
-          <h3 className="text-white font-semibold text-sm truncate">{meal.name}</h3>
+          <h3 className="text-white font-semibold text-sm truncate">{display.name}</h3>
           <div className={`flex items-center gap-3 mt-1 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
             <span className="text-orange-500 text-xs font-medium">{meal.calories} {t('kcal')}</span>
             <span className="text-zinc-500 text-xs">{meal.protein}g {t('protein')}</span>
@@ -56,7 +65,7 @@ export default function MealCard({ meal, index }) {
         <div className="h-40 w-full overflow-hidden">
           <img
             src={(import.meta.env.BASE_URL + meal.image_url).replace(/\/+/g, '/')}
-            alt={meal.name}
+            alt={display.name}
             className="w-full h-full object-cover"
           />
         </div>
@@ -69,7 +78,7 @@ export default function MealCard({ meal, index }) {
               {t(mealTypeKeys[meal.meal_type] || meal.meal_type)}
             </span>
             <h3 className="text-white font-bold text-lg mt-1">
-              {meal.titleKey ? t(meal.titleKey) : meal.name}
+              {display.name}
             </h3>
           </div>
           <button
@@ -84,26 +93,26 @@ export default function MealCard({ meal, index }) {
           </button>
         </div>
 
-        <div className="grid grid-cols-4 gap-2 mt-4">
-          <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
+        <div className="grid grid-cols-4 gap-2 mt-4 text-center">
+          <div className="bg-zinc-800/50 rounded-xl p-2">
             <Flame className="w-4 h-4 text-orange-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.calories || 0}</p>
-            <p className="text-zinc-500 text-xs">{t('kcal')}</p>
+            <p className="text-zinc-500 text-[10px]">{t('kcal')}</p>
           </div>
-          <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
+          <div className="bg-zinc-800/50 rounded-xl p-2">
             <Beef className="w-4 h-4 text-red-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.protein || 0}g</p>
-            <p className="text-zinc-500 text-xs">{t('protein')}</p>
+            <p className="text-zinc-500 text-[10px]">{t('protein')}</p>
           </div>
-          <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
+          <div className="bg-zinc-800/50 rounded-xl p-2">
             <Wheat className="w-4 h-4 text-yellow-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.carbs || 0}g</p>
-            <p className="text-zinc-500 text-xs">{t('carbs')}</p>
+            <p className="text-zinc-500 text-[10px]">{t('carbs')}</p>
           </div>
-          <div className="bg-zinc-800/50 rounded-xl p-2 text-center">
+          <div className="bg-zinc-800/50 rounded-xl p-2">
             <Droplet className="w-4 h-4 text-blue-500 mx-auto mb-1" />
             <p className="text-white font-bold text-sm">{meal.fats || 0}g</p>
-            <p className="text-zinc-500 text-xs">{t('fats')}</p>
+            <p className="text-zinc-500 text-[10px]">{t('fats')}</p>
           </div>
         </div>
 
@@ -115,32 +124,32 @@ export default function MealCard({ meal, index }) {
               exit={{ height: 0, opacity: 0 }}
               className="overflow-hidden"
             >
-              {meal.portion_size && (
+              {display.portion && (
                 <div className="mt-4 p-3 bg-orange-500/10 rounded-xl border border-orange-500/20">
                   <h4 className="text-orange-500 text-xs font-bold uppercase tracking-wider mb-1">{t('portionSize')}</h4>
-                  <p className="text-white text-sm font-medium">{meal.portion_size}</p>
+                  <p className="text-white text-sm font-medium">{display.portion}</p>
                 </div>
               )}
 
-              {meal.how_much_to_eat && (
+              {display.howMuch && (
                 <div className="mt-4">
                   <h4 className="text-zinc-400 text-sm font-medium mb-1">{t('howMuchToEat')}</h4>
-                  <p className={`text-zinc-300 text-sm ${isRTL ? 'text-right' : ''}`}>{meal.how_much_to_eat}</p>
+                  <p className={`text-zinc-300 text-sm ${isRTL ? 'text-right' : ''}`}>{display.howMuch}</p>
                 </div>
               )}
 
-              {meal.diet_tip && (
+              {display.tip && (
                 <div className="mt-4 p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
                   <h4 className="text-emerald-500 text-xs font-bold uppercase tracking-wider mb-1">{t('dietTip')}</h4>
-                  <p className="text-zinc-300 text-sm italic">"{meal.diet_tip}"</p>
+                  <p className="text-zinc-300 text-sm italic">"{display.tip}"</p>
                 </div>
               )}
 
-              {meal.ingredients?.length > 0 && (
+              {display.ingredients?.length > 0 && (
                 <div className="mt-4">
                   <h4 className="text-zinc-400 text-sm font-medium mb-2">{t('ingredients')}</h4>
                   <ul className="space-y-1">
-                    {meal.ingredients.map((ing, i) => (
+                    {display.ingredients.map((ing, i) => (
                       <li key={i} className={`text-white text-sm flex items-center gap-2 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
                         <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                         {ing}
@@ -150,10 +159,10 @@ export default function MealCard({ meal, index }) {
                 </div>
               )}
 
-              {meal.instructions && (
+              {display.instructions && (
                 <div className="mt-4">
                   <h4 className="text-zinc-400 text-sm font-medium mb-2">{t('howToPrepare')}</h4>
-                  <p className={`text-zinc-300 text-sm ${isRTL ? 'text-right' : ''}`}>{meal.instructions}</p>
+                  <p className={`text-zinc-300 text-sm ${isRTL ? 'text-right' : ''}`}>{display.instructions}</p>
                 </div>
               )}
             </motion.div>

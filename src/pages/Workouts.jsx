@@ -13,11 +13,11 @@ const workoutModules = {
     muscleGroupKey: 'chest',
     duration_minutes: 60,
     exercises: [
-      { name: 'Bench Press', nameAr: 'ضغط صدر بالبار', sets: 4, reps: '8-10', calories: 45, fat: 5, gif_url: '/exercises/Barbell-Bench-Press.gif', description: 'Keep your back flat and push through your chest' },
-      { name: 'Incline Dumbbell Press', nameAr: 'ضغط صدر علوي بالدمبل', sets: 3, reps: '10-12', calories: 38, fat: 4, gif_url: '/exercises/Incline-Dumbbell-Press.gif', description: 'Focus on upper chest, 45-degree angle' },
-      { name: 'Cable Flyes', nameAr: 'تفتيح كابل', sets: 3, reps: '12-15', calories: 30, fat: 3, gif_url: '/exercises/Cable-Crossover.gif', description: 'Squeeze at the center for maximum contraction' },
-      { name: 'Tricep Pushdowns', nameAr: 'ترايسبس بالكابل', sets: 4, reps: '12-15', calories: 25, fat: 3, gif_url: '/exercises/Pushdown.gif', description: 'Keep elbows tucked to your sides' },
-      { name: 'Overhead Tricep Extension', nameAr: 'ترايسبس خلف الرأس', sets: 3, reps: '10-12', calories: 22, fat: 2, gif_url: '/exercises/Dumbbell-Triceps-Extension.gif', description: 'Full stretch at the bottom' },
+      { name: 'Bench Press', nameAr: 'ضغط صدر بالبار', sets: 4, reps: '8-10', calories: 45, fat: 5, gif_url: '/exercises/Barbell-Bench-Press.gif', description: 'Keep your back flat and push through your chest', descriptionAr: 'حافظ على استقامة ظهرك وادفع بصدرك' },
+      { name: 'Incline Dumbbell Press', nameAr: 'ضغط صدر علوي بالدمبل', sets: 3, reps: '10-12', calories: 38, fat: 4, gif_url: '/exercises/Incline-Dumbbell-Press.gif', description: 'Focus on upper chest, 45-degree angle', descriptionAr: 'ركز على الجزء العلوي من الصدر، بزاوية 45 درجة' },
+      { name: 'Cable Flyes', nameAr: 'تفتيح كابل', sets: 3, reps: '12-15', calories: 30, fat: 3, gif_url: '/exercises/Cable-Crossover.gif', description: 'Squeeze at the center for maximum contraction', descriptionAr: 'اعصر عضلات الصدر في المنتصف لأقصى استفادة' },
+      { name: 'Tricep Pushdowns', nameAr: 'ترايسبس بالكابل', sets: 4, reps: '12-15', calories: 25, fat: 3, gif_url: '/exercises/Pushdown.gif', description: 'Keep elbows tucked to your sides', descriptionAr: 'حافظ على ثبات كوعيك بجانب جسمك' },
+      { name: 'Overhead Tricep Extension', nameAr: 'ترايسبس خلف الرأس', sets: 3, reps: '10-12', calories: 22, fat: 2, gif_url: '/exercises/Dumbbell-Triceps-Extension.gif', description: 'Full stretch at the bottom', descriptionAr: 'تمدد كامل في أسفل الحركة' },
     ]
   },
   Back: {
@@ -25,7 +25,7 @@ const workoutModules = {
     muscleGroupKey: 'back',
     duration_minutes: 65,
     exercises: [
-      { name: 'Deadlift', nameAr: 'ديدليفت', sets: 4, reps: '6-8', calories: 80, fat: 9, gif_url: '/exercises/Barbell-Deadlift.gif', description: 'Keep your back straight, lift with your legs' },
+      { name: 'Deadlift', nameAr: 'ديدليفت', sets: 4, reps: '6-8', calories: 80, fat: 9, gif_url: '/exercises/Barbell-Deadlift.gif', description: 'Keep your back straight, lift with your legs', descriptionAr: 'حافظ على استقامة ظهرك، ارفع برجليك' },
       { name: 'Lat Pulldowns', nameAr: 'سحب أمامي', sets: 4, reps: '10-12', calories: 40, fat: 4, gif_url: '/exercises/Lat-Pulldown.gif', description: 'Pull to upper chest, squeeze lats' },
       { name: 'Seated Cable Rows', nameAr: 'سحب أرضي', sets: 3, reps: '10-12', calories: 35, fat: 4, gif_url: '/exercises/Seated-Cable-Row.gif', description: 'Pull to your belly button' },
       { name: 'Barbell Curls', nameAr: 'باي بالبار', sets: 4, reps: '10-12', calories: 28, fat: 3, gif_url: '/exercises/Barbell-Curl.gif', description: 'Keep elbows stationary' },

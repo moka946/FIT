@@ -91,7 +91,9 @@ export default function ExerciseCard({ exercise, index, language = 'en', isRTL =
               })()}
             </div>
             {exercise.description && (
-              <p className={`mt-3 text-zinc-400 text-sm ${isRTL ? 'text-right' : ''}`}>{exercise.description}</p>
+              <p className={`mt-3 text-zinc-400 text-sm ${isRTL ? 'text-right' : ''}`}>
+                {language === 'ar' && exercise.descriptionAr ? exercise.descriptionAr : exercise.description}
+              </p>
             )}
           </motion.div>
         )}

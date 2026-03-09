@@ -189,6 +189,13 @@ const translations = {
     meal_corn: 'Grilled Corn (Durah)',
     meal_coffee: 'Black Coffee with 3 Dates',
     meal_oats: 'Oats with Milk and Honey',
+    meal_tuna: 'Egyptian Tuna Salad (Low Fat)',
+    meal_egg_whites: 'Egg Whites with Spinach',
+    meal_kofta: 'Grilled Lean Kofta (No Fat)',
+    meal_protein_shake: 'Protein Shake with Skimmed Milk',
+    meal_post_chicken: 'Grilled Chicken & 3 Spoons Rice',
+    meal_areesh_fruit: 'Areesh Cheese with Peach/Apple',
+    meal_salad: 'Egyptian Green Salad (Large)',
 
     footerCredit: 'Made by Mohamed Tamer | Powered by Firebase | Groq AI',
     gram: 'g',
@@ -380,6 +387,13 @@ const translations = {
     meal_corn: 'ذرة مشوي',
     meal_coffee: 'قهوة سادة مع 3 تمرات',
     meal_oats: 'شوفان بالحليب والعسل',
+    meal_tuna: 'سلطة تونة مصرية (قليلة الدسم)',
+    meal_egg_whites: 'بياض بيض مع سبانخ',
+    meal_kofta: 'كفتة مشوية (بدون دهون)',
+    meal_protein_shake: 'بروتين شيك مع حليب خالي الدسم',
+    meal_post_chicken: 'دجاج مشوي مع 3 ملاعق ارز',
+    meal_areesh_fruit: 'جبنة قريش مع قطع فاكهة',
+    meal_salad: 'سلطة خضراء مصرية (كبيرة)',
   }
 };
 
