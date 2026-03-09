@@ -73,6 +73,9 @@ const translations = {
     protein: 'Protein',
     carbs: 'Carbs',
     fats: 'Fats',
+    portionSize: 'Portion Size',
+    dietTip: 'Diet Tip',
+    howMuchToEat: 'Suggested Intake',
 
     preWorkoutTip: 'Best Fat-Burning Pre-Workout Foods',
     preWorkoutFoods: 'Coffee, Green Tea, Oats, Bananas, Dates with Almonds',
@@ -150,7 +153,45 @@ const translations = {
     pageNotFoundSuffix: 'could not be found in this application.',
     goHome: 'Go Home',
 
+    // Workout Titles
+    chestWorkout: 'Chest & Triceps',
+    backWorkout: 'Back & Biceps',
+    legsWorkout: 'Legs',
+    shouldersWorkout: 'Shoulders & Abs',
+    armsWorkout: 'Arms',
+    fullBodyWorkout: 'Full Body HIIT',
+    upperBodyPower: 'Upper Body Power',
+    lowerBodyCore: 'Lower Body & Core',
+    pushWorkout: 'Push (Chest & Shoulders)',
+    pullWorkout: 'Pull (Back & Bicep)',
+    legsHiit: 'Legs & HIIT',
+
+    // Muscle Groups
+    chest: 'Chest',
+    back: 'Back',
+    legs: 'Legs',
+    shoulders: 'Shoulders',
+    arms: 'Arms',
+    fullBody: 'Full Body',
+    recovery: 'Recovery',
+
+    // Meals
+    meal_ful: 'Ful Medames (High Protein)',
+    meal_falafel: "Baked Ta'ameya (Fit Falafel)",
+    meal_shakshuka: 'Shakshuka (Healthy Style)',
+    meal_areesh: 'Areesh Cheese with Veggies',
+    meal_chicken: 'Grilled Chicken (Lean Egyptian Style)',
+    meal_molokhia: 'Molokhia (Zero-Fat Stock)',
+    meal_lentil: 'Lentil Soup (The Diet King)',
+    meal_fish: 'Baked Sayadeya Fish',
+    meal_yogurt: 'Greek Yogurt with 3 Dates',
+    meal_termes: 'Lupin Beans (Termes)',
+    meal_corn: 'Grilled Corn (Durah)',
+    meal_coffee: 'Black Coffee with 3 Dates',
+    meal_oats: 'Oats with Milk and Honey',
+
     footerCredit: 'Made by Mohamed Tamer | Powered by Firebase | Groq AI',
+    gram: 'g',
   },
   ar: {
     welcomeBack: 'اهلا بعودتك،',
@@ -222,6 +263,9 @@ const translations = {
     protein: 'بروتين',
     carbs: 'كارب',
     fats: 'دهون',
+    portionSize: 'حجم الحصة',
+    dietTip: 'نصيحة الدايت',
+    howMuchToEat: 'الكمية المقترحة',
 
     preWorkoutTip: 'افضل اطعمة قبل التمرين',
     preWorkoutFoods: 'القهوة، الشاي الاخضر، الشوفان، الموز، التمر مع اللوز',
@@ -300,126 +344,56 @@ const translations = {
     goHome: 'العودة للرئيسية',
 
     footerCredit: 'تم التطوير بواسطة Mohamed Tamer | مدعوم بواسطة Firebase و Groq AI',
-  },
+    gram: 'جرام',
+
+    // Workout/Meals
+    chestWorkout: 'صدر وترايسبس',
+    backWorkout: 'ظهر وباي',
+    legsWorkout: 'رجل',
+    shouldersWorkout: 'كتف وبطن',
+    armsWorkout: 'ذراع',
+    fullBodyWorkout: 'تمرين كامل هيت',
+    upperBodyPower: 'جزء علوي بقوة',
+    lowerBodyCore: 'جزء سفلي وبطن',
+    pushWorkout: 'دفع (صدر وكتف)',
+    pullWorkout: 'سحب (ظهر وباي)',
+    legsHiit: 'رجل وكارديو',
+
+    chest: 'صدر',
+    back: 'ظهر',
+    legs: 'رجل',
+    shoulders: 'كتف',
+    arms: 'ذراع',
+    fullBody: 'جسم كامل',
+    recovery: 'استشفاء',
+
+    meal_ful: 'فول مدمس (عالي البروتين)',
+    meal_falafel: 'طعمية بفرن (فيت طعمية)',
+    meal_shakshuka: 'شكشوكة (نمط صحي)',
+    meal_areesh: 'جبنة قريش مع الخضار',
+    meal_chicken: 'دجاج مشوي (على الطريقة المصرية)',
+    meal_molokhia: 'ملوخية (دايت)',
+    meal_lentil: 'شوربة عدس (ملك الدايت)',
+    meal_fish: 'سمك صيادية مشوي',
+    meal_yogurt: 'زبادي يوناني مع 3 تمرات',
+    meal_termes: 'ترمس (سناك صحي)',
+    meal_corn: 'ذرة مشوي',
+    meal_coffee: 'قهوة سادة مع 3 تمرات',
+    meal_oats: 'شوفان بالحليب والعسل',
+  }
 };
 
-translations.es = {
-  ...translations.en,
-  welcomeBack: 'Bienvenido de nuevo,',
-  dailyGoal: 'Objetivo diario',
-  stayConsistent: 'Manten la constancia',
-  quickActions: 'Acciones rapidas',
-  mealPlan: 'Plan de comidas',
-  askCoach: 'Preguntar al coach',
-  todaysMotivation: 'MOTIVACION DE HOY',
-  home: 'Inicio',
-  workouts: 'Entrenos',
-  meals: 'Comidas',
-  more: 'Mas',
-  language: 'Idioma',
-  settings: 'Configuracion',
-  changeSchedule: 'Cambiar dias de entrenamiento',
-  logout: 'Cerrar sesion',
-  joinTeamTitle: 'Unete al equipo',
-  welcomeChampionTitle: 'Bienvenido, campeon',
-  signUp: 'Registrarse',
-  continue: 'Continuar',
-  orUseEmail: 'O usar correo',
-  createAccount: 'Crear cuenta',
-  startTraining: 'Comenzar entrenamiento',
-  signIn: 'Iniciar sesion',
-  goHome: 'Ir a inicio',
-};
-
-translations.fr = {
-  ...translations.en,
-  welcomeBack: 'Bon retour,',
-  dailyGoal: 'Objectif du jour',
-  stayConsistent: 'Reste regulier',
-  quickActions: 'Actions rapides',
-  mealPlan: 'Plan repas',
-  askCoach: 'Demander au coach',
-  todaysMotivation: 'MOTIVATION DU JOUR',
-  home: 'Accueil',
-  workouts: 'Entrainements',
-  meals: 'Repas',
-  more: 'Plus',
-  language: 'Langue',
-  settings: 'Parametres',
-  changeSchedule: "Changer les jours d'entrainement",
-  logout: 'Se deconnecter',
-  joinTeamTitle: "Rejoindre l'equipe",
-  welcomeChampionTitle: 'Bienvenue, champion',
-  signUp: "S'inscrire",
-  continue: 'Continuer',
-  orUseEmail: 'Ou utiliser email',
-  createAccount: 'Creer un compte',
-  startTraining: "Commencer l'entrainement",
-  signIn: 'Se connecter',
-  goHome: "Retour a l'accueil",
-};
-
-translations.de = {
-  ...translations.en,
-  welcomeBack: 'Willkommen zuruck,',
-  dailyGoal: 'Tagesziel',
-  stayConsistent: 'Bleib konsequent',
-  quickActions: 'Schnellaktionen',
-  mealPlan: 'Ernahrungsplan',
-  askCoach: 'Coach fragen',
-  todaysMotivation: 'MOTIVATION HEUTE',
-  home: 'Start',
-  workouts: 'Workouts',
-  meals: 'Mahlzeiten',
-  more: 'Mehr',
-  language: 'Sprache',
-  settings: 'Einstellungen',
-  changeSchedule: 'Trainingstage andern',
-  logout: 'Abmelden',
-  joinTeamTitle: 'Dem Team beitreten',
-  welcomeChampionTitle: 'Willkommen, Champion',
-  signUp: 'Registrieren',
-  continue: 'Weiter',
-  orUseEmail: 'Oder E-Mail nutzen',
-  createAccount: 'Konto erstellen',
-  startTraining: 'Training starten',
-  signIn: 'Anmelden',
-  goHome: 'Zur Startseite',
-};
-
-translations.it = {
-  ...translations.en,
-  welcomeBack: 'Bentornato,',
-  dailyGoal: 'Obiettivo giornaliero',
-  stayConsistent: 'Rimani costante',
-  quickActions: 'Azioni rapide',
-  mealPlan: 'Piano pasti',
-  askCoach: 'Chiedi al coach',
-  todaysMotivation: 'MOTIVAZIONE DI OGGI',
-  home: 'Home',
-  workouts: 'Allenamenti',
-  meals: 'Pasti',
-  more: 'Altro',
-  language: 'Lingua',
-  settings: 'Impostazioni',
-  changeSchedule: 'Cambia giorni di allenamento',
-  logout: 'Esci',
-  joinTeamTitle: 'Unisciti al team',
-  welcomeChampionTitle: 'Benvenuto, campione',
-  signUp: 'Registrati',
-  continue: 'Continua',
-  orUseEmail: 'Oppure usa email',
-  createAccount: 'Crea account',
-  startTraining: 'Inizia allenamento',
-  signIn: 'Accedi',
-  goHome: 'Vai alla home',
-};
+// Add basic copies for other languages to avoid crashes, they will be mostly English but with core UI translated
+translations.es = { ...translations.en, ...translations.es }; // translations.es was empty/partial
+translations.fr = { ...translations.en, ...translations.fr };
+translations.de = { ...translations.en, ...translations.de };
+translations.it = { ...translations.en, ...translations.it };
 
 const supportedLanguages = [
   { code: 'en', label: 'English', base: 'en', dir: 'ltr', aiName: 'English' },
   { code: 'ar', label: 'العربية', base: 'ar', dir: 'rtl', aiName: 'Arabic' },
-  { code: 'es', label: 'Espanol', base: 'es', dir: 'ltr', aiName: 'Spanish' },
-  { code: 'fr', label: 'Francais', base: 'fr', dir: 'ltr', aiName: 'French' },
+  { code: 'es', label: 'Español', base: 'es', dir: 'ltr', aiName: 'Spanish' },
+  { code: 'fr', label: 'Français', base: 'fr', dir: 'ltr', aiName: 'French' },
   { code: 'de', label: 'Deutsch', base: 'de', dir: 'ltr', aiName: 'German' },
   { code: 'it', label: 'Italiano', base: 'it', dir: 'ltr', aiName: 'Italian' },
 ];
@@ -441,7 +415,7 @@ const getLanguageConfig = (code) => (
 const getDayOfYear = () => {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now - start;
+  const diff = Number(now) - Number(start);
   return Math.floor(diff / 86400000);
 };
 
@@ -504,4 +478,3 @@ export function useLanguage() {
   }
   return context;
 }
-

@@ -68,7 +68,9 @@ export default function MealCard({ meal, index }) {
             <span className="text-xs font-medium text-orange-500 uppercase tracking-wider">
               {t(mealTypeKeys[meal.meal_type] || meal.meal_type)}
             </span>
-            <h3 className="text-white font-bold text-lg mt-1">{meal.name}</h3>
+            <h3 className="text-white font-bold text-lg mt-1">
+              {meal.titleKey ? t(meal.titleKey) : meal.name}
+            </h3>
           </div>
           <button
             onClick={() => setExpanded(!expanded)}
@@ -113,6 +115,27 @@ export default function MealCard({ meal, index }) {
               exit={{ height: 0, opacity: 0 }}
               className="overflow-hidden"
             >
+              {meal.portion_size && (
+                <div className="mt-4 p-3 bg-orange-500/10 rounded-xl border border-orange-500/20">
+                  <h4 className="text-orange-500 text-xs font-bold uppercase tracking-wider mb-1">{t('portionSize')}</h4>
+                  <p className="text-white text-sm font-medium">{meal.portion_size}</p>
+                </div>
+              )}
+
+              {meal.how_much_to_eat && (
+                <div className="mt-4">
+                  <h4 className="text-zinc-400 text-sm font-medium mb-1">{t('howMuchToEat')}</h4>
+                  <p className={`text-zinc-300 text-sm ${isRTL ? 'text-right' : ''}`}>{meal.how_much_to_eat}</p>
+                </div>
+              )}
+
+              {meal.diet_tip && (
+                <div className="mt-4 p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
+                  <h4 className="text-emerald-500 text-xs font-bold uppercase tracking-wider mb-1">{t('dietTip')}</h4>
+                  <p className="text-zinc-300 text-sm italic">"{meal.diet_tip}"</p>
+                </div>
+              )}
+
               {meal.ingredients?.length > 0 && (
                 <div className="mt-4">
                   <h4 className="text-zinc-400 text-sm font-medium mb-2">{t('ingredients')}</h4>

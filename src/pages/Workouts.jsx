@@ -7,20 +7,10 @@ import ExerciseCard from '@/components/workout/ExerciseCard';
 import { useLanguage } from '@/components/LanguageContext';
 import { useExerciseDays } from '@/lib/useExerciseDays';
 
-const workoutData = {
-  Sunday: {
-    name: 'Rest Day',
-    nameAr: 'يوم راحة',
-    muscle_group: 'Recovery',
-    muscleGroupAr: 'استشفاء',
-    duration_minutes: 0,
-    exercises: []
-  },
-  Monday: {
-    name: 'Chest & Triceps',
-    nameAr: 'صدر وترايسبس',
-    muscle_group: 'Chest',
-    muscleGroupAr: 'صدر',
+const workoutModules = {
+  Chest: {
+    titleKey: 'chestWorkout',
+    muscleGroupKey: 'chest',
     duration_minutes: 60,
     exercises: [
       { name: 'Bench Press', nameAr: 'ضغط صدر بالبار', sets: 4, reps: '8-10', calories: 45, fat: 5, gif_url: '/exercises/Barbell-Bench-Press.gif', description: 'Keep your back flat and push through your chest' },
@@ -30,11 +20,9 @@ const workoutData = {
       { name: 'Overhead Tricep Extension', nameAr: 'ترايسبس خلف الرأس', sets: 3, reps: '10-12', calories: 22, fat: 2, gif_url: '/exercises/Dumbbell-Triceps-Extension.gif', description: 'Full stretch at the bottom' },
     ]
   },
-  Tuesday: {
-    name: 'Back & Biceps',
-    nameAr: 'ظهر وباي',
-    muscle_group: 'Back',
-    muscleGroupAr: 'ظهر',
+  Back: {
+    titleKey: 'backWorkout',
+    muscleGroupKey: 'back',
     duration_minutes: 65,
     exercises: [
       { name: 'Deadlift', nameAr: 'ديدليفت', sets: 4, reps: '6-8', calories: 80, fat: 9, gif_url: '/exercises/Barbell-Deadlift.gif', description: 'Keep your back straight, lift with your legs' },
@@ -44,11 +32,9 @@ const workoutData = {
       { name: 'Hammer Curls', nameAr: 'هامر كيرل', sets: 3, reps: '12-15', calories: 25, fat: 3, gif_url: '/exercises/Hammer-Curl.gif', description: 'Works brachialis for arm thickness' },
     ]
   },
-  Wednesday: {
-    name: 'Legs',
-    nameAr: 'رجل',
-    muscle_group: 'Legs',
-    muscleGroupAr: 'رجل',
+  Legs: {
+    titleKey: 'legsWorkout',
+    muscleGroupKey: 'legs',
     duration_minutes: 70,
     exercises: [
       { name: 'Barbell Squats', nameAr: 'سكوات بالبار', sets: 4, reps: '8-10', calories: 85, fat: 10, gif_url: '/exercises/BARBELL-SQUAT.gif', description: 'Go below parallel if mobility allows' },
@@ -58,11 +44,9 @@ const workoutData = {
       { name: 'Calf Raises', nameAr: 'رفع السمانة', sets: 4, reps: '15-20', calories: 30, fat: 3, gif_url: '/exercises/Calf-Raise.gif', description: 'Full range of motion' },
     ]
   },
-  Thursday: {
-    name: 'Shoulders & Abs',
-    nameAr: 'كتف وبطن',
-    muscle_group: 'Shoulders',
-    muscleGroupAr: 'كتف',
+  Shoulders: {
+    titleKey: 'shouldersWorkout',
+    muscleGroupKey: 'shoulders',
     duration_minutes: 55,
     exercises: [
       { name: 'Overhead Press', nameAr: 'ضغط كتف', sets: 4, reps: '8-10', calories: 45, fat: 5, gif_url: '/exercises/Barbell-Shoulder-Press.gif', description: 'Press straight up, don\'t lean back' },
@@ -72,11 +56,9 @@ const workoutData = {
       { name: 'Cable Crunches', nameAr: 'كرنش بالكابل', sets: 3, reps: '15-20', calories: 30, fat: 3, gif_url: '/exercises/Cable-Crunch.gif', description: 'Crunch down, exhale at bottom' },
     ]
   },
-  Friday: {
-    name: 'Arms',
-    nameAr: 'ذراع',
-    muscle_group: 'Arms',
-    muscleGroupAr: 'ذراع',
+  Arms: {
+    titleKey: 'armsWorkout',
+    muscleGroupKey: 'arms',
     duration_minutes: 50,
     exercises: [
       { name: 'Close Grip Bench Press', nameAr: 'ضغط قبضة ضيقة', sets: 4, reps: '8-10', calories: 40, fat: 4, gif_url: '/exercises/Close-Grip-Bench-Press.gif', description: 'Hands shoulder-width apart' },
@@ -86,11 +68,9 @@ const workoutData = {
       { name: 'Dips', nameAr: 'ديبس', sets: 3, reps: '10-15', calories: 35, fat: 4, gif_url: '/exercises/Chest-Dips.gif', description: 'Lean forward slightly for chest' },
     ]
   },
-  Saturday: {
-    name: 'Full Body HIIT',
-    nameAr: 'تمرين كامل هيت',
-    muscle_group: 'Full Body',
-    muscleGroupAr: 'جسم كامل',
+  FullBody: {
+    titleKey: 'fullBodyWorkout',
+    muscleGroupKey: 'fullBody',
     duration_minutes: 45,
     exercises: [
       { name: 'Burpees', nameAr: 'بيربي', sets: 4, reps: '10', calories: 60, fat: 7, gif_url: '/exercises/Burpee.gif', description: 'Explosive jump at the top' },
@@ -106,21 +86,86 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 
 export default function Workouts() {
   const { t, language, isRTL } = useLanguage();
-  const { isTrainingDay } = useExerciseDays();
+  const { getTrainingDays, isTrainingDay } = useExerciseDays();
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const [selectedDay, setSelectedDay] = useState(today);
 
-  const workout = workoutData[selectedDay];
-  const currentIndex = days.indexOf(selectedDay);
+  // Dynamically map workouts to selected days
+  const trainingDays = getTrainingDays(); // ['Monday', 'Wednesday', ...] ordered in week
+  const sortedTrainingDays = [...trainingDays].sort((a, b) => days.indexOf(a) - days.indexOf(b));
 
-  // Check if this day is a training day
-  const isDayTraining = isTrainingDay(selectedDay);
+  const getWorkoutForDay = (dayName) => {
+    if (!isTrainingDay(dayName)) {
+      return {
+        titleKey: 'restDay',
+        muscleGroupKey: 'recovery',
+        duration_minutes: 0,
+        exercises: []
+      };
+    }
 
-  // If it's not a training day, show rest day workout data
-  const displayWorkout = isDayTraining ? workout : {
-    ...workout,
-    exercises: []
+    const dayIndex = sortedTrainingDays.indexOf(dayName);
+    const dayCount = sortedTrainingDays.length;
+
+    // Logic based on how many days the user selected
+    if (dayCount === 1) {
+      return workoutModules.FullBody;
+    }
+
+    if (dayCount === 2) {
+      // Upper / Lower split
+      if (dayIndex === 0) {
+        return {
+          ...workoutModules.Chest,
+          titleKey: 'upperBodyPower',
+          exercises: [...workoutModules.Chest.exercises.slice(0, 3), ...workoutModules.Back.exercises.slice(0, 2)]
+        };
+      }
+      return {
+        ...workoutModules.Legs,
+        titleKey: 'lowerBodyCore',
+        exercises: [...workoutModules.Legs.exercises, ...workoutModules.Shoulders.exercises.slice(3)]
+      };
+    }
+
+    if (dayCount === 3) {
+      // Push / Pull / Legs
+      if (dayIndex === 0) {
+        return {
+          ...workoutModules.Chest,
+          titleKey: 'pushWorkout',
+          exercises: [...workoutModules.Chest.exercises.slice(0, 3), ...workoutModules.Shoulders.exercises.slice(0, 2)]
+        };
+      }
+      if (dayIndex === 1) {
+        return {
+          ...workoutModules.Back,
+          titleKey: 'pullWorkout',
+          exercises: [...workoutModules.Back.exercises]
+        };
+      }
+      return {
+        ...workoutModules.Legs,
+        titleKey: 'legsHiit',
+        exercises: [...workoutModules.Legs.exercises.slice(0, 4), workoutModules.FullBody.exercises[0]]
+      };
+    }
+
+    // 4+ days: Cycle through the traditional 5-6 day split
+    const sequence = [
+      workoutModules.Chest,
+      workoutModules.Back,
+      workoutModules.Legs,
+      workoutModules.Shoulders,
+      workoutModules.Arms,
+      workoutModules.FullBody
+    ];
+
+    return sequence[dayIndex % sequence.length];
   };
+
+  const displayWorkout = getWorkoutForDay(selectedDay);
+  const currentIndex = days.indexOf(selectedDay);
 
   const goToPrevDay = () => {
     const newIndex = (currentIndex - 1 + 7) % 7;
@@ -175,11 +220,11 @@ export default function Workouts() {
           animate={{ opacity: 1, y: 0 }}
           className={`bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-6 mb-6 ${isRTL ? 'text-right' : ''}`}
         >
-          <h2 className="text-2xl font-bold text-white">{language === 'ar' ? displayWorkout.nameAr : displayWorkout.name}</h2>
+          <h2 className="text-2xl font-bold text-white">{t(displayWorkout.titleKey)}</h2>
           <div className={`flex items-center gap-4 mt-3 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-white/70" />
-              <span className="text-white/70 text-sm">{language === 'ar' ? displayWorkout.muscleGroupAr : displayWorkout.muscle_group}</span>
+              <span className="text-white/70 text-sm">{t(displayWorkout.muscleGroupKey)}</span>
             </div>
             {displayWorkout.duration_minutes > 0 && (
               <div className="flex items-center gap-2">
