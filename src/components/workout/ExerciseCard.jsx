@@ -17,56 +17,35 @@ export default function ExerciseCard({ exercise, index }) {
       transition={{ delay: index * 0.05 }}
       className="bg-zinc-900/60 rounded-2xl overflow-hidden border border-zinc-800 backdrop-blur-md"
     >
-      <div className={`p-4 flex items-center gap-5 ${isRTL ? 'flex-row-reverse' : ''}`}>
-        <div className="w-24 h-24 rounded-2xl bg-zinc-800 overflow-hidden flex-shrink-0 relative border border-zinc-700/50 shadow-lg">
-          {exercise.gif_url?.endsWith('.mp4') ? (
-            <video
-              src={(import.meta.env.BASE_URL + exercise.gif_url).replace(/\/+/g, '/')}
-              className="w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-            />
-          ) : (
-            <img
-              src={exercise.gif_url ? (import.meta.env.BASE_URL + exercise.gif_url).replace(/\/+/g, '/') : "https://via.placeholder.com/80"}
-              alt={title}
-              className="w-full h-full object-cover"
-            />
-          )}
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
-          >
-            <Play className="w-6 h-6 text-white" />
-          </button>
-        </div>
-
+      <div
+        onClick={() => setExpanded(!expanded)}
+        className={`p-5 flex items-center justify-between cursor-pointer group ${isRTL ? 'flex-row-reverse' : ''}`}
+      >
         <div className={`flex-1 min-w-0 ${isRTL ? 'text-right' : ''}`}>
-          <h4 className="text-white font-bold text-lg truncate mb-1">{title}</h4>
-          <div className={`flex items-center gap-4 mt-2 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
-            <div className="flex items-center gap-1.5">
-              <div className="w-6 h-6 rounded-lg bg-orange-500/10 flex items-center justify-center">
-                <Calendar className="w-3.5 h-3.5 text-orange-500" />
-              </div>
-              <span className="text-zinc-300 text-sm font-semibold">{exercise.sets} {t('sets')}</span>
+          <div className={`flex items-center gap-3 mb-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
+              <Play className={`w-4 h-4 text-orange-500 transition-transform group-hover:scale-110 ${isRTL ? 'rotate-180' : ''}`} />
             </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-6 h-6 rounded-lg bg-orange-500/10 flex items-center justify-center">
-                <Flame className="w-3.5 h-3.5 text-orange-500" />
-              </div>
-              <span className="text-zinc-300 text-sm font-semibold">{exercise.reps} {t('reps')}</span>
+            <h4 className="text-white font-bold text-lg truncate tracking-tight">{title}</h4>
+          </div>
+
+          <div className={`flex items-center gap-6 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-zinc-500" />
+              <span className="text-zinc-400 text-sm font-medium">{exercise.sets} {t('sets')}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Flame className="w-4 h-4 text-zinc-500" />
+              <span className="text-zinc-400 text-sm font-medium">{exercise.reps} {t('reps')}</span>
             </div>
           </div>
         </div>
 
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className={`w-10 h-10 rounded-xl bg-zinc-800/80 backdrop-blur flex items-center justify-center text-zinc-400 hover:text-white transition-all transform ${expanded ? 'bg-orange-500 text-black' : 'hover:scale-105 active:scale-95'}`}
+        <div
+          className={`w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center text-zinc-400 transition-all ${expanded ? 'bg-orange-500 text-black shadow-[0_0_20px_rgba(249,115,22,0.4)]' : 'group-hover:bg-zinc-700'}`}
         >
           {expanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-        </button>
+        </div>
       </div>
 
       <AnimatePresence>
