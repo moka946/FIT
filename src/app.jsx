@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Toaster as HotToaster } from 'react-hot-toast';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -107,6 +108,10 @@ const AuthenticatedApp = () => {
 
 
 function App() {
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
+
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>

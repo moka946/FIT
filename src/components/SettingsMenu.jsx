@@ -42,7 +42,9 @@ export default function SettingsMenu() {
 
       <DropdownMenuContent
         align="end"
-        className="w-60 bg-zinc-900 border-zinc-700 text-zinc-100"
+        sideOffset={8}
+        collisionPadding={10}
+        className="w-44 bg-zinc-900 border-zinc-700 text-zinc-100"
       >
         <DropdownMenuLabel className="text-zinc-300">
           {t('settings')}
@@ -56,15 +58,19 @@ export default function SettingsMenu() {
             <span>{t('language')}</span>
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
-            <DropdownMenuSubContent className="w-48 bg-zinc-900 border-zinc-700 text-zinc-100">
+            <DropdownMenuSubContent
+              sideOffset={4}
+              collisionPadding={10}
+              className="w-36 bg-zinc-900 border-zinc-700 text-zinc-100"
+            >
               {supportedLanguages.map((option) => (
                 <DropdownMenuItem
                   key={option.code}
                   onSelect={() => setLanguage(option.code)}
-                  className="focus:bg-zinc-800 focus:text-white"
+                  className="flex items-center justify-between focus:bg-zinc-800 focus:text-white"
                 >
-                  <span>{option.label}</span>
-                  {language === option.code && <Check className="w-4 h-4 ml-auto text-orange-500" />}
+                  <span className="truncate">{option.label}</span>
+                  {language === option.code && <Check className="w-4 h-4 text-orange-500 shrink-0" />}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuSubContent>
