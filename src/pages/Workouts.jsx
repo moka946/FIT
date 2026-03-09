@@ -26,6 +26,8 @@ const workoutModules = {
     exercises: [
       { name: 'Deadlift', titleKey: 'ex_deadlift', descKey: 'ex_deadlift_desc', sets: 4, reps: '6-8', calories: 80, fat: 9, gif_url: '/exercises/Barbell-Deadlift.gif' },
       { name: 'Lat Pulldowns', titleKey: 'ex_lat_pulldown', descKey: 'ex_lat_pulldown_desc', sets: 4, reps: '10-12', calories: 40, fat: 4, gif_url: '/exercises/Lat-Pulldown.gif' },
+      { name: 'Seated Cable Row', titleKey: 'ex_seated_row', descKey: 'ex_seated_row_desc', sets: 3, reps: '12-15', calories: 35, fat: 3, gif_url: '/exercises/Seated-Cable-Row.gif' },
+      { name: 'Barbell Curls', titleKey: 'ex_barbell_curl', descKey: 'ex_barbell_curl_desc', sets: 3, reps: '12-15', calories: 25, fat: 2, gif_url: '/exercises/Barbell-Curl.gif' },
     ]
   },
   Legs: {
@@ -34,14 +36,19 @@ const workoutModules = {
     duration_minutes: 70,
     exercises: [
       { name: 'Barbell Squats', titleKey: 'ex_squat', descKey: 'ex_squat_desc', sets: 4, reps: '8-10', calories: 85, fat: 10, gif_url: '/exercises/BARBELL-SQUAT.gif' },
+      { name: 'Leg Press', titleKey: 'ex_leg_press', descKey: 'ex_leg_press_desc', sets: 3, reps: '12-15', calories: 50, fat: 4, gif_url: '/exercises/Leg-Press.mp4' },
+      { name: 'Calf Raises', titleKey: 'ex_calf_raise', descKey: 'ex_calf_raise_desc', sets: 4, reps: '15-20', calories: 20, fat: 2, gif_url: '/exercises/Calf-Raise.gif' },
     ]
   },
   Shoulders: {
     titleKey: 'shouldersWorkout',
     muscleGroupKey: 'shoulders',
-    duration_minutes: 55,
+    duration_minutes: 65,
     exercises: [
       { name: 'Overhead Press', titleKey: 'ex_ohp', descKey: 'ex_ohp_desc', sets: 4, reps: '8-10', calories: 45, fat: 5, gif_url: '/exercises/Barbell-Shoulder-Press.gif' },
+      { name: 'Lateral Raises', titleKey: 'ex_lateral_raise', descKey: 'ex_lateral_raise_desc', sets: 3, reps: '12-15', calories: 15, fat: 1, gif_url: '/exercises/Dumbbell-Lateral-Raise.gif' },
+      { name: 'Face Pulls', titleKey: 'ex_face_pull', descKey: 'ex_face_pull_desc', sets: 3, reps: '15-20', calories: 15, fat: 1, gif_url: '/exercises/Face-Pull.gif' },
+      { name: 'Cable Crunches', titleKey: 'ex_cable_crunch', descKey: 'ex_cable_crunch_desc', sets: 4, reps: '15-20', calories: 20, fat: 2, gif_url: '/exercises/Cable-Crunch.gif' },
     ]
   }
 };
@@ -59,11 +66,43 @@ export default function Workouts() {
 
   const getWorkoutForDay = (dayName) => {
     if (!isTrainingDay(dayName)) return { titleKey: 'restDay', muscleGroupKey: 'recovery', duration_minutes: 0, exercises: [] };
+
     const dayIndex = sortedTrainingDays.indexOf(dayName);
     const dayCount = sortedTrainingDays.length;
-    if (dayCount === 1) return workoutModules.FullBody || workoutModules.Chest;
-    const sequence = [workoutModules.Chest, workoutModules.Back, workoutModules.Legs, workoutModules.Shoulders];
-    return sequence[dayIndex % sequence.length];
+
+    // Define the sequence of all available modules
+    const modules = [
+      workoutModules.Chest,
+      workoutModules.Back,
+      workoutModules.Legs,
+      workoutModules.Shoulders
+    ];
+
+    if (dayCount < 4) {
+      // If we have fewer than 4 training days, we must combine modules to "fit all"
+      const modulesForThisDay = [];
+      modules.forEach((module, idx) => {
+        // Distribute modules into the available days
+        if (idx % dayCount === dayIndex) {
+          modulesForThisDay.push(module);
+        }
+      });
+
+      if (modulesForThisDay.length === 0) return { titleKey: 'restDay', muscleGroupKey: 'recovery', duration_minutes: 0, exercises: [] };
+      if (modulesForThisDay.length === 1) return modulesForThisDay[0];
+
+      // Combine multiple modules for a fuller workout on this day
+      return {
+        isCombined: true,
+        combinedTitles: modulesForThisDay.map(m => m.titleKey),
+        muscleGroupKey: 'mixed',
+        duration_minutes: modulesForThisDay.reduce((acc, m) => acc + m.duration_minutes, 0),
+        exercises: modulesForThisDay.flatMap(m => m.exercises)
+      };
+    }
+
+    // For 4 or more training days, cycle through the modules normally
+    return modules[dayIndex % modules.length];
   };
 
   const displayWorkout = getWorkoutForDay(selectedDay);
@@ -71,6 +110,14 @@ export default function Workouts() {
 
   const goToPrevDay = () => setSelectedDay(days[(currentIndex - 1 + 7) % 7]);
   const goToNextDay = () => setSelectedDay(days[(currentIndex + 1) % 7]);
+
+  // Helper to format the title for combined workouts
+  const renderWorkoutTitle = (workout) => {
+    if (workout.isCombined) {
+      return workout.combinedTitles.map(key => t(key)).join(' + ');
+    }
+    return t(workout.titleKey);
+  };
 
   return (
     <div className="min-h-screen bg-black pb-24">
@@ -107,7 +154,7 @@ export default function Workouts() {
 
       <div className="px-6 py-4">
         <motion.div key={selectedDay} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`bg-gradient-to-br from-orange-500/20 to-orange-600/5 border border-orange-500/20 rounded-3xl p-6 mb-6 ${isRTL ? 'text-right' : ''}`}>
-          <h2 className="text-2xl font-black text-white">{t(displayWorkout.titleKey)}</h2>
+          <h2 className="text-2xl font-black text-white">{renderWorkoutTitle(displayWorkout)}</h2>
           <div className={`flex items-center gap-4 mt-3 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-orange-500" />
