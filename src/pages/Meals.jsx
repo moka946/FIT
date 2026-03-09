@@ -17,7 +17,7 @@ const egyptianMeals = [
     instructionsKey: "meal_ful_instr",
     meal_type: "Breakfast",
     calories: 180, protein: 14, carbs: 20, fats: 2,
-    image_url: "https://eatwellabi.com/wp-content/uploads/2022/06/Ful-Medame-13.jpg"
+    image_url: "/meal-images/full.jpg"
   },
   {
     titleKey: "meal_areesh",
@@ -28,7 +28,7 @@ const egyptianMeals = [
     instructionsKey: "meal_areesh_instr",
     meal_type: "Breakfast",
     calories: 120, protein: 26, carbs: 4, fats: 1,
-    image_url: "https://www.seductioninthekitchen.com/wp-content/uploads/2017/08/Egyptian-Feta-Cucumber-Salad-1.jpg"
+    image_url: "/meal-images/gebna.jpg"
   },
 
   // Lunch - High Protein & Lean
@@ -41,7 +41,7 @@ const egyptianMeals = [
     instructionsKey: "meal_chicken_instr",
     meal_type: "Lunch",
     calories: 260, protein: 50, carbs: 0, fats: 4,
-    image_url: "https://healthyfitnessmeals.com/wp-content/uploads/2018/06/grilled-chicken-shish-tawook-9.jpg"
+    image_url: "/meal-images/chicken.jpg"
   },
   {
     titleKey: "meal_fish",
@@ -52,7 +52,7 @@ const egyptianMeals = [
     instructionsKey: "meal_fish_instr",
     meal_type: "Lunch",
     calories: 220, protein: 42, carbs: 0, fats: 6,
-    image_url: "https://scarfgalfood.com/wp-content/uploads/2015/05/screen-shot-2015-05-26-at-1-26-17-pm.png"
+    image_url: "/meal-images/fish.jpg"
   },
 
   // Dinner - Light
@@ -65,7 +65,7 @@ const egyptianMeals = [
     instructionsKey: "meal_egg_whites_instr",
     meal_type: "Dinner",
     calories: 130, protein: 26, carbs: 2, fats: 1,
-    image_url: "https://www.eatingbirdfood.com/wp-content/uploads/2023/01/egg-white-omelette-hero.jpg"
+    image_url: "/meal-images/eggs.jpg"
   },
   {
     titleKey: "meal_tuna",
@@ -76,7 +76,7 @@ const egyptianMeals = [
     instructionsKey: "meal_tuna_instr",
     meal_type: "Dinner",
     calories: 170, protein: 35, carbs: 5, fats: 2,
-    image_url: "https://www.themediterraneandish.com/wp-content/uploads/2021/05/Mediterranean-Tuna-Salad-5.jpg"
+    image_url: "/meal-images/tuna.jpg"
   },
 
   // Post-Workout - Recovery
@@ -89,7 +89,7 @@ const egyptianMeals = [
     instructionsKey: "meal_post_chicken_instr",
     meal_type: "Post-Workout",
     calories: 360, protein: 45, carbs: 42, fats: 3,
-    image_url: "https://healthyfitnessmeals.com/wp-content/uploads/2021/01/Honey-garlic-chicken-and-rice.jpg"
+    image_url: "/meal-images/chicken_rice.jpg"
   },
   {
     titleKey: "meal_protein_shake",
@@ -113,7 +113,7 @@ const egyptianMeals = [
     instructionsKey: "meal_termes_instr",
     meal_type: "Snack",
     calories: 120, protein: 12, carbs: 10, fats: 4,
-    image_url: "https://cheznermine.com/wp-content/uploads/2021/02/Egyptian-Termes-Lupini-Beans-Snack-%D8%AA%D8%B1%D9%85%D8%B3-scaled.jpg"
+    image_url: "/meal-images/nuts.jpg"
   },
   {
     titleKey: "meal_coffee",
@@ -124,7 +124,7 @@ const egyptianMeals = [
     instructionsKey: "meal_coffee_instr",
     meal_type: "Pre-Workout",
     calories: 60, protein: 1, carbs: 15, fats: 0,
-    image_url: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1000"
+    image_url: "/meal-images/dates.jpg"
   }
 ];
 
@@ -174,7 +174,7 @@ export default function Meals() {
                 onClick={() => setSelectedType(type)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedType === type
                   ? 'bg-orange-500 text-black'
-                  : 'bg-zinc-900 text-zinc-400 border border-zinc-800 shadow-lg'
+                  : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
                   }`}
               >
                 {t(mealTypeKeys[type])}
