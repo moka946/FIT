@@ -28,7 +28,7 @@ const egyptianMeals = [
     instructionsKey: "meal_areesh_instr",
     meal_type: "Breakfast",
     calories: 120, protein: 26, carbs: 4, fats: 1,
-    image_url: "/meal-images/gebna.jpg"
+    image_url: "/meal-images/areesh_cheese.jpg"
   },
 
   // Lunch - High Protein & Lean
@@ -52,7 +52,7 @@ const egyptianMeals = [
     instructionsKey: "meal_fish_instr",
     meal_type: "Lunch",
     calories: 220, protein: 42, carbs: 0, fats: 6,
-    image_url: "/meal-images/fish.jpg"
+    image_url: "/meal-images/sea_base.jpg"
   },
 
   // Dinner - Light
@@ -65,7 +65,7 @@ const egyptianMeals = [
     instructionsKey: "meal_egg_whites_instr",
     meal_type: "Dinner",
     calories: 130, protein: 26, carbs: 2, fats: 1,
-    image_url: "/meal-images/eggs.jpg"
+    image_url: "/meal-images/egg_omelete.jpg"
   },
   {
     titleKey: "meal_tuna",
@@ -76,7 +76,7 @@ const egyptianMeals = [
     instructionsKey: "meal_tuna_instr",
     meal_type: "Dinner",
     calories: 170, protein: 35, carbs: 5, fats: 2,
-    image_url: "/meal-images/tuna.jpg"
+    image_url: "/meal-images/tuna_salad.jpg"
   },
 
   // Post-Workout - Recovery
@@ -89,7 +89,7 @@ const egyptianMeals = [
     instructionsKey: "meal_post_chicken_instr",
     meal_type: "Post-Workout",
     calories: 360, protein: 45, carbs: 42, fats: 3,
-    image_url: "/meal-images/chicken_rice.jpg"
+    image_url: "/meal-images/chicken_and_rice.jpg"
   },
   {
     titleKey: "meal_protein_shake",
@@ -100,7 +100,7 @@ const egyptianMeals = [
     instructionsKey: "meal_protein_shake_instr",
     meal_type: "Post-Workout",
     calories: 120, protein: 24, carbs: 3, fats: 1,
-    image_url: "https://images.unsplash.com/photo-1593095191850-2a763396707a?auto=format&fit=crop&q=80&w=1000"
+    image_url: "/meal-images/protien_shake.jpg"
   },
 
   // Snacks & Pre-Workout
@@ -113,7 +113,7 @@ const egyptianMeals = [
     instructionsKey: "meal_termes_instr",
     meal_type: "Snack",
     calories: 120, protein: 12, carbs: 10, fats: 4,
-    image_url: "/meal-images/nuts.jpg"
+    image_url: "/meal-images/termes.jpg"
   },
   {
     titleKey: "meal_coffee",
