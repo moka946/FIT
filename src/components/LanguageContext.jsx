@@ -57,6 +57,7 @@ const translations = {
     kcal: 'kcal',
     fat: 'fat',
     sets: 'sets',
+    reps: 'reps',
 
     egyptianMeals: 'Egyptian Nutrition',
     options: 'options',
@@ -153,52 +154,95 @@ const translations = {
     pageNotFoundSuffix: 'could not be found in this application.',
     goHome: 'Go Home',
 
-    // Workout Titles
-    chestWorkout: 'Chest & Triceps',
-    backWorkout: 'Back & Biceps',
-    legsWorkout: 'Legs',
-    shouldersWorkout: 'Shoulders & Abs',
-    armsWorkout: 'Arms',
-    fullBodyWorkout: 'Full Body HIIT',
-    upperBodyPower: 'Upper Body Power',
-    lowerBodyCore: 'Lower Body & Core',
-    pushWorkout: 'Push (Chest & Shoulders)',
-    pullWorkout: 'Pull (Back & Bicep)',
-    legsHiit: 'Legs & HIIT',
-
-    // Muscle Groups
-    chest: 'Chest',
-    back: 'Back',
-    legs: 'Legs',
-    shoulders: 'Shoulders',
-    arms: 'Arms',
-    fullBody: 'Full Body',
-    recovery: 'Recovery',
-
-    // Meals
-    meal_ful: 'Ful Medames (High Protein)',
-    meal_falafel: "Baked Ta'ameya (Fit Falafel)",
-    meal_shakshuka: 'Shakshuka (Healthy Style)',
-    meal_areesh: 'Areesh Cheese with Veggies',
-    meal_chicken: 'Grilled Chicken (Lean Egyptian Style)',
-    meal_molokhia: 'Molokhia (Zero-Fat Stock)',
-    meal_lentil: 'Lentil Soup (The Diet King)',
-    meal_fish: 'Baked Sayadeya Fish',
-    meal_yogurt: 'Greek Yogurt with 3 Dates',
-    meal_termes: 'Lupin Beans (Termes)',
-    meal_corn: 'Grilled Corn (Durah)',
-    meal_coffee: 'Black Coffee with 3 Dates',
-    meal_oats: 'Oats with Milk and Honey',
-    meal_tuna: 'Egyptian Tuna Salad (Low Fat)',
-    meal_egg_whites: 'Egg Whites with Spinach',
-    meal_kofta: 'Grilled Lean Kofta (No Fat)',
-    meal_protein_shake: 'Protein Shake with Skimmed Milk',
-    meal_post_chicken: 'Grilled Chicken & 3 Spoons Rice',
-    meal_areesh_fruit: 'Areesh Cheese with Peach/Apple',
-    meal_salad: 'Egyptian Green Salad (Large)',
-
     footerCredit: 'Made by Mohamed Tamer | Powered by Firebase | Groq AI',
     gram: 'g',
+
+    // Meal Specific Strings
+    meal_ful: 'Ful Medames (Ultra Lean)',
+    meal_ful_portion: '150g (boiled)',
+    meal_ful_how: 'Eat half a bowl. Use 1/4 whole wheat bread maximum.',
+    meal_ful_tip: 'Zero Oil. Add lemon, cumin, and chopped parsley for flavor.',
+    meal_ful_ingredients: '150g Fava beans, 1/2 Lemon, 1 tsp Cumin, 1 Garlic clove, 1/4 Baladi bread',
+    meal_ful_instr: 'Boil beans, mash with lemon and spices. No oil added.',
+
+    meal_areesh: 'Low-Fat Areesh Cheese',
+    meal_areesh_portion: '200g',
+    meal_areesh_how: 'Best fit breakfast. Eat the full portion.',
+    meal_areesh_tip: 'Top with lots of cucumber and green pepper to feel full.',
+    meal_areesh_ingredients: '200g Quraish cheese, 1 large Cucumber, 1 Green pepper, 1 tsp Black seeds',
+    meal_areesh_instr: 'Mix cheese with vegetables. Avoid adding any oil or cream.',
+
+    meal_chicken: 'Grilled Chicken Breast (Lean)',
+    meal_chicken_portion: '200g breast',
+    meal_chicken_how: 'One large breast. Skip the rice for faster fat loss.',
+    meal_chicken_tip: 'Remove all skin and visible fat before grilling.',
+    meal_chicken_ingredients: '200g Skinless chicken breast, 2 tbsp Onion water, 1 tsp Thyme, 1/2 tsp Black pepper',
+    meal_chicken_instr: 'Marinate in onion water and spices. Grill over charcoal or in oven.',
+
+    meal_fish: 'Baked Sea Bass or Tilapia',
+    meal_fish_portion: '250g fish',
+    meal_fish_how: 'Eat one large fish with a huge green salad.',
+    meal_fish_tip: 'Baking is much cleaner than frying. No flour coating.',
+    meal_fish_ingredients: '250g Tilapia or Sea Bass, 2 Garlic cloves, 1 Lemon, 1 tsp Cumin, 1 Bell pepper',
+    meal_fish_instr: 'Marinate with garlic/lemon, bake with peppers and onion slices.',
+
+    meal_egg_whites: 'Fit Egg White Omelet',
+    meal_egg_whites_portion: '6 Egg whites',
+    meal_egg_whites_how: 'Perfect light dinner for muscle definition.',
+    meal_egg_whites_tip: 'Use zero yolk for zero cholesterol and minimal fat.',
+    meal_egg_whites_ingredients: '6 Egg whites, 100g Fresh spinach, pinch of Salt, 50g Mushrooms',
+    meal_egg_whites_instr: 'Cook with a drop of vinegar to remove egg smell. Use non-stick pan.',
+
+    meal_tuna: 'Lean Egyptian Tuna Salad',
+    meal_tuna_portion: '1 can (drained)',
+    meal_tuna_how: 'Eat directly with a fork. No bread.',
+    meal_tuna_tip: 'Wash tuna with vinegar and water to remove excess sodium and oil.',
+    meal_tuna_ingredients: '140g Canned tuna in water, 1/2 Onion, 1 tbsp Vinegar, pinch of Chili, 1 stalk Celery',
+    meal_tuna_instr: 'Drain water/oil, mix with chopped veggies and vinegar.',
+
+    meal_post_chicken: 'Post-Workout Chicken & Rice',
+    meal_post_chicken_portion: '150g Chicken + 100g Rice',
+    meal_post_chicken_how: 'Take within 60 mins of finishing your workout.',
+    meal_post_chicken_tip: 'Steamed rice only. No butter or oil in the rice.',
+    meal_post_chicken_ingredients: '150g Grilled chicken breast, 100g Steamed white rice, pinch of Cinnamon',
+    meal_post_chicken_instr: 'Serve grilled chicken over steamed rice for fast recovery.',
+
+    meal_protein_shake: 'Whey Protein Shake',
+    meal_protein_shake_portion: '1 Scoop',
+    meal_protein_shake_how: 'Best consumed immediately after training.',
+    meal_protein_shake_tip: 'Use skimmed milk or water to keep calories minimal.',
+    meal_protein_shake_ingredients: '30g Whey Protein Scoop, 300ml Water/Skimmed Milk',
+    meal_protein_shake_instr: 'Mix in a shaker and drink immediately.',
+
+    meal_termes: 'Boiled Lupin Beans (Termes)',
+    meal_termes_portion: '1 Cup',
+    meal_termes_how: 'Great high-protein snack for the evening.',
+    meal_termes_tip: 'Use low salt to avoid water bloating.',
+    meal_termes_ingredients: '100g Lupin beans, 1 tsp Cumin, 1 tbsp Lemon juice',
+    meal_termes_instr: 'Boil until soft, season with cumin and lemon.',
+
+    meal_coffee: 'Pre-Workout Coffee & Dates',
+    meal_coffee_portion: 'Coffee + 2 Dates',
+    meal_coffee_how: '30 mins before your training session.',
+    meal_coffee_tip: 'Dates provide natural energy boost for your muscles.',
+    meal_coffee_ingredients: '1 cup Black Coffee (Plain), 2 Medjool Dates',
+    meal_coffee_instr: 'Brew coffee and have with dates for energy jump.',
+
+    // Exercise Keys
+    ex_bench_press: 'Bench Press',
+    ex_bench_press_desc: 'Keep back flat and push through chest.',
+    ex_incline_db_press: 'Incline Dumbbell Press',
+    ex_incline_db_press_desc: 'Focus on upper chest, 45° angle.',
+    ex_cable_flyes: 'Cable Flyes',
+    ex_cable_flyes_desc: 'Squeeze at center for maximum contraction.',
+    ex_deadlift: 'Deadlift',
+    ex_deadlift_desc: 'Keep back straight, lift with your legs.',
+    ex_lat_pulldown: 'Lat Pulldowns',
+    ex_lat_pulldown_desc: 'Pull to upper chest, squeeze lats.',
+    ex_squat: 'Barbell Squats',
+    ex_squat_desc: 'Go below parallel for full leg growth.',
+    ex_ohp: 'Overhead Press',
+    ex_ohp_desc: 'Press straight up, engage your core.',
   },
   ar: {
     welcomeBack: 'اهلا بعودتك،',
@@ -254,6 +298,7 @@ const translations = {
     kcal: 'سعرة',
     fat: 'دهون',
     sets: 'مجموعات',
+    reps: 'عدات',
 
     egyptianMeals: 'تغذية مصرية',
     options: 'خيارات',
@@ -353,55 +398,157 @@ const translations = {
     footerCredit: 'تم التطوير بواسطة Mohamed Tamer | مدعوم بواسطة Firebase و Groq AI',
     gram: 'جرام',
 
-    // Workout/Meals
-    chestWorkout: 'صدر وترايسبس',
-    backWorkout: 'ظهر وباي',
-    legsWorkout: 'رجل',
-    shouldersWorkout: 'كتف وبطن',
-    armsWorkout: 'ذراع',
-    fullBodyWorkout: 'تمرين كامل هيت',
-    upperBodyPower: 'جزء علوي بقوة',
-    lowerBodyCore: 'جزء سفلي وبطن',
-    pushWorkout: 'دفع (صدر وكتف)',
-    pullWorkout: 'سحب (ظهر وباي)',
-    legsHiit: 'رجل وكارديو',
+    meal_ful: 'فول مدمس خفيف (بدون زيت)',
+    meal_ful_portion: '150 جرام (مسلوق)',
+    meal_ful_how: 'نصف طبق فقط مع ربع رغيف خبز أسمر بحد أقصى.',
+    meal_ful_tip: 'بدون زيت تماماً. استخدم الليمون والكمون والبقدونس للنكهة.',
+    meal_ful_ingredients: '150 جم فول، نصف ليمونة، ملعقة صغيرة كمون، فص ثوم، ربع رغيف بلدي',
+    meal_ful_instr: 'قم بسلق الفول، وهرسه مع الليمون والبهارات. لا تضف أي زيت.',
 
-    chest: 'صدر',
-    back: 'ظهر',
-    legs: 'رجل',
-    shoulders: 'كتف',
-    arms: 'ذراع',
-    fullBody: 'جسم كامل',
-    recovery: 'استشفاء',
+    meal_areesh: 'جبنة قريش دايت',
+    meal_areesh_portion: '200 جرام',
+    meal_areesh_how: 'أفضل فطور صحي. يمكنك تناول الحصة كاملة.',
+    meal_areesh_tip: 'ضع الكثير من الخيار والفلفل الأخضر للشعور بالشبع.',
+    meal_areesh_ingredients: '200 جم جبنة قريش، خيارة كبيرة، فلفل أخضر، ملعقة صغيرة حبة البركة',
+    meal_areesh_instr: 'اخلط الجبنة مع الخضار المقطع. تجنب إضافة الزيت أو القشطة.',
 
-    meal_ful: 'فول مدمس (عالي البروتين)',
-    meal_falafel: 'طعمية بفرن (فيت طعمية)',
-    meal_shakshuka: 'شكشوكة (نمط صحي)',
-    meal_areesh: 'جبنة قريش مع الخضار',
-    meal_chicken: 'دجاج مشوي (على الطريقة المصرية)',
-    meal_molokhia: 'ملوخية (دايت)',
-    meal_lentil: 'شوربة عدس (ملك الدايت)',
-    meal_fish: 'سمك صيادية مشوي',
-    meal_yogurt: 'زبادي يوناني مع 3 تمرات',
-    meal_termes: 'ترمس (سناك صحي)',
-    meal_corn: 'ذرة مشوي',
-    meal_coffee: 'قهوة سادة مع 3 تمرات',
-    meal_oats: 'شوفان بالحليب والعسل',
-    meal_tuna: 'سلطة تونة مصرية (قليلة الدسم)',
-    meal_egg_whites: 'بياض بيض مع سبانخ',
-    meal_kofta: 'كفتة مشوية (بدون دهون)',
-    meal_protein_shake: 'بروتين شيك مع حليب خالي الدسم',
-    meal_post_chicken: 'دجاج مشوي مع 3 ملاعق ارز',
-    meal_areesh_fruit: 'جبنة قريش مع قطع فاكهة',
-    meal_salad: 'سلطة خضراء مصرية (كبيرة)',
+    meal_chicken: 'صدور دجاج مشوية (بدون دهون)',
+    meal_chicken_portion: '200 جرام صدور',
+    meal_chicken_how: 'صدر دجاج كبير. تجنب الأرز لخسارة دهون أسرع.',
+    meal_chicken_tip: 'قم بإزالة الجلد وأي دهون مرئية قبل الشوي.',
+    meal_chicken_ingredients: '200 جم صدور دجاج، ملعقتين ماء بصل، ملعقة زعتر، نصف ملعقة فلفل أسود',
+    meal_chicken_instr: 'تبل الدجاج في ماء البصل والبهارات ثم اشوه في الفرن أو على الفحم.',
+
+    meal_fish: 'سمك مشوي في الفرن',
+    meal_fish_portion: '250 جرام سمك',
+    meal_fish_how: 'تناول سمكة كبيرة مع طبق سلطة خضراء كبير.',
+    meal_fish_tip: 'الخبز في الفرن أنظف بكثير من القلي. لا تستخدم الدقيق.',
+    meal_fish_ingredients: '250 جم سمك بلطي أو قاروص، فصين ثوم، ليمونة، ملعقة كمون، فلفل ألوان',
+    meal_fish_instr: 'تبل السمك بالثوم والليمون واخبزه مع شرائح الفلفل والبصل.',
+
+    meal_egg_whites: 'أومليت بياض البيض',
+    meal_egg_whites_portion: 'بياض 6 بيضات',
+    meal_egg_whites_how: 'عشاء خفيف مثالي لتقسيم العضلات.',
+    meal_egg_whites_tip: 'بدون صفار لتقليل الكوليسترول والدهون تماماً.',
+    meal_egg_whites_ingredients: 'بياض 6 بيضات، 100 جم سبانخ طازجة، رشة ملح، 50 جم مشروم',
+    meal_egg_whites_instr: 'اطبخه في طاسة غير لاصقة مع نقطة خل لإزالة الرائحة.',
+
+    meal_tuna: 'سلطة تونة مصرية (دايت)',
+    meal_tuna_portion: 'علبة تونة (مصفاة)',
+    meal_tuna_how: 'تناولها بالشوكة مباشرة بدون خبز.',
+    meal_tuna_tip: 'اغسل التونة بالخل والماء لإزالة الصوديوم والزيوت الزائدة.',
+    meal_tuna_ingredients: '140 جم تونة قطع، نصف بصلة، ملعقة خل، رشة شطة، عود كرفس',
+    meal_tuna_instr: 'صفِّ التونة تماماً واخلطها مع الخضار المقطع والخل.',
+
+    meal_post_chicken: 'وجبة دجاج وأرز بعد التمرين',
+    meal_post_chicken_portion: '150 جم دجاج + 100 جم أرز',
+    meal_post_chicken_how: 'تناولها خلال 60 دقيقة من نهاية التمرين.',
+    meal_post_chicken_tip: 'أرز مسلوق أو على البخار فقط بدون أي زيت أو سمن.',
+    meal_post_chicken_ingredients: '150 جم صدر دجاج، 100 جم أرز أبيض مسلوق، رشة قرفة',
+    meal_post_chicken_instr: 'قدم الدجاج المشوي مع الأرز المسلوق لسرعة الاستشفاء.',
+
+    meal_protein_shake: 'مخفوق بروتين (واي بروتين)',
+    meal_protein_shake_portion: 'سكوب واحد',
+    meal_protein_shake_how: 'يفضل تناوله مباشرة بعد التمرين.',
+    meal_protein_shake_tip: 'استخدم الماء أو حليب خالي الدسم لتقليل السعرات.',
+    meal_protein_shake_ingredients: '30 جم واي بروتين، 300 مل ماء أو حليب خالي الدسم',
+    meal_protein_shake_instr: 'اخلطه في الشيكر واشربه فوراً.',
+
+    meal_termes: 'ترمس مسلوق (سناك البروتين)',
+    meal_termes_portion: 'كوب واحد',
+    meal_termes_how: 'سناك ممتاز عالي البروتين لفترة المساء.',
+    meal_termes_tip: 'قلل الملح لتجنب احتباس السوائل في الجسم.',
+    meal_termes_ingredients: '100 جم ترمس، ملعقة صغيرة كمون، ملعقة عصير ليمون',
+    meal_termes_instr: 'اسلق الترمس حتى ينضج ثم تبله بالكمون والليمون.',
+
+    meal_coffee: 'قهوة وتمر قبل التمرين',
+    meal_coffee_portion: 'قهوة +  تمرتين',
+    meal_coffee_how: 'قبل جلسة التمرين بـ 30 دقيقة.',
+    meal_coffee_tip: 'التمر يوفر طاقة طبيعية فورية لعضلاتك.',
+    meal_coffee_ingredients: 'كوب قهوة سادة، 2 تمرة',
+    meal_coffee_instr: 'حضر القهوة وتناولها مع التمر لطاقة تفجيرية.',
+
+    ex_bench_press: 'ضغط صدر بالبار',
+    ex_bench_press_desc: 'حافظ على استقامة ظهرك وادفع بصدرك.',
+    ex_incline_db_press: 'ضغط صدر علوي بالدمبل',
+    ex_incline_db_press_desc: 'ركز على الجزء العلوي، زاوية 45 درجة.',
+    ex_cable_flyes: 'تفتيح كابل',
+    ex_cable_flyes_desc: 'اعصر عضلات الصدر في المنتصف.',
+    ex_deadlift: 'ديدليفت',
+    ex_deadlift_desc: 'حافظ على ظهرك مفروداً، ارفع برجليك.',
+    ex_lat_pulldown: 'سحب أمامي',
+    ex_lat_pulldown_desc: 'اسحب للصدر العلوي بتركيز العضلات.',
+    ex_squat: 'سكوات بالبار',
+    ex_squat_desc: 'انزل لأسفل لنمو كامل لعضلات الرجل.',
+    ex_ohp: 'ضغط كتف',
+    ex_ohp_desc: 'ادفع للأعلى مباشرة مع شد البطن.',
+  },
+  es: {
+    welcomeBack: 'Bienvenido,',
+    champion: 'Campeón',
+    dailyGoal: 'Meta Diaria',
+    mealPlan: 'Plan de Comida',
+    workouts: 'Entrenos',
+    meals: 'Comidas',
+    kcal: 'kcal',
+    gram: 'g',
+    protein: 'Proteína',
+    carbs: 'Carbos',
+    fats: 'Grasas',
+    ingredients: 'Ingredientes',
+    howToPrepare: 'Cocinando',
+    allMeals: 'Todo',
+    breakfast: 'Desayuno',
+    lunch: 'Almuerzo',
+    dinner: 'Cena',
+    snack: 'Snack',
+    preWorkout: 'Pre-Entreno',
+    postWorkout: 'Post-Entreno',
+    portionSize: 'Porción',
+    dietTip: 'Consejo',
+    howMuchToEat: 'Ingesta',
+
+    ex_bench_press: 'Press de Banca',
+    ex_bench_press_desc: 'Mantén la espalda recta y empuja.',
+    ex_squat: 'Sentadillas',
+    ex_squat_desc: 'Baja más allá del paralelo.',
+  },
+  it: {
+    welcomeBack: 'Bentornato,',
+    champion: 'Campione',
+    dailyGoal: 'Obiettivo',
+    mealPlan: 'Alimentazione',
+    workouts: 'Allenamenti',
+    meals: 'Pasti',
+    kcal: 'kcal',
+    gram: 'g',
+    protein: 'Proteine',
+    carbs: 'Carboidrati',
+    fats: 'Grassi',
+    ingredients: 'Ingredienti',
+    howToPrepare: 'Preparazione',
+    allMeals: 'Tutti',
+    breakfast: 'Colazione',
+    lunch: 'Pranzo',
+    dinner: 'Cena',
+    snack: 'Merenda',
+    preWorkout: 'Pre-Workout',
+    postWorkout: 'Post-Workout',
+    portionSize: 'Porzione',
+    dietTip: 'Consiglio',
+    howMuchToEat: 'Dose',
+
+    ex_bench_press: 'Panca Piana',
+    ex_bench_press_desc: 'Mantieni la schiena piatta.',
+    ex_squat: 'Squat',
+    ex_squat_desc: 'Scendi sotto il parallelo.',
   }
 };
 
-// Add basic copies for other languages to avoid crashes, they will be mostly English but with core UI translated
-translations.es = { ...translations.en, ...translations.es }; // translations.es was empty/partial
-translations.fr = { ...translations.en, ...translations.fr };
-translations.de = { ...translations.en, ...translations.de };
-translations.it = { ...translations.en, ...translations.it };
+// Simple loop to ensure all UI keys are present from EN if missing in ES/IT
+['es', 'it', 'fr', 'de'].forEach(lang => {
+  translations[lang] = { ...translations.en, ...translations[lang] || {} };
+});
 
 const supportedLanguages = [
   { code: 'en', label: 'English', base: 'en', dir: 'ltr', aiName: 'English' },
@@ -412,19 +559,9 @@ const supportedLanguages = [
   { code: 'it', label: 'Italiano', base: 'it', dir: 'ltr', aiName: 'Italian' },
 ];
 
-const motivationQuoteKeys = [
-  'motivationQuote1',
-  'motivationQuote2',
-  'motivationQuote3',
-  'motivationQuote4',
-  'motivationQuote5',
-  'motivationQuote6',
-  'motivationQuote7',
-];
+const motivationQuoteKeys = ['motivationQuote1', 'motivationQuote2', 'motivationQuote3', 'motivationQuote4', 'motivationQuote5', 'motivationQuote6', 'motivationQuote7'];
 
-const getLanguageConfig = (code) => (
-  supportedLanguages.find((language) => language.code === code) || supportedLanguages[0]
-);
+const getLanguageConfig = (code) => supportedLanguages.find((l) => l.code === code) || supportedLanguages[0];
 
 const getDayOfYear = () => {
   const now = new Date();
@@ -434,52 +571,29 @@ const getDayOfYear = () => {
 };
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(() => {
-    const savedLanguage = localStorage.getItem('appLanguage') || 'en';
-    return getLanguageConfig(savedLanguage).code;
-  });
+  const [language, setLanguage] = useState(() => localStorage.getItem('appLanguage') || 'en');
 
   useEffect(() => {
-    const languageConfig = getLanguageConfig(language);
-    localStorage.setItem('appLanguage', languageConfig.code);
-    document.documentElement.dir = languageConfig.dir;
-    document.documentElement.lang = languageConfig.code;
+    const config = getLanguageConfig(language);
+    localStorage.setItem('appLanguage', language);
+    document.documentElement.dir = config.dir;
+    document.documentElement.lang = language;
   }, [language]);
 
-  const setAppLanguage = (newLanguage) => {
-    setLanguage(getLanguageConfig(newLanguage).code);
+  const t = (key) => {
+    const { base } = getLanguageConfig(language);
+    return translations[base]?.[key] || translations.en[key] || key;
   };
-
-  const translateKey = (key, langCode = language) => {
-    const { base } = getLanguageConfig(langCode);
-    const activeTranslations = translations[base] || translations.en;
-    return activeTranslations[key] || translations.en[key] || key;
-  };
-
-  const t = (key) => translateKey(key);
 
   const getDailyMotivationQuote = () => {
-    const index = (getDayOfYear() - 1) % motivationQuoteKeys.length;
-    const quoteKey = motivationQuoteKeys[index < 0 ? 0 : index];
-    return translateKey(quoteKey);
+    const quoteKey = motivationQuoteKeys[getDayOfYear() % motivationQuoteKeys.length];
+    return t(quoteKey);
   };
-
-  const getAIResponseLanguageName = () => getLanguageConfig(language).aiName;
 
   const isRTL = getLanguageConfig(language).dir === 'rtl';
 
   return (
-    <LanguageContext.Provider
-      value={{
-        language,
-        setLanguage: setAppLanguage,
-        t,
-        isRTL,
-        supportedLanguages,
-        getDailyMotivationQuote,
-        getAIResponseLanguageName,
-      }}
-    >
+    <LanguageContext.Provider value={{ language, setLanguage, t, isRTL, supportedLanguages, getDailyMotivationQuote }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -487,8 +601,6 @@ export function LanguageProvider({ children }) {
 
 export function useLanguage() {
   const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
+  if (!context) throw new Error('useLanguage Error');
   return context;
 }

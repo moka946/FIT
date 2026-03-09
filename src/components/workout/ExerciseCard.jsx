@@ -1,100 +1,93 @@
 import React, { useState } from 'react';
-import { Play, ChevronDown, ChevronUp, Flame, Droplet } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Play, Flame, Beef, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
+import { useLanguage } from '@/components/LanguageContext';
 
-export default function ExerciseCard({ exercise, index, language = 'en', isRTL = false, t = (k) => k }) {
-  const [showVideo, setShowVideo] = useState(false);
+export default function ExerciseCard({ exercise, index }) {
+  const [expanded, setExpanded] = useState(false);
+  const { t, isRTL } = useLanguage();
+
+  const title = exercise.titleKey ? t(exercise.titleKey) : exercise.name;
+  const description = exercise.descKey ? t(exercise.descKey) : exercise.description;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800"
+      transition={{ delay: index * 0.05 }}
+      className="bg-zinc-900/60 rounded-2xl overflow-hidden border border-zinc-800 backdrop-blur-md"
     >
-      <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
-        <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center">
-            <span className="text-orange-500 font-bold">{index + 1}</span>
-          </div>
-          <div className={isRTL ? 'text-right' : ''}>
-            <h4 className="text-white font-semibold">{language === 'ar' && exercise.nameAr ? exercise.nameAr : exercise.name}</h4>
-            <p className="text-zinc-500 text-sm">{exercise.sets} {t('sets')} × {exercise.reps}</p>
+      <div className={`p-4 flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+        <div className="w-20 h-20 rounded-xl bg-zinc-800 overflow-hidden flex-shrink-0 relative">
+          <img
+            src={exercise.gif_url ? (import.meta.env.BASE_URL + exercise.gif_url).replace(/\/+/g, '/') : "https://via.placeholder.com/80"}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+          >
+            <Play className="w-6 h-6 text-white" />
+          </button>
+        </div>
+
+        <div className={`flex-1 min-w-0 ${isRTL ? 'text-right' : ''}`}>
+          <h4 className="text-white font-bold text-base truncate">{title}</h4>
+          <div className={`flex items-center gap-3 mt-1.5 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
+            <div className="flex items-center gap-1">
+              <Calendar className="w-3 h-3 text-orange-500" />
+              <span className="text-zinc-400 text-xs font-medium">{exercise.sets} {t('sets')}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Flame className="w-3 h-3 text-orange-500" />
+              <span className="text-zinc-400 text-xs font-medium">{exercise.reps} {t('reps')}</span>
+            </div>
           </div>
         </div>
-        {exercise.gif_url && (
-          <button
-            onClick={() => setShowVideo(!showVideo)}
-            className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center"
-          >
-            {showVideo ? (
-              <ChevronUp className="w-5 h-5 text-black" />
-            ) : (
-              <Play className="w-5 h-5 text-black" />
-            )}
-          </button>
-        )}
+
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+        >
+          {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
       </div>
 
-      {/* Calories & Fat Burn Info */}
-      {(exercise.calories || exercise.fat) && (
-        <div className={`flex gap-4 mt-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          {exercise.calories && (
-            <div className={`flex items-center gap-1.5 bg-orange-500/10 px-3 py-1.5 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Flame className="w-4 h-4 text-orange-500" />
-              <span className="text-orange-500 text-sm font-medium">{t('burns')} {exercise.calories} {t('kcal')}</span>
-            </div>
-          )}
-          {exercise.fat && (
-            <div className={`flex items-center gap-1.5 bg-blue-500/10 px-3 py-1.5 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Droplet className="w-4 h-4 text-blue-500" />
-              <span className="text-blue-500 text-sm font-medium">{exercise.fat}g {t('fat')}</span>
-            </div>
-          )}
-        </div>
-      )}
-
       <AnimatePresence>
-        {showVideo && exercise.gif_url && (
+        {expanded && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
+            className="border-t border-zinc-800 bg-zinc-900/40"
           >
-            <div className="mt-4 rounded-xl overflow-hidden bg-zinc-800 relative min-h-[200px] flex items-center justify-center">
-              {(() => {
-                const baseUrl = import.meta.env.BASE_URL || '/';
-                const assetUrl = (baseUrl + exercise.gif_url).replace(/\/+/g, '/');
-
-                return exercise.gif_url.match(/\.(mp4|webm|mov)$/) ? (
-                  <video
-                    src={assetUrl}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-auto"
-                  />
-                ) : (
-                  <img
-                    src={assetUrl}
-                    alt={exercise.name}
-                    className="w-full h-auto"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.src = 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop';
-                      target.className = "w-full h-48 object-cover opacity-50 grayscale";
-                    }}
-                  />
-                );
-              })()}
-            </div>
-            {exercise.description && (
-              <p className={`mt-3 text-zinc-400 text-sm ${isRTL ? 'text-right' : ''}`}>
-                {language === 'ar' && exercise.descriptionAr ? exercise.descriptionAr : exercise.description}
+            <div className="p-4">
+              <p className={`text-zinc-400 text-sm leading-relaxed ${isRTL ? 'text-right' : ''}`}>
+                {description}
               </p>
-            )}
+
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="bg-zinc-800/50 p-2.5 rounded-xl border border-zinc-800/50 flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center">
+                    <Flame className="w-4 h-4 text-orange-500" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-sm">{exercise.calories}</p>
+                    <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">{t('kcal')}</p>
+                  </div>
+                </div>
+                <div className="bg-zinc-800/50 p-2.5 rounded-xl border border-zinc-800/50 flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+                    <Beef className="w-4 h-4 text-red-500" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-sm">{exercise.fat}g</p>
+                    <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">{t('fat')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

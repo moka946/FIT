@@ -9,222 +9,122 @@ import { useLanguage } from '@/components/LanguageContext';
 const egyptianMeals = [
   // Breakfast - Ultra Lean
   {
-    name: "Ful Medames (Ultra Lean)",
-    nameAr: "فول مدمس خفيف (بدون زيت)",
     titleKey: "meal_ful",
+    portionKey: "meal_ful_portion",
+    howMuchKey: "meal_ful_how",
+    tipKey: "meal_ful_tip",
+    ingredientsKey: "meal_ful_ingredients",
+    instructionsKey: "meal_ful_instr",
     meal_type: "Breakfast",
-    calories: 180,
-    protein: 14,
-    carbs: 20,
-    fats: 2,
-    image_url: "/meal-images/full.jpg",
-    portion_size: "150g (boiled)",
-    portion_size_ar: "150 جرام (مسلوق)",
-    how_much_to_eat: "Eat half a bowl. Use 1/4 whole wheat bread maximum.",
-    how_much_to_eat_ar: "نصف طبق فقط مع ربع رغيف خبز أسمر بحد أقصى.",
-    diet_tip: "Zero Oil. Add lemon, cumin, and chopped parsley for flavor.",
-    diet_tip_ar: "بدون زيت تماماً. استخدم الليمون والكمون والبقدونس للنكهة.",
-    ingredients: ["Fava beans", "Lemon", "Cumin", "Garlic", "1/4 Baladi bread"],
-    ingredients_ar: ["فول مدمس", "ليمون", "كمون", "ثوم", "ربع رغيف بلدي"],
-    instructions: "Boil beans, mash with lemon and spices. No oil added.",
-    instructions_ar: "قم بسلق الفول، وهرسه مع الليمون والبهارات. لا تضف أي زيت."
+    calories: 180, protein: 14, carbs: 20, fats: 2,
+    image_url: "https://eatwellabi.com/wp-content/uploads/2022/06/Ful-Medame-13.jpg"
   },
   {
-    name: "Low-Fat Areesh Cheese",
-    nameAr: "جبنة قريش دايت",
     titleKey: "meal_areesh",
+    portionKey: "meal_areesh_portion",
+    howMuchKey: "meal_areesh_how",
+    tipKey: "meal_areesh_tip",
+    ingredientsKey: "meal_areesh_ingredients",
+    instructionsKey: "meal_areesh_instr",
     meal_type: "Breakfast",
-    calories: 120,
-    protein: 26,
-    carbs: 4,
-    fats: 1,
-    image_url: "/meal-images/gebna.jpg",
-    portion_size: "200g",
-    portion_size_ar: "200 جرام",
-    how_much_to_eat: "Best fit breakfast. Eat the full portion.",
-    how_much_to_eat_ar: "أفضل فطور صحي. يمكنك تناول الحصة كاملة.",
-    diet_tip: "Top with lots of cucumber and green pepper to feel full.",
-    diet_tip_ar: "ضع الكثير من الخيار والفلفل الأخضر للشعور بالشبع.",
-    ingredients: ["200g Quraish cheese", "Cucumber", "Green pepper", "Black seeds"],
-    ingredients_ar: ["200 جرام جبنة قريش", "خيار", "فلفل أخضر", "حبة البركة"],
-    instructions: "Mix cheese with vegetables. Avoid adding any oil or cream.",
-    instructions_ar: "اخلط الجبنة مع الخضار المقطع. تجنب إضافة الزيت أو القشطة."
+    calories: 120, protein: 26, carbs: 4, fats: 1,
+    image_url: "https://www.seductioninthekitchen.com/wp-content/uploads/2017/08/Egyptian-Feta-Cucumber-Salad-1.jpg"
   },
 
   // Lunch - High Protein & Lean
   {
-    name: "Grilled Chicken Breast (Lean)",
-    nameAr: "صدور دجاج مشوية (بدون دهون)",
     titleKey: "meal_chicken",
+    portionKey: "meal_chicken_portion",
+    howMuchKey: "meal_chicken_how",
+    tipKey: "meal_chicken_tip",
+    ingredientsKey: "meal_chicken_ingredients",
+    instructionsKey: "meal_chicken_instr",
     meal_type: "Lunch",
-    calories: 260,
-    protein: 50,
-    carbs: 0,
-    fats: 4,
-    image_url: "/meal-images/chicken_rice.jpg",
-    portion_size: "200g breast",
-    portion_size_ar: "200 جرام صدور",
-    how_much_to_eat: "One large breast. Skip the rice for faster fat loss.",
-    how_much_to_eat_ar: "صدر دجاج كبير. تجنب الأرز لخسارة دهون أسرع.",
-    diet_tip: "Remove all skin and visible fat before grilling.",
-    diet_tip_ar: "قم بإزالة الجلد وأي دهون مرئية قبل الشوي.",
-    ingredients: ["Skinless chicken breast", "Onion water", "Thyme", "Black pepper"],
-    ingredients_ar: ["صدر دجاج بدون جلد", "ماء بصل", "زعتر", "فلفل أسود"],
-    instructions: "Marinate in onion water and spices. Grill over charcoal or in oven.",
-    instructions_ar: "تبل الدجاج في ماء البصل والبهارات ثم اشوه في الفرن أو على الفحم."
+    calories: 260, protein: 50, carbs: 0, fats: 4,
+    image_url: "https://healthyfitnessmeals.com/wp-content/uploads/2018/06/grilled-chicken-shish-tawook-9.jpg"
   },
   {
-    name: "Baked Sea Bass or Tilapia",
-    nameAr: "سمك مشوي في الفرن",
     titleKey: "meal_fish",
+    portionKey: "meal_fish_portion",
+    howMuchKey: "meal_fish_how",
+    tipKey: "meal_fish_tip",
+    ingredientsKey: "meal_fish_ingredients",
+    instructionsKey: "meal_fish_instr",
     meal_type: "Lunch",
-    calories: 220,
-    protein: 42,
-    carbs: 0,
-    fats: 6,
-    image_url: "/meal-images/koshary.jpg",
-    portion_size: "250g fish",
-    portion_size_ar: "250 جرام سمك",
-    how_much_to_eat: "Eat one large fish with a huge green salad.",
-    how_much_to_eat_ar: "تناول سمكة كبيرة مع طبق سلطة خضراء كبير.",
-    diet_tip: "Baking is much cleaner than frying. No flour coating.",
-    diet_tip_ar: "الخبز في الفرن أنظف بكثير من القلي. لا تستخدم الدقيق.",
-    ingredients: ["Tilapia or Sea Bass", "Garlic", "Lemon", "Cumin", "Bell pepper"],
-    ingredients_ar: ["سمك بلطي أو قاروص", "ثوم", "ليمون", "كمون", "فلفل ألوان"],
-    instructions: "Marinate with garlic/lemon, bake with peppers and onion slices.",
-    instructions_ar: "تبل السمك بالثوم والليمون واخبزه مع شرائح الفلفل والبصل."
+    calories: 220, protein: 42, carbs: 0, fats: 6,
+    image_url: "https://scarfgalfood.com/wp-content/uploads/2015/05/screen-shot-2015-05-26-at-1-26-17-pm.png"
   },
 
   // Dinner - Light
   {
-    name: "Fit Egg White Omelet",
-    nameAr: "أومليت بياض البيض",
     titleKey: "meal_egg_whites",
+    portionKey: "meal_egg_whites_portion",
+    howMuchKey: "meal_egg_whites_how",
+    tipKey: "meal_egg_whites_tip",
+    ingredientsKey: "meal_egg_whites_ingredients",
+    instructionsKey: "meal_egg_whites_instr",
     meal_type: "Dinner",
-    calories: 130,
-    protein: 26,
-    carbs: 2,
-    fats: 1,
-    image_url: "/meal-images/eggs.jpg",
-    portion_size: "6 Egg whites",
-    portion_size_ar: "بياض 6 بيضات",
-    how_much_to_eat: "Perfect light dinner for muscle definition.",
-    how_much_to_eat_ar: "عشاء خفيف مثالي لتقسيم العضلات.",
-    diet_tip: "Use zero yolk for zero cholesterol and minimal fat.",
-    diet_tip_ar: "بدون صفار لتقليل الكوليسترول والدهون تماماً.",
-    ingredients: ["6 Egg whites", "Fresh spinach", "Salt", "Mushrooms"],
-    ingredients_ar: ["بياض 6 بيضات", "سبانخ طازجة", "ملح", "مشروم"],
-    instructions: "Cook with a drop of vinegar to remove egg smell. Use non-stick pan.",
-    instructions_ar: "اطبخه في طاسة غير لاصقة مع نقطة خل لإزالة الرائحة."
+    calories: 130, protein: 26, carbs: 2, fats: 1,
+    image_url: "https://www.eatingbirdfood.com/wp-content/uploads/2023/01/egg-white-omelette-hero.jpg"
   },
   {
-    name: "Lean Egyptian Tuna Salad",
-    nameAr: "سلطة تونة مصرية (دايت)",
     titleKey: "meal_tuna",
+    portionKey: "meal_tuna_portion",
+    howMuchKey: "meal_tuna_how",
+    tipKey: "meal_tuna_tip",
+    ingredientsKey: "meal_tuna_ingredients",
+    instructionsKey: "meal_tuna_instr",
     meal_type: "Dinner",
-    calories: 170,
-    protein: 35,
-    carbs: 5,
-    fats: 2,
-    image_url: "/meal-images/nuts.jpg",
-    portion_size: "1 can (drained)",
-    portion_size_ar: "علبة تونة (مصفاة)",
-    how_much_to_eat: "Eat directly with a fork. No bread.",
-    how_much_to_eat_ar: "تناولها بالشوكة مباشرة بدون خبز.",
-    diet_tip: "Wash tuna with vinegar and water to remove excess sodium and oil.",
-    diet_tip_ar: "اغسل التونة بالخل والماء لإزالة الصوديوم والزيوت الزائدة.",
-    ingredients: ["Canned tuna in water", "Onion", "Vinegar", "Chili", "Celery"],
-    ingredients_ar: ["تونة قطع في محلول ملحي", "بصل", "خل", "شطة", "كرفس"],
-    instructions: "Drain water/oil, mix with chopped veggies and vinegar.",
-    instructions_ar: "صفِّ التونة تماماً واخلطها مع الخضار المقطع والخل."
+    calories: 170, protein: 35, carbs: 5, fats: 2,
+    image_url: "https://www.themediterraneandish.com/wp-content/uploads/2021/05/Mediterranean-Tuna-Salad-5.jpg"
   },
 
   // Post-Workout - Recovery
   {
-    name: "Post-Workout Chicken & Rice",
-    nameAr: "وجبة دجاج وأرز بعد التمرين",
     titleKey: "meal_post_chicken",
+    portionKey: "meal_post_chicken_portion",
+    howMuchKey: "meal_post_chicken_how",
+    tipKey: "meal_post_chicken_tip",
+    ingredientsKey: "meal_post_chicken_ingredients",
+    instructionsKey: "meal_post_chicken_instr",
     meal_type: "Post-Workout",
-    calories: 360,
-    protein: 45,
-    carbs: 42,
-    fats: 3,
-    image_url: "/meal-images/chicken_rice.jpg",
-    portion_size: "150g Chicken + 100g Rice",
-    portion_size_ar: "150 جم دجاج + 100 جم أرز",
-    how_much_to_eat: "Take within 60 mins of finishing your workout.",
-    how_much_to_eat_ar: "تناولها خلال 60 دقيقة من نهاية التمرين.",
-    diet_tip: "Steamed rice only. No butter or oil in the rice.",
-    diet_tip_ar: "أرز مسلوق أو على البخار فقط بدون أي زيت أو سمن.",
-    ingredients: ["Grilled chicken breast", "Steamed white rice", "Cinnamon"],
-    ingredients_ar: ["صدر دجاج مشوي", "أرز أبيض مسلوق", "قرفة"],
-    instructions: "Serve grilled chicken over steamed rice for fast recovery.",
-    instructions_ar: "قدم الدجاج المشوي مع الأرز المسلوق لسرعة الاستشفاء."
+    calories: 360, protein: 45, carbs: 42, fats: 3,
+    image_url: "https://healthyfitnessmeals.com/wp-content/uploads/2021/01/Honey-garlic-chicken-and-rice.jpg"
   },
   {
-    name: "Whey Protein Shake",
-    nameAr: "مخفوق بروتين (واي بروتين)",
     titleKey: "meal_protein_shake",
+    portionKey: "meal_protein_shake_portion",
+    howMuchKey: "meal_protein_shake_how",
+    tipKey: "meal_protein_shake_tip",
+    ingredientsKey: "meal_protein_shake_ingredients",
+    instructionsKey: "meal_protein_shake_instr",
     meal_type: "Post-Workout",
-    calories: 120,
-    protein: 24,
-    carbs: 3,
-    fats: 1,
-    image_url: "/meal-images/dates.jpg",
-    portion_size: "1 Scoop",
-    portion_size_ar: "سكوب واحد",
-    how_much_to_eat: "Best consumed immediately after training.",
-    how_much_to_eat_ar: "يفضل تناوله مباشرة بعد التمرين.",
-    diet_tip: "Use skimmed milk or water to keep calories minimal.",
-    diet_tip_ar: "استخدم الماء أو حليب خالي الدسم لتقليل السعرات.",
-    ingredients: ["Whey Protein Scoop", "300ml Water/Skimmed Milk"],
-    ingredients_ar: ["سكوب واي بروتين", "300 مل ماء أو حليب خالي الدسم"],
-    instructions: "Mix in a shaker and drink immediately.",
-    instructions_ar: "اخلطه في الشيكر واشربه فوراً."
+    calories: 120, protein: 24, carbs: 3, fats: 1,
+    image_url: "https://images.unsplash.com/photo-1593095191850-2a763396707a?auto=format&fit=crop&q=80&w=1000"
   },
 
   // Snacks & Pre-Workout
   {
-    name: "Boiled Lupin Beans (Termes)",
-    nameAr: "ترمس مسلوق (سناك البروتين)",
     titleKey: "meal_termes",
+    portionKey: "meal_termes_portion",
+    howMuchKey: "meal_termes_how",
+    tipKey: "meal_termes_tip",
+    ingredientsKey: "meal_termes_ingredients",
+    instructionsKey: "meal_termes_instr",
     meal_type: "Snack",
-    calories: 120,
-    protein: 12,
-    carbs: 10,
-    fats: 4,
-    image_url: "/meal-images/nuts.jpg",
-    portion_size: "1 Cup",
-    portion_size_ar: "كوب واحد",
-    how_much_to_eat: "Great high-protein snack for the evening.",
-    how_much_to_eat_ar: "سناك ممتاز عالي البروتين لفترة المساء.",
-    diet_tip: "Use low salt to avoid water bloating.",
-    diet_tip_ar: "قلل الملح لتجنب احتباس السوائل في الجسم.",
-    ingredients: ["Lupin beans", "Cumin", "Lemon juice"],
-    ingredients_ar: ["ترمس", "كمون", "عصير ليمون"],
-    instructions: "Boil until soft, season with cumin and lemon.",
-    instructions_ar: "اسلق الترمس حتى ينضج ثم تبله بالكمون والليمون."
+    calories: 120, protein: 12, carbs: 10, fats: 4,
+    image_url: "https://cheznermine.com/wp-content/uploads/2021/02/Egyptian-Termes-Lupini-Beans-Snack-%D8%AA%D8%B1%D9%85%D8%B3-scaled.jpg"
   },
   {
-    name: "Pre-Workout Coffee & Dates",
-    nameAr: "قهوة وتمر قبل التمرين",
     titleKey: "meal_coffee",
+    portionKey: "meal_coffee_portion",
+    howMuchKey: "meal_coffee_how",
+    tipKey: "meal_coffee_tip",
+    ingredientsKey: "meal_coffee_ingredients",
+    instructionsKey: "meal_coffee_instr",
     meal_type: "Pre-Workout",
-    calories: 60,
-    protein: 1,
-    carbs: 15,
-    fats: 0,
-    image_url: "/meal-images/dates.jpg",
-    portion_size: "Coffee + 2 Dates",
-    portion_size_ar: "قهوة +  تمرتين",
-    how_much_to_eat: "30 mins before your training session.",
-    how_much_to_eat_ar: "قبل جلسة التمرين بـ 30 دقيقة.",
-    diet_tip: "Dates provide natural energy boost for your muscles.",
-    diet_tip_ar: "التمر يوفر طاقة طبيعية فورية لعضلاتك.",
-    ingredients: ["Black Coffee (Plain)", "2 Medjool Dates"],
-    ingredients_ar: ["قهوة سادة", "2 تمرة"],
-    instructions: "Brew coffee and have with dates for energy jump.",
-    instructions_ar: "حضر القهوة وتناولها مع التمر لطاقة تفجيرية."
+    calories: 60, protein: 1, carbs: 15, fats: 0,
+    image_url: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1000"
   }
 ];
 
@@ -240,10 +140,9 @@ const mealTypeKeys = {
 };
 
 export default function Meals() {
-  const { t, isRTL, language } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const [selectedType, setSelectedType] = useState("All");
 
-  // Sort meals by type order when showing all
   const mealTypeOrder = { "Breakfast": 1, "Lunch": 2, "Dinner": 3, "Snack": 4, "Pre-Workout": 5, "Post-Workout": 6 };
 
   const filteredMeals = selectedType === "All"
@@ -275,7 +174,7 @@ export default function Meals() {
                 onClick={() => setSelectedType(type)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedType === type
                   ? 'bg-orange-500 text-black'
-                  : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
+                  : 'bg-zinc-900 text-zinc-400 border border-zinc-800 shadow-lg'
                   }`}
               >
                 {t(mealTypeKeys[type])}
