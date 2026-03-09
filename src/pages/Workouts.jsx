@@ -37,6 +37,7 @@ const workoutModules = {
     exercises: [
       { name: 'Barbell Squats', titleKey: 'ex_squat', descKey: 'ex_squat_desc', sets: 4, reps: '8-10', calories: 85, fat: 10, gif_url: '/exercises/BARBELL-SQUAT.gif' },
       { name: 'Leg Press', titleKey: 'ex_leg_press', descKey: 'ex_leg_press_desc', sets: 3, reps: '12-15', calories: 50, fat: 4, gif_url: '/exercises/Leg-Press.mp4' },
+      { name: 'Leg Extensions', titleKey: 'ex_leg_extension', descKey: 'ex_leg_extension_desc', sets: 3, reps: '12-15', calories: 40, fat: 3, gif_url: '/exercises/LEG-EXTENSION.gif' },
       { name: 'Calf Raises', titleKey: 'ex_calf_raise', descKey: 'ex_calf_raise_desc', sets: 4, reps: '15-20', calories: 20, fat: 2, gif_url: '/exercises/Calf-Raise.gif' },
     ]
   },

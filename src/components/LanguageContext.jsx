@@ -114,6 +114,9 @@ const translations = {
     recovery: 'Recovery',
     mixed: 'Mixed',
 
+    ex_leg_extension: 'Leg Extensions',
+    ex_leg_extension_desc: 'Sit on the machine, extend your legs fully.',
+
     language: 'Language',
     logout: 'Logout',
     settings: 'Settings',
@@ -381,6 +384,9 @@ const translations = {
     shoulders: 'اكتاف',
     recovery: 'استشفاء',
     mixed: 'مختلط',
+
+    ex_leg_extension: 'مد أرجل',
+    ex_leg_extension_desc: 'اجلس على الجهاز، افرد رجليك تماماً للأمام.',
 
     language: 'اللغة',
     logout: 'تسجيل خروج',
