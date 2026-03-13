@@ -74,6 +74,20 @@ export default function More() {
     }
 
     try {
+      const prompt = `Create a complete personalized workout and nutrition plan for an Egyptian fitness enthusiast with these stats:
+- Age: ${formData.age}
+- Height: ${formData.height} cm
+- Weight: ${formData.weight} kg
+
+The plan MUST include exactly two main sections with these EXACT headers:
+# Workout Plan
+# Nutrition Plan
+
+Inside Workout Plan, give a 7-day schedule.
+Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, etc.) with calorie estimates.
+
+Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
+
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
