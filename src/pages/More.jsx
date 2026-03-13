@@ -18,6 +18,7 @@ import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
+import { Groq } from 'groq-sdk';
 import ReactMarkdown from 'react-markdown';
 
 export default function More() {
@@ -74,6 +75,11 @@ export default function More() {
     }
 
     try {
+      const groq = new Groq({
+        apiKey,
+        dangerouslyAllowBrowser: true,
+      });
+
       const prompt = `Create a complete personalized workout and nutrition plan for an Egyptian fitness enthusiast with these stats:
 - Age: ${formData.age}
 - Height: ${formData.height} cm
@@ -88,38 +94,23 @@ Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled 
 
 Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
 
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          messages: [{ role: 'user', content: prompt }],
-          model: 'llama-3.1-8b-instant',
-          temperature: 0.7,
-          max_tokens: 2048
-        })
+      const completion = await groq.chat.completions.create({
+        messages: [{ role: 'user', content: prompt }],
+        model: 'llama-3.1-8b-instant',
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || `API Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const responseText = data.choices[0]?.message?.content || '';
+      const responseText = completion.choices[0]?.message?.content || '';
       setPlan(responseText);
     } catch (error) {
       console.error('Plan Generation Error:', error);
-      if (error?.status === 401) {
-        alert("Invalid API Key (Unauthorized)");
-      } else if (error?.status === 429) {
+      const errorMsg = error?.message || String(error);
+      
+      if (errorMsg.includes('401')) {
+        alert("Invalid API Key. Please check your GitHub Secrets.");
+      } else if (errorMsg.includes('429')) {
         alert("Rate limit reached. Try again in a minute.");
-      } else if (String(error).includes('fetch')) {
-        alert(t('failedConnectAI'));
       } else {
-        alert(t('failedGeneratePlan') + (error?.message ? `: ${error.message}` : ""));
+        alert(`${t('failedGeneratePlan')}: ${errorMsg}`);
       }
     } finally {
       setLoading(false);

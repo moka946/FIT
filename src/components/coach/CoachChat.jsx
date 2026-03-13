@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Volume2, VolumeX, Loader2, Bot, User } from 'lucide-react';
+import { Groq } from 'groq-sdk';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import FooterCredit from '@/components/FooterCredit';
@@ -113,6 +114,11 @@ export default function CoachChat() {
 ${profileContext}
 Be enthusiastic, supportive, and use fitness terminology. Keep responses concise but helpful. Respond in ${getAIResponseLanguageName()}.`;
 
+      const groq = new Groq({
+        apiKey,
+        dangerouslyAllowBrowser: true,
+      });
+
       const chatHistory = messages
         .filter((m) => m.content !== getInitialMessage())
         .map((m) => ({
@@ -120,44 +126,27 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
           content: m.content,
         }));
 
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          messages: [
-            { role: 'system', content: systemPrompt },
-            ...chatHistory,
-            { role: 'user', content: currentInput },
-          ],
-          model: 'llama-3.1-8b-instant',
-          temperature: 0.7,
-          max_tokens: 1024
-        })
+      const completion = await groq.chat.completions.create({
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...chatHistory,
+          { role: 'user', content: currentInput },
+        ],
+        model: 'llama-3.1-8b-instant',
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || `API Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const responseText = data.choices[0]?.message?.content || t('coachLostThought');
+      const responseText = completion.choices[0]?.message?.content || t('coachLostThought');
 
       setMessages((prev) => [...prev, { role: 'coach', content: responseText }]);
     } catch (error) {
       console.error('Groq AI Error:', error);
-      const errorStr = String(error);
+      const errorStr = error?.message || String(error);
       let errorMessage = `${t('coachErrorPrefix')} ${errorStr.substring(0, 150)}`;
 
       if (errorStr.includes('401')) {
         errorMessage = t('coachInvalidApiKey');
       } else if (errorStr.includes('429')) {
         errorMessage = t('coachRateLimit');
-      } else if (errorStr.includes('fetch')) {
-        errorMessage = t('coachNetworkIssue');
       }
 
       setMessages((prev) => [...prev, {
