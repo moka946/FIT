@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Dumbbell, Calendar, Clock, ChevronLeft, ChevronRight, Flame, Zap, Share2, Download, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import html2canvas from 'html2canvas';
@@ -55,6 +55,53 @@ const workoutModules = {
   }
 };
 
+const homeWorkoutModules = {
+  Chest: {
+    titleKey: 'chestWorkout',
+    muscleGroupKey: 'chest',
+    duration_minutes: 40,
+    exercises: [
+      { name: 'Push-ups', titleKey: 'ex_pushups', descKey: 'ex_pushups_desc', sets: 4, reps: '15-20', calories: 40, fat: 4, gif_url: '/exercises/Push-Up.gif' },
+      { name: 'Wide Push-ups', titleKey: 'ex_wide_pushups', descKey: 'ex_wide_pushups_desc', sets: 3, reps: '12-15', calories: 35, fat: 3, gif_url: '/exercises/Push-Up.gif' },
+      { name: 'Chest Dips', titleKey: 'ex_chest_dips', descKey: 'ex_chest_dips_desc', sets: 3, reps: '10-12', calories: 35, fat: 3, gif_url: '/exercises/Chest-Dips.gif' },
+      { name: 'Front Plank', titleKey: 'ex_plank', descKey: 'ex_plank_desc', sets: 3, reps: '60s', calories: 30, fat: 3, gif_url: '/exercises/Front-Plank.gif' },
+    ]
+  },
+  Back: {
+    titleKey: 'backWorkout',
+    muscleGroupKey: 'back',
+    duration_minutes: 45,
+    exercises: [
+      { name: 'Burpees', titleKey: 'ex_burpee', descKey: 'ex_burpee_desc', sets: 4, reps: '15-20', calories: 60, fat: 6, gif_url: '/exercises/Burpee.gif' },
+      { name: 'Mountain Climbers', titleKey: 'ex_mountain_climber', descKey: 'ex_mountain_climber_desc', sets: 4, reps: '30s', calories: 45, fat: 4, gif_url: '/exercises/Mountain-Climber.mp4' },
+      { name: 'Cross-Body Mountain Climber', titleKey: 'ex_cross_body_mc', descKey: 'ex_cross_body_mc_desc', sets: 3, reps: '30s', calories: 45, fat: 5, gif_url: '/exercises/Cross-Body-Mountain-Climber.mp4' },
+      { name: 'Hanging Leg Raises', titleKey: 'ex_hanging_leg_raise', descKey: 'ex_hanging_leg_raise_desc', sets: 3, reps: '10-15', calories: 30, fat: 3, gif_url: '/exercises/Hanging-Leg-Raise.gif' },
+    ]
+  },
+  Legs: {
+    titleKey: 'legsWorkout',
+    muscleGroupKey: 'legs',
+    duration_minutes: 45,
+    exercises: [
+      { name: 'Bodyweight Squats', titleKey: 'ex_bw_squats', descKey: 'ex_bw_squats_desc', sets: 4, reps: '20-25', calories: 50, fat: 5, gif_url: '/exercises/BARBELL-SQUAT.gif' },
+      { name: 'Jump Squats', titleKey: 'ex_jump_squats', descKey: 'ex_jump_squats_desc', sets: 4, reps: '15-20', calories: 60, fat: 6, gif_url: '/exercises/Jump-Squat.gif' },
+      { name: 'Walking Lunges', titleKey: 'ex_lunges', descKey: 'ex_lunges_desc', sets: 3, reps: '20 steps', calories: 40, fat: 4, gif_url: '/exercises/BARBELL-SQUAT.gif' },
+      { name: 'Calf Raises', titleKey: 'ex_calf_raise', descKey: 'ex_calf_raise_desc', sets: 4, reps: '25-30', calories: 20, fat: 2, gif_url: '/exercises/Calf-Raise.gif' },
+    ]
+  },
+  Shoulders: {
+    titleKey: 'shouldersWorkout',
+    muscleGroupKey: 'shoulders',
+    duration_minutes: 40,
+    exercises: [
+      { name: 'Pike Push-ups', titleKey: 'ex_pike_pushups', descKey: 'ex_pike_pushups_desc', sets: 4, reps: '10-15', calories: 40, fat: 4, gif_url: '/exercises/Push-Up.gif' },
+      { name: 'Burpees', titleKey: 'ex_burpee', descKey: 'ex_burpee_desc', sets: 4, reps: '15 reps', calories: 50, fat: 5, gif_url: '/exercises/Burpee.gif' },
+      { name: 'Mountain Climbers', titleKey: 'ex_mountain_climber', descKey: 'ex_mountain_climber_desc', sets: 3, reps: '30s', calories: 45, fat: 4, gif_url: '/exercises/Mountain-Climber.mp4' },
+      { name: 'Front Plank', titleKey: 'ex_plank', descKey: 'ex_plank_desc', sets: 3, reps: '60s', calories: 25, fat: 2, gif_url: '/exercises/Front-Plank.gif' },
+    ]
+  }
+};
+
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export default function Workouts() {
@@ -63,7 +110,14 @@ export default function Workouts() {
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const [selectedDay, setSelectedDay] = useState(today);
   const [showShareCard, setShowShareCard] = useState(false);
+  const [workoutLocation, setWorkoutLocation] = useState(() => {
+    return localStorage.getItem('fitegypt_workout_location') || 'gym';
+  });
   const shareCardRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem('fitegypt_workout_location', workoutLocation);
+  }, [workoutLocation]);
 
   const trainingDays = getTrainingDays();
   const sortedTrainingDays = [...trainingDays].sort((a, b) => days.indexOf(a) - days.indexOf(b));
@@ -74,11 +128,13 @@ export default function Workouts() {
     const dayIndex = sortedTrainingDays.indexOf(dayName);
     const dayCount = sortedTrainingDays.length;
 
+    const currentModules = workoutLocation === 'home' ? homeWorkoutModules : workoutModules;
+
     const modules = [
-      workoutModules.Chest,
-      workoutModules.Back,
-      workoutModules.Legs,
-      workoutModules.Shoulders
+      currentModules.Chest,
+      currentModules.Back,
+      currentModules.Legs,
+      currentModules.Shoulders
     ];
 
     if (dayCount < 4) {
@@ -167,6 +223,32 @@ export default function Workouts() {
               <h1 className="text-xl font-bold text-white">{t('workouts')}</h1>
               <p className="text-zinc-500 text-sm">{t('yourWeeklyPlan')}</p>
             </div>
+          </div>
+        </div>
+
+        {/* Location Toggle */}
+        <div className="px-6 pb-4">
+          <div className="flex bg-zinc-900/80 rounded-xl p-1 border border-zinc-800">
+            <button
+              onClick={() => setWorkoutLocation('gym')}
+              className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                workoutLocation === 'gym'
+                  ? 'bg-orange-500 text-black shadow-md'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              🏢 {t('gymWorkout')}
+            </button>
+            <button
+              onClick={() => setWorkoutLocation('home')}
+              className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                workoutLocation === 'home'
+                  ? 'bg-orange-500 text-black shadow-md'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              🏠 {t('homeWorkout')}
+            </button>
           </div>
         </div>
 

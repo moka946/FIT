@@ -18,11 +18,13 @@ import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
+import { useExerciseDays } from '@/lib/useExerciseDays';
 import ReactMarkdown from 'react-markdown';
 
 export default function More() {
   const { t, isRTL, getAIResponseLanguageName } = useLanguage();
   const { user } = useAuth();
+  const { exerciseDays } = useExerciseDays();
 
   const formKey = user ? `plan_form_${user.uid}` : 'plan_form_guest';
   const planKey = user ? `plan_saved_${user.uid}` : 'plan_saved_guest';
@@ -79,11 +81,12 @@ export default function More() {
 - Height: ${formData.height} cm
 - Weight: ${formData.weight} kg
 
+The user only exercises on these specific days: ${exerciseDays?.length > 0 ? exerciseDays.join(', ') : 'every day'}.
 The plan MUST include exactly two main sections with these EXACT headers:
 # Workout Plan
 # Nutrition Plan
 
-Inside Workout Plan, give a 7-day schedule.
+Inside Workout Plan, create a schedule ONLY for the specified exercise days (${exerciseDays?.length > 0 ? exerciseDays.join(', ') : 'every day'}).
 Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, etc.) with calorie estimates.
 
 Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
