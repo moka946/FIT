@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Utensils } from 'lucide-react';
+import { Utensils, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
@@ -128,7 +128,154 @@ const egyptianMeals = [
   }
 ];
 
-const mealTypes = ["All", "Breakfast", "Lunch", "Dinner", "Snack", "Pre-Workout", "Post-Workout"];
+// Budget meals (under 20 EGP per serving)
+const budgetMeals = [
+  {
+    titleKey: "meal_ful",
+    portionKey: "meal_ful_portion",
+    howMuchKey: "meal_ful_how",
+    tipKey: "meal_ful_tip",
+    ingredientsKey: "meal_ful_ingredients",
+    instructionsKey: "meal_ful_instr",
+    meal_type: "Budget",
+    calories: 180, protein: 14, carbs: 20, fats: 2,
+    cost_egp: 10,
+    image_url: "/meal-images/full.jpg"
+  },
+  {
+    titleKey: "meal_lentil_soup",
+    portionKey: "meal_lentil_soup_portion",
+    howMuchKey: "meal_lentil_soup_how",
+    tipKey: "meal_lentil_soup_tip",
+    ingredientsKey: "meal_lentil_soup_ingredients",
+    instructionsKey: "meal_lentil_soup_instr",
+    meal_type: "Budget",
+    calories: 200, protein: 12, carbs: 30, fats: 3,
+    cost_egp: 8,
+  },
+  {
+    titleKey: "meal_egg_omelette",
+    portionKey: "meal_egg_omelette_portion",
+    howMuchKey: "meal_egg_omelette_how",
+    tipKey: "meal_egg_omelette_tip",
+    ingredientsKey: "meal_egg_omelette_ingredients",
+    instructionsKey: "meal_egg_omelette_instr",
+    meal_type: "Budget",
+    calories: 210, protein: 18, carbs: 2, fats: 15,
+    cost_egp: 12,
+    image_url: "/meal-images/egg_omelete.jpg"
+  },
+  {
+    titleKey: "meal_koshary",
+    portionKey: "meal_koshary_portion",
+    howMuchKey: "meal_koshary_how",
+    tipKey: "meal_koshary_tip",
+    ingredientsKey: "meal_koshary_ingredients",
+    instructionsKey: "meal_koshary_instr",
+    meal_type: "Budget",
+    calories: 450, protein: 12, carbs: 85, fats: 8,
+    cost_egp: 15,
+  },
+];
+
+// Ramadan-specific meals
+const ramadanMeals = [
+  // Suhoor: slow-digesting, high protein
+  {
+    titleKey: "meal_ful",
+    portionKey: "meal_ful_portion",
+    howMuchKey: "meal_ful_how",
+    tipKey: "meal_ful_tip",
+    ingredientsKey: "meal_ful_ingredients",
+    instructionsKey: "meal_ful_instr",
+    meal_type: "Suhoor",
+    calories: 180, protein: 14, carbs: 20, fats: 2,
+    image_url: "/meal-images/full.jpg"
+  },
+  {
+    titleKey: "meal_areesh",
+    portionKey: "meal_areesh_portion",
+    howMuchKey: "meal_areesh_how",
+    tipKey: "meal_areesh_tip",
+    ingredientsKey: "meal_areesh_ingredients",
+    instructionsKey: "meal_areesh_instr",
+    meal_type: "Suhoor",
+    calories: 120, protein: 26, carbs: 4, fats: 1,
+    image_url: "/meal-images/areesh_cheese.jpg"
+  },
+  {
+    titleKey: "meal_egg_whites",
+    portionKey: "meal_egg_whites_portion",
+    howMuchKey: "meal_egg_whites_how",
+    tipKey: "meal_egg_whites_tip",
+    ingredientsKey: "meal_egg_whites_ingredients",
+    instructionsKey: "meal_egg_whites_instr",
+    meal_type: "Suhoor",
+    calories: 130, protein: 26, carbs: 2, fats: 1,
+    image_url: "/meal-images/egg_omelete.jpg"
+  },
+  // Iftar: moderate carbs + protein
+  {
+    titleKey: "meal_coffee",
+    portionKey: "meal_coffee_portion",
+    howMuchKey: "meal_coffee_how",
+    tipKey: "meal_coffee_tip",
+    ingredientsKey: "meal_coffee_ingredients",
+    instructionsKey: "meal_coffee_instr",
+    meal_type: "Iftar",
+    calories: 60, protein: 1, carbs: 15, fats: 0,
+    image_url: "/meal-images/dates.jpg"
+  },
+  {
+    titleKey: "meal_chicken",
+    portionKey: "meal_chicken_portion",
+    howMuchKey: "meal_chicken_how",
+    tipKey: "meal_chicken_tip",
+    ingredientsKey: "meal_chicken_ingredients",
+    instructionsKey: "meal_chicken_instr",
+    meal_type: "Iftar",
+    calories: 260, protein: 50, carbs: 0, fats: 4,
+    image_url: "/meal-images/chicken.jpg"
+  },
+  {
+    titleKey: "meal_post_chicken",
+    portionKey: "meal_post_chicken_portion",
+    howMuchKey: "meal_post_chicken_how",
+    tipKey: "meal_post_chicken_tip",
+    ingredientsKey: "meal_post_chicken_ingredients",
+    instructionsKey: "meal_post_chicken_instr",
+    meal_type: "Iftar",
+    calories: 360, protein: 45, carbs: 42, fats: 3,
+    image_url: "/meal-images/chicken_and_rice.jpg"
+  },
+  // Post-Tarawih: light protein snack
+  {
+    titleKey: "meal_tuna",
+    portionKey: "meal_tuna_portion",
+    howMuchKey: "meal_tuna_how",
+    tipKey: "meal_tuna_tip",
+    ingredientsKey: "meal_tuna_ingredients",
+    instructionsKey: "meal_tuna_instr",
+    meal_type: "Post-Tarawih",
+    calories: 170, protein: 35, carbs: 5, fats: 2,
+    image_url: "/meal-images/tuna_salad.jpg"
+  },
+  {
+    titleKey: "meal_areesh",
+    portionKey: "meal_areesh_portion",
+    howMuchKey: "meal_areesh_how",
+    tipKey: "meal_areesh_tip",
+    ingredientsKey: "meal_areesh_ingredients",
+    instructionsKey: "meal_areesh_instr",
+    meal_type: "Post-Tarawih",
+    calories: 120, protein: 26, carbs: 4, fats: 1,
+    image_url: "/meal-images/areesh_cheese.jpg"
+  },
+];
+
+const normalMealTypes = ["All", "Breakfast", "Lunch", "Dinner", "Snack", "Pre-Workout", "Post-Workout", "Budget"];
+const ramadanMealTypes = ["All", "Suhoor", "Iftar", "Post-Tarawih"];
+
 const mealTypeKeys = {
   "All": "all",
   "Breakfast": "breakfast",
@@ -136,18 +283,27 @@ const mealTypeKeys = {
   "Lunch": "lunch",
   "Snack": "snack",
   "Pre-Workout": "preWorkout",
-  "Post-Workout": "postWorkout"
+  "Post-Workout": "postWorkout",
+  "Budget": "budget",
+  "Suhoor": "suhoor",
+  "Iftar": "iftar",
+  "Post-Tarawih": "postTarawih",
 };
 
 export default function Meals() {
   const { t, isRTL } = useLanguage();
   const [selectedType, setSelectedType] = useState("All");
 
-  const mealTypeOrder = { "Breakfast": 1, "Lunch": 2, "Dinner": 3, "Snack": 4, "Pre-Workout": 5, "Post-Workout": 6 };
+  const isRamadanMode = localStorage.getItem('fitegypt_ramadan_mode') === 'true';
+
+  const mealTypes = isRamadanMode ? ramadanMealTypes : normalMealTypes;
+  const allMeals = isRamadanMode ? ramadanMeals : [...egyptianMeals, ...budgetMeals];
+
+  const mealTypeOrder = { "Suhoor": 1, "Iftar": 2, "Post-Tarawih": 3, "Breakfast": 1, "Lunch": 2, "Dinner": 3, "Snack": 4, "Pre-Workout": 5, "Post-Workout": 6, "Budget": 7 };
 
   const filteredMeals = selectedType === "All"
-    ? [...egyptianMeals].sort((a, b) => (mealTypeOrder[a.meal_type] || 99) - (mealTypeOrder[b.meal_type] || 99))
-    : egyptianMeals.filter(meal => meal.meal_type === selectedType);
+    ? [...allMeals].sort((a, b) => (mealTypeOrder[a.meal_type] || 99) - (mealTypeOrder[b.meal_type] || 99))
+    : allMeals.filter(meal => meal.meal_type === selectedType);
 
   return (
     <div className="min-h-screen bg-black pb-24">
@@ -164,6 +320,19 @@ export default function Meals() {
             </div>
           </div>
         </div>
+
+        {/* Ramadan Banner */}
+        {isRamadanMode && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-6 mb-3 bg-gradient-to-r from-orange-500/20 to-yellow-500/10 border border-orange-500/20 rounded-xl px-4 py-2.5 flex items-center gap-2"
+          >
+            <Moon className="w-4 h-4 text-orange-500" />
+            <span className="text-orange-500 font-bold text-sm">{t('ramadanBanner')}</span>
+            <span className="text-zinc-400 text-xs ml-auto">{t('ramadanMealTip')}</span>
+          </motion.div>
+        )}
 
         {/* Filter Pills */}
         <div className="px-6 pb-4 overflow-x-auto scrollbar-hide">
@@ -204,4 +373,4 @@ export default function Meals() {
       <BottomNav currentPage="Meals" />
     </div>
   );
-}
+}

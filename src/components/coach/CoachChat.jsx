@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Send, Volume2, VolumeX, Loader2, Bot, User } from 'lucide-react';
 import { Groq } from 'groq-sdk';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
+import { useExerciseDays } from '@/lib/useExerciseDays';
 
 export default function CoachChat() {
   const { t, isRTL, getAIResponseLanguageName } = useLanguage();
@@ -27,6 +28,28 @@ export default function CoachChat() {
   const [loading, setLoading] = useState(false);
   const [speaking, setSpeaking] = useState(null);
   const messagesEndRef = useRef(null);
+  const [keyboardOffset, setKeyboardOffset] = useState(0);
+
+  // Read user profile for personalized AI
+  const userProfile = (() => {
+    try { return JSON.parse(localStorage.getItem('fitegypt_user_profile')); } catch { return null; }
+  })();
+
+  // Keyboard overlap fix
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const onResize = () => {
+      const offset = window.innerHeight - vv.height;
+      setKeyboardOffset(offset > 0 ? offset : 0);
+    };
+    vv.addEventListener('resize', onResize);
+    vv.addEventListener('scroll', onResize);
+    return () => {
+      vv.removeEventListener('resize', onResize);
+      vv.removeEventListener('scroll', onResize);
+    };
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -79,12 +102,16 @@ export default function CoachChat() {
     }
 
     try {
+      const profileContext = userProfile
+        ? `\n\nUser Profile:\n- Goal: ${userProfile.goal || 'not set'}\n- Weight: ${userProfile.weight || 'unknown'} kg\n\nTailor advice to the user's ${userProfile.goal || 'fitness'} goal.`
+        : '';
+
       const systemPrompt = `You are Coach, an energetic and motivating gym personal trainer AI. You help with:
 - Workout plans and exercise tips
 - Nutrition advice (especially Egyptian cuisine)
 - Motivation and fitness goals
 - Form correction and injury prevention
-
+${profileContext}
 Be enthusiastic, supportive, and use fitness terminology. Keep responses concise but helpful. Respond in ${getAIResponseLanguageName()}.`;
 
       const groq = new Groq({
@@ -204,7 +231,7 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
         <FooterCredit />
       </div>
 
-      <div className="p-4 border-t border-zinc-800 safe-area-bottom">
+      <div className="p-4 border-t border-zinc-800 safe-area-bottom" style={{ paddingBottom: `max(env(safe-area-inset-bottom), ${keyboardOffset}px)` }}>
         <div className="flex gap-3">
           <input
             type="text"

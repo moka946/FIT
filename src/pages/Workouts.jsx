@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Dumbbell, Calendar, Clock, ChevronLeft, ChevronRight, Flame, Zap } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { Dumbbell, Calendar, Clock, ChevronLeft, ChevronRight, Flame, Zap, Share2, Download, CheckCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import html2canvas from 'html2canvas';
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import ExerciseCard from '@/components/workout/ExerciseCard';
@@ -61,6 +62,8 @@ export default function Workouts() {
   const { getTrainingDays, isTrainingDay } = useExerciseDays();
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const [selectedDay, setSelectedDay] = useState(today);
+  const [showShareCard, setShowShareCard] = useState(false);
+  const shareCardRef = useRef(null);
 
   const trainingDays = getTrainingDays();
   const sortedTrainingDays = [...trainingDays].sort((a, b) => days.indexOf(a) - days.indexOf(b));
@@ -71,7 +74,6 @@ export default function Workouts() {
     const dayIndex = sortedTrainingDays.indexOf(dayName);
     const dayCount = sortedTrainingDays.length;
 
-    // Define the sequence of all available modules
     const modules = [
       workoutModules.Chest,
       workoutModules.Back,
@@ -80,10 +82,8 @@ export default function Workouts() {
     ];
 
     if (dayCount < 4) {
-      // If we have fewer than 4 training days, we must combine modules to "fit all"
       const modulesForThisDay = [];
       modules.forEach((module, idx) => {
-        // Distribute modules into the available days
         if (idx % dayCount === dayIndex) {
           modulesForThisDay.push(module);
         }
@@ -92,7 +92,6 @@ export default function Workouts() {
       if (modulesForThisDay.length === 0) return { titleKey: 'restDay', muscleGroupKey: 'recovery', duration_minutes: 0, exercises: [] };
       if (modulesForThisDay.length === 1) return modulesForThisDay[0];
 
-      // Combine multiple modules for a fuller workout on this day
       return {
         isCombined: true,
         combinedTitles: modulesForThisDay.map(m => m.titleKey),
@@ -102,22 +101,57 @@ export default function Workouts() {
       };
     }
 
-    // For 4 or more training days, cycle through the modules normally
     return modules[dayIndex % modules.length];
   };
 
   const displayWorkout = getWorkoutForDay(selectedDay);
   const currentIndex = days.indexOf(selectedDay);
+  const totalCalories = displayWorkout.exercises.reduce((sum, ex) => sum + (ex.calories || 0), 0);
 
   const goToPrevDay = () => setSelectedDay(days[(currentIndex - 1 + 7) % 7]);
   const goToNextDay = () => setSelectedDay(days[(currentIndex + 1) % 7]);
 
-  // Helper to format the title for combined workouts
   const renderWorkoutTitle = (workout) => {
     if (workout.isCombined) {
       return workout.combinedTitles.map(key => t(key)).join(' + ');
     }
     return t(workout.titleKey);
+  };
+
+  const handleFinishWorkout = () => {
+    // Save to progress in localStorage
+    const todayKey = new Date().toISOString().split('T')[0];
+    const saved = JSON.parse(localStorage.getItem('fitegypt_progress') || '{"completedDays":{}}');
+    saved.completedDays[todayKey] = { calories: totalCalories, timestamp: Date.now() };
+    localStorage.setItem('fitegypt_progress', JSON.stringify(saved));
+    setShowShareCard(true);
+  };
+
+  const handleShare = async () => {
+    if (!shareCardRef.current) return;
+    try {
+      const canvas = await html2canvas(shareCardRef.current, { backgroundColor: '#000', scale: 2 });
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const file = new File([blob], 'fitegypt-workout.png', { type: 'image/png' });
+
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({ files: [file], title: 'FitEgypt Workout', text: t('workoutComplete') });
+          } catch { /* user cancelled */ }
+        } else {
+          // Fallback: download
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'fitegypt-workout.png';
+          a.click();
+          URL.revokeObjectURL(url);
+        }
+      });
+    } catch (err) {
+      console.error('Share error:', err);
+    }
   };
 
   return (
@@ -171,12 +205,25 @@ export default function Workouts() {
         </motion.div>
 
         {displayWorkout.exercises.length > 0 ? (
-          <div className="space-y-4">
-            <h3 className={`text-lg font-bold text-white mb-2 ${isRTL ? 'text-right' : ''}`}>{t('exercises')}</h3>
-            {displayWorkout.exercises.map((exercise, index) => (
-              <ExerciseCard key={index} exercise={exercise} index={index} />
-            ))}
-          </div>
+          <>
+            <div className="space-y-4">
+              <h3 className={`text-lg font-bold text-white mb-2 ${isRTL ? 'text-right' : ''}`}>{t('exercises')}</h3>
+              {displayWorkout.exercises.map((exercise, index) => (
+                <ExerciseCard key={index} exercise={exercise} index={index} />
+              ))}
+            </div>
+
+            {/* Finish Workout Button */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              onClick={handleFinishWorkout}
+              className="w-full mt-6 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg flex items-center justify-center gap-2 shadow-[0_8px_30px_rgba(249,115,22,0.3)] active:scale-[0.98] transition-all"
+            >
+              <CheckCircle className="w-5 h-5" /> {t('finishWorkout')}
+            </motion.button>
+          </>
         ) : (
           <div className="text-center py-20 bg-zinc-900/40 rounded-3xl border border-dashed border-zinc-800">
             <div className="text-5xl mb-4 grayscale opacity-50">😴</div>
@@ -186,8 +233,74 @@ export default function Workouts() {
         )}
       </div>
 
+      {/* Share Workout Card Modal */}
+      <AnimatePresence>
+        {showShareCard && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+            onClick={() => setShowShareCard(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="w-full max-w-sm"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Shareable Card */}
+              <div
+                ref={shareCardRef}
+                className="bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 rounded-3xl p-6 border border-zinc-700"
+              >
+                <div className="text-center mb-4">
+                  <p className="text-orange-500 text-sm font-bold uppercase tracking-widest">FitEgypt</p>
+                  <h3 className="text-white text-2xl font-black mt-1">{t('workoutComplete')}</h3>
+                </div>
+                <div className="bg-zinc-800/50 rounded-2xl p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-zinc-400 text-sm">{t('workouts')}</span>
+                    <span className="text-white font-bold">{renderWorkoutTitle(displayWorkout)}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-zinc-400 text-sm">{t('exercisesCompleted')}</span>
+                    <span className="text-white font-bold">{displayWorkout.exercises.length}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-zinc-400 text-sm">{t('caloriesBurned')}</span>
+                    <span className="text-orange-500 font-bold">{totalCalories} {t('kcal')}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-zinc-400 text-sm">{t('today')}</span>
+                    <span className="text-white font-bold">{new Date().toLocaleDateString()}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Share / Download buttons */}
+              <div className="flex gap-3 mt-4">
+                <button
+                  onClick={handleShare}
+                  className="flex-1 py-3 rounded-2xl bg-orange-500 text-black font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
+                >
+                  <Share2 className="w-4 h-4" /> {t('shareWorkout')}
+                </button>
+                <button
+                  onClick={() => setShowShareCard(false)}
+                  className="px-6 py-3 rounded-2xl bg-zinc-800 text-zinc-300 font-bold active:scale-[0.98] transition-all"
+                >
+                  ✕
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <FooterCredit />
       <BottomNav currentPage="Workouts" />
     </div>
   );
-}
+}

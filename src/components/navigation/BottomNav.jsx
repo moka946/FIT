@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Dumbbell, Utensils, MessageCircle, Home, Menu } from 'lucide-react';
+import { Dumbbell, Utensils, MessageCircle, Home, Menu, BarChart3 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/components/LanguageContext';
 
@@ -13,12 +13,13 @@ export default function BottomNav({ currentPage }) {
     { nameKey: 'workouts', icon: Dumbbell, page: 'Workouts' },
     { nameKey: 'meals', icon: Utensils, page: 'Meals' },
     { nameKey: 'coach', icon: MessageCircle, page: 'Coach' },
+    { nameKey: 'progress', icon: BarChart3, page: 'Progress' },
     { nameKey: 'more', icon: Menu, page: 'More' },
   ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-zinc-900/95 backdrop-blur-lg border-t border-zinc-800 z-50 safe-area-bottom">
-      <div className="grid grid-cols-5 max-w-md mx-auto h-16">
+      <div className="grid grid-cols-6 max-w-md mx-auto h-16">
         {navItems.map((item) => {
           const isActive = currentPage === item.page;
           const Icon = item.icon;

@@ -50,6 +50,7 @@
 import Coach from './pages/Coach';
 import Home from './pages/Home';
 import Meals from './pages/Meals';
+import Progress from './pages/Progress';
 import Workouts from './pages/Workouts';
 import More from './pages/More';
 import __Layout from './Layout.jsx';
@@ -58,6 +59,7 @@ export const PAGES = {
     "Coach": Coach,
     "Home": Home,
     "Meals": Meals,
+    "Progress": Progress,
     "Workouts": Workouts,
     "More": More,
 }

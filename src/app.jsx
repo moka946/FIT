@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Toaster as HotToaster } from 'react-hot-toast';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import NavigationTracker from '@/lib/NavigationTracker'
 import { pagesConfig } from './pages.config'
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
@@ -13,6 +14,7 @@ import Login from '@/pages/Login';
 import ExerciseDaysOnboarding from '@/pages/ExerciseDaysOnboarding';
 import { useExerciseDays } from '@/lib/useExerciseDays';
 import { LanguageProvider } from '@/components/LanguageContext';
+import ProfileSetupModal from './components/ProfileSetupModal';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -53,6 +55,9 @@ const FirebaseConfigErrorScreen = ({ authError }) => {
 const AuthenticatedApp = () => {
   const { isAuthenticated, isLoadingAuth, authError, navigateToLogin } = useAuth();
   const { hasCompletedOnboarding, isLoading: isLoadingOnboarding } = useExerciseDays();
+  const [showProfileModal, setShowProfileModal] = useState(() => {
+    return !localStorage.getItem('fitegypt_user_profile');
+  });
 
   if (isLoadingAuth || isLoadingOnboarding) {
     return (
@@ -84,7 +89,13 @@ const AuthenticatedApp = () => {
   }
 
   return (
-    <Routes>
+    <>
+      {showProfileModal && (
+        <AnimatePresence>
+          <ProfileSetupModal onClose={() => setShowProfileModal(false)} />
+        </AnimatePresence>
+      )}
+      <Routes>
       <Route path="/" element={
         <LayoutWrapper currentPageName={mainPageKey}>
           <MainPage />
@@ -103,7 +114,8 @@ const AuthenticatedApp = () => {
       ))}
       <Route path="/settings/schedule" element={<ExerciseDaysOnboarding />} />
       <Route path="*" element={<PageNotFound />} />
-    </Routes>
+      </Routes>
+    </>
   );
 };
 

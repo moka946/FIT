@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Dumbbell, Utensils, MessageCircle, ChevronRight, Flame, Target } from 'lucide-react';
+import { Dumbbell, Utensils, MessageCircle, ChevronRight, Flame, Target, GlassWater } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
@@ -9,8 +9,34 @@ import SettingsMenu from '@/components/SettingsMenu';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
 
+function getWaterKey() {
+  return `fitegypt_water_${new Date().toISOString().split('T')[0]}`;
+}
+
 export default function Home() {
   const { t, isRTL, getDailyMotivationQuote } = useLanguage();
+
+  // Water tracker
+  const [waterCount, setWaterCount] = useState(() => {
+    return parseInt(localStorage.getItem(getWaterKey()) || '0', 10);
+  });
+
+  useEffect(() => {
+    localStorage.setItem(getWaterKey(), String(waterCount));
+  }, [waterCount]);
+
+  const toggleGlass = (index) => {
+    if (index < waterCount) {
+      setWaterCount(index);
+    } else {
+      setWaterCount(index + 1);
+    }
+  };
+
+  // Profile badge
+  const userProfile = (() => {
+    try { return JSON.parse(localStorage.getItem('fitegypt_user_profile')); } catch { return null; }
+  })();
 
   const quickActions = [
     {
@@ -51,6 +77,17 @@ export default function Home() {
             >
               <p className="text-orange-500 font-medium">{t('welcomeBack')}</p>
               <h1 className="text-3xl font-bold text-white mt-1">{t('champion')}</h1>
+              {userProfile && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="mt-2 inline-flex items-center gap-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full px-3 py-1"
+                >
+                  <span className="text-orange-500 text-xs font-bold">
+                    {t('goalLabel')}: {t(userProfile.goal?.toLowerCase() || 'maintain')} 🔥
+                  </span>
+                </motion.div>
+              )}
             </motion.div>
             <div className="flex items-center gap-2">
               <SettingsMenu />
@@ -81,6 +118,48 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </motion.div>
+      </div>
+
+      {/* Water Intake Tracker */}
+      <div className="px-6 mt-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="bg-zinc-900 rounded-3xl p-5 border border-zinc-800"
+        >
+          <div className={`flex items-center gap-2 mb-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <GlassWater className="w-5 h-5 text-cyan-400" />
+            <span className="text-white font-bold">{t('waterIntake')}</span>
+            <span className="text-zinc-500 text-sm ml-auto">{waterCount}/8 {t('glasses')}</span>
+          </div>
+          {/* Glass Icons */}
+          <div className="flex gap-2 justify-between mb-3">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => toggleGlass(i)}
+                className={`w-8 h-10 rounded-lg flex items-center justify-center transition-all active:scale-90 ${
+                  i < waterCount
+                    ? 'bg-cyan-500/20 border border-cyan-500/40'
+                    : 'bg-zinc-800/50 border border-zinc-700/30'
+                }`}
+              >
+                <GlassWater className={`w-4 h-4 ${i < waterCount ? 'text-cyan-400' : 'text-zinc-600'}`} />
+              </button>
+            ))}
+          </div>
+          {/* Progress bar */}
+          <div className="w-full bg-zinc-800 rounded-full h-2 overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${(waterCount / 8) * 100}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+          <p className="text-zinc-500 text-xs mt-2 text-center">{t('waterGoal')}</p>
         </motion.div>
       </div>
 
@@ -136,3 +215,4 @@ export default function Home() {
     </div>
   );
 }
+

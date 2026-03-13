@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const LanguageContext = createContext(null);
 
@@ -273,6 +273,89 @@ const translations = {
     ex_cable_crunch_desc: 'Crunch down using your abs, not your hips.',
     ex_tricep_pushdown: 'Tricep Pushdowns',
     ex_tricep_pushdown_desc: 'Push down, lock elbows at the sides.',
+
+    // Progress Tracker
+    progress: 'Progress',
+    weeklyProgress: 'Weekly Progress',
+    streak: 'Streak',
+    days: 'days',
+    totalCaloriesBurned: 'Total Calories Burned',
+    markComplete: 'Mark Today Complete',
+    completed: 'Completed',
+    noProgressYet: 'Start your fitness journey!',
+
+    // Water Tracker
+    waterIntake: 'Water Intake',
+    glasses: 'glasses',
+    waterGoal: 'Daily Goal: 8 Glasses',
+    glassesConsumed: 'glasses consumed',
+
+    // Body Measurements
+    bodyMeasurements: 'Body Measurements',
+    waist: 'Waist',
+    arms: 'Arms',
+    chestMeasure: 'Chest',
+    saveMeasurement: 'Save Measurement',
+    measurementSaved: 'Measurement saved!',
+    weightOverTime: 'Weight Over Time',
+    noMeasurements: 'No measurements yet',
+    cm: 'cm',
+    kg: 'kg',
+
+    // Ramadan Mode
+    ramadanMode: 'Ramadan Mode',
+    suhoor: 'Suhoor',
+    iftar: 'Iftar',
+    postTarawih: 'Post-Tarawih',
+    ramadanBanner: 'Ramadan Kareem 🌙',
+    ramadanMealTip: 'Meals optimized for fasting',
+
+    // Share Workout
+    finishWorkout: 'Finish Workout',
+    shareWorkout: 'Share',
+    downloadCard: 'Download',
+    workoutComplete: 'Workout Complete! 💪',
+    exercisesCompleted: 'Exercises Completed',
+    caloriesBurned: 'Calories Burned',
+
+    // User Profile
+    setupProfile: 'Set Up Your Profile',
+    whatsYourGoal: "What's your goal?",
+    bulk: 'Bulk',
+    cut: 'Cut',
+    maintain: 'Maintain',
+    currentWeight: 'Current Weight (kg)',
+    saveProfile: 'Save Profile',
+    goalLabel: 'Goal',
+
+    // Budget Meals
+    budget: 'Budget',
+    budgetMeals: 'Budget Meals',
+    estimatedCost: 'Est. Cost',
+    egp: 'EGP',
+    meal_lentil_soup: 'Lentil Soup (Ads)',
+    meal_lentil_soup_portion: '300ml bowl',
+    meal_lentil_soup_how: 'Great as a starter or light meal.',
+    meal_lentil_soup_tip: 'Add lemon juice for vitamin C absorption.',
+    meal_lentil_soup_ingredients: '100g Red lentils, 1 Onion, 1 Tomato, 1 tsp Cumin, 1 Lemon',
+    meal_lentil_soup_instr: 'Boil lentils with onion and tomato. Blend, season with cumin and lemon.',
+    meal_egg_omelette: 'Egg Omelette',
+    meal_egg_omelette_portion: '3 whole eggs',
+    meal_egg_omelette_how: 'Quick protein-rich breakfast.',
+    meal_egg_omelette_tip: 'Use non-stick pan, no oil needed.',
+    meal_egg_omelette_ingredients: '3 Eggs, 1 Tomato, 1 Green pepper, Salt, Black pepper',
+    meal_egg_omelette_instr: 'Beat eggs, pour in heated pan with chopped veggies. Fold when set.',
+    meal_koshary: 'Koshary',
+    meal_koshary_portion: 'Regular serving',
+    meal_koshary_how: 'A full Egyptian meal rich in carbs and plant protein.',
+    meal_koshary_tip: 'Eat moderate portions. Skip extra oil or ghee.',
+    meal_koshary_ingredients: 'Rice, Lentils, Macaroni, Chickpeas, Tomato sauce, Fried onions',
+    meal_koshary_instr: 'Layer cooked rice, lentils, and pasta. Top with tomato sauce and crispy onions.',
+
+    // Logout Confirmation
+    logoutConfirmTitle: 'Log Out',
+    logoutConfirmMessage: 'Are you sure you want to log out?',
+    cancel: 'Cancel',
   },
   ar: {
     welcomeBack: 'اهلا بعودتك،',
@@ -542,6 +625,89 @@ const translations = {
     ex_cable_crunch_desc: 'استخدم عضلات بطنك للطحن للأسفل.',
     ex_tricep_pushdown: 'ترايسبس كابل',
     ex_tricep_pushdown_desc: 'ادفع لأسفل مع تثبيت الكوع.',
+
+    // Progress Tracker
+    progress: 'التقدم',
+    weeklyProgress: 'تقدم الأسبوع',
+    streak: 'سلسلة',
+    days: 'أيام',
+    totalCaloriesBurned: 'إجمالي السعرات المحروقة',
+    markComplete: 'تسجيل اليوم مكتمل',
+    completed: 'مكتمل',
+    noProgressYet: 'ابدأ رحلتك الرياضية!',
+
+    // Water Tracker
+    waterIntake: 'شرب المياه',
+    glasses: 'أكواب',
+    waterGoal: 'الهدف اليومي: 8 أكواب',
+    glassesConsumed: 'أكواب تم شربها',
+
+    // Body Measurements
+    bodyMeasurements: 'قياسات الجسم',
+    waist: 'الخصر',
+    arms: 'الذراعين',
+    chestMeasure: 'الصدر',
+    saveMeasurement: 'حفظ القياس',
+    measurementSaved: 'تم حفظ القياس!',
+    weightOverTime: 'الوزن عبر الوقت',
+    noMeasurements: 'لا توجد قياسات بعد',
+    cm: 'سم',
+    kg: 'كجم',
+
+    // Ramadan Mode
+    ramadanMode: 'وضع رمضان',
+    suhoor: 'سحور',
+    iftar: 'إفطار',
+    postTarawih: 'بعد التراويح',
+    ramadanBanner: 'رمضان كريم 🌙',
+    ramadanMealTip: 'وجبات مُحسّنة للصيام',
+
+    // Share Workout
+    finishWorkout: 'إنهاء التمرين',
+    shareWorkout: 'مشاركة',
+    downloadCard: 'تحميل',
+    workoutComplete: 'تم التمرين! 💪',
+    exercisesCompleted: 'التمارين المكتملة',
+    caloriesBurned: 'السعرات المحروقة',
+
+    // User Profile
+    setupProfile: 'إعداد ملفك الشخصي',
+    whatsYourGoal: 'ما هو هدفك؟',
+    bulk: 'تضخيم',
+    cut: 'تنشيف',
+    maintain: 'ثبات',
+    currentWeight: 'الوزن الحالي (كجم)',
+    saveProfile: 'حفظ الملف الشخصي',
+    goalLabel: 'الهدف',
+
+    // Budget Meals
+    budget: 'اقتصادي',
+    budgetMeals: 'وجبات اقتصادية',
+    estimatedCost: 'التكلفة التقديرية',
+    egp: 'ج.م',
+    meal_lentil_soup: 'شوربة عدس',
+    meal_lentil_soup_portion: 'طبق 300 مل',
+    meal_lentil_soup_how: 'ممتازة كوجبة خفيفة أو مقبلات.',
+    meal_lentil_soup_tip: 'أضف عصير الليمون لامتصاص فيتامين سي.',
+    meal_lentil_soup_ingredients: '100 جم عدس أحمر، بصلة، طماطم، ملعقة كمون، ليمونة',
+    meal_lentil_soup_instr: 'اسلق العدس مع البصل والطماطم. اخلطه وتبله بالكمون والليمون.',
+    meal_egg_omelette: 'أومليت بيض',
+    meal_egg_omelette_portion: '3 بيضات',
+    meal_egg_omelette_how: 'فطور سريع غني بالبروتين.',
+    meal_egg_omelette_tip: 'استخدم مقلاة غير لاصقة بدون زيت.',
+    meal_egg_omelette_ingredients: '3 بيضات، طماطم، فلفل أخضر، ملح، فلفل أسود',
+    meal_egg_omelette_instr: 'اخفق البيض واسكبه في المقلاة مع الخضار المقطع. اطوه عند النضج.',
+    meal_koshary: 'كشري',
+    meal_koshary_portion: 'طبق عادي',
+    meal_koshary_how: 'وجبة مصرية كاملة غنية بالكربوهيدرات والبروتين النباتي.',
+    meal_koshary_tip: 'كُل كمية معتدلة. تجنب الزيت أو السمن الزائد.',
+    meal_koshary_ingredients: 'أرز، عدس، مكرونة، حمص، صلصة طماطم، بصل مقلي',
+    meal_koshary_instr: 'رص الأرز والعدس والمكرونة. ضع الصلصة والبصل المقرمش.',
+
+    // Logout Confirmation
+    logoutConfirmTitle: 'تسجيل الخروج',
+    logoutConfirmMessage: 'هل أنت متأكد من تسجيل الخروج؟',
+    cancel: 'إلغاء',
   },
   es: {
     welcomeBack: 'Bienvenido,',

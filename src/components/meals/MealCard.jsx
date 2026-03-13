@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp, Flame, Beef, Wheat, Droplet } from 'lucide-react';
+import { ChevronDown, ChevronUp, Flame, Beef, Wheat, Droplet, Coins } from 'lucide-react';
 import { useLanguage } from '@/components/LanguageContext';
 
 const mealTypeKeys = {
@@ -9,7 +9,11 @@ const mealTypeKeys = {
   "Lunch": "lunch",
   "Snack": "snack",
   "Pre-Workout": "preWorkout",
-  "Post-Workout": "postWorkout"
+  "Post-Workout": "postWorkout",
+  "Budget": "budget",
+  "Suhoor": "suhoor",
+  "Iftar": "iftar",
+  "Post-Tarawih": "postTarawih",
 };
 
 export default function MealCard({ meal, index }) {
@@ -96,6 +100,12 @@ export default function MealCard({ meal, index }) {
             <h3 className="text-white font-bold text-xl">
               {display.name}
             </h3>
+            {meal.cost_egp && (
+              <span className="inline-flex items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5">
+                <Coins className="w-3 h-3 text-emerald-500" />
+                <span className="text-emerald-500 text-xs font-bold">~{meal.cost_egp} {t('egp')}</span>
+              </span>
+            )}
           </div>
           <button
             onClick={() => setExpanded(!expanded)}
