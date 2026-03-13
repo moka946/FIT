@@ -916,10 +916,22 @@ export function LanguageProvider({ children }) {
     return t(quoteKey);
   };
 
+  const getAIResponseLanguageName = () => {
+    return getLanguageConfig(language).aiName || 'English';
+  };
+
   const isRTL = getLanguageConfig(language).dir === 'rtl';
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, isRTL, supportedLanguages, getDailyMotivationQuote }}>
+    <LanguageContext.Provider value={{ 
+      language, 
+      setLanguage, 
+      t, 
+      isRTL, 
+      supportedLanguages, 
+      getDailyMotivationQuote,
+      getAIResponseLanguageName
+    }}>
       {children}
     </LanguageContext.Provider>
   );
