@@ -63,7 +63,7 @@ const homeWorkoutModules = {
     exercises: [
       { name: 'Push-ups', titleKey: 'ex_pushups', descKey: 'ex_pushups_desc', sets: 4, reps: '15-20', calories: 40, fat: 4, gif_url: '/exercises/Push-Up.gif' },
       { name: 'Wide Push-ups', titleKey: 'ex_wide_pushups', descKey: 'ex_wide_pushups_desc', sets: 3, reps: '12-15', calories: 35, fat: 3, gif_url: '/exercises/Push-Up.gif' },
-      { name: 'Chest Dips', titleKey: 'ex_chest_dips', descKey: 'ex_chest_dips_desc', sets: 3, reps: '10-12', calories: 35, fat: 3, gif_url: '/exercises/Chest-Dips.gif' },
+      { name: 'Diamond Push-ups', titleKey: 'ex_diamond_pushups', descKey: 'ex_diamond_pushups_desc', sets: 3, reps: '10-12', calories: 35, fat: 3, gif_url: '/exercises/Push-Up.gif' },
       { name: 'Front Plank', titleKey: 'ex_plank', descKey: 'ex_plank_desc', sets: 3, reps: '60s', calories: 30, fat: 3, gif_url: '/exercises/Front-Plank.gif' },
     ]
   },
@@ -75,7 +75,7 @@ const homeWorkoutModules = {
       { name: 'Burpees', titleKey: 'ex_burpee', descKey: 'ex_burpee_desc', sets: 4, reps: '15-20', calories: 60, fat: 6, gif_url: '/exercises/Burpee.gif' },
       { name: 'Mountain Climbers', titleKey: 'ex_mountain_climber', descKey: 'ex_mountain_climber_desc', sets: 4, reps: '30s', calories: 45, fat: 4, gif_url: '/exercises/Mountain-Climber.mp4' },
       { name: 'Cross-Body Mountain Climber', titleKey: 'ex_cross_body_mc', descKey: 'ex_cross_body_mc_desc', sets: 3, reps: '30s', calories: 45, fat: 5, gif_url: '/exercises/Cross-Body-Mountain-Climber.mp4' },
-      { name: 'Hanging Leg Raises', titleKey: 'ex_hanging_leg_raise', descKey: 'ex_hanging_leg_raise_desc', sets: 3, reps: '10-15', calories: 30, fat: 3, gif_url: '/exercises/Hanging-Leg-Raise.gif' },
+      { name: 'Superman Holds', titleKey: 'ex_superman', descKey: 'ex_superman_desc', sets: 3, reps: '30-45s', calories: 30, fat: 3, gif_url: '/exercises/Front-Plank.gif' },
     ]
   },
   Legs: {
