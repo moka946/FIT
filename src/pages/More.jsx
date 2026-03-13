@@ -1,6 +1,19 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Ruler, Weight, Sparkles, Loader2, ClipboardList, RotateCcw, Trash2 } from 'lucide-react';
+import { 
+  User, 
+  Ruler, 
+  Weight, 
+  Sparkles, 
+  Loader2, 
+  ClipboardList, 
+  RotateCcw, 
+  Trash2, 
+  Dumbbell, 
+  Apple, 
+  CheckCircle2,
+  Info
+} from 'lucide-react';
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
@@ -72,11 +85,14 @@ export default function More() {
 - Height: ${formData.height} cm
 - Weight: ${formData.weight} kg
 
-The plan should include:
-1. A weekly workout schedule focused on these stats.
-2. A daily nutrition plan including Egyptian meals (like Foul, Ta'ameya, Grilled Chicken, etc.) with estimated calories.
+The plan MUST include exactly two main sections with these EXACT headers:
+# Workout Plan
+# Nutrition Plan
 
-Please respond in ${getAIResponseLanguageName()} and format with clear headers for "Workout Plan" and "Nutrition Plan".`;
+Inside Workout Plan, give a 7-day schedule.
+Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, etc.) with calorie estimates.
+
+Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
 
       const completion = await groq.chat.completions.create({
         messages: [{ role: 'user', content: prompt }],
@@ -99,133 +115,162 @@ Please respond in ${getAIResponseLanguageName()} and format with clear headers f
 
   return (
     <div className="min-h-screen bg-black pb-24 text-white">
-      <div className="sticky top-0 bg-black/95 backdrop-blur-xl z-40 border-b border-zinc-800/50 p-6">
+      {/* Premium Gradient Header */}
+      <div className="sticky top-0 bg-black/60 backdrop-blur-2xl z-40 border-b border-white/5 px-6 py-4">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}
         >
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center shadow-[0_0_20px_rgba(249,115,22,0.3)]">
-            <Sparkles className="w-6 h-6 text-white" />
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-tr from-orange-500 to-red-600 rounded-2xl blur opacity-40 group-hover:opacity-60 transition duration-500" />
+            <div className="relative w-12 h-12 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center">
+              <Sparkles className="w-6 h-6 text-orange-500" />
+            </div>
           </div>
-          <div>
-            <h1 className={`text-2xl font-black tracking-tight ${isRTL ? 'text-right' : ''}`}>{t('more')}</h1>
-            <p className={`text-zinc-500 text-xs font-medium uppercase tracking-wider ${isRTL ? 'text-right' : ''}`}>{t('getYourPlan')}</p>
+          <div className={isRTL ? 'text-right' : ''}>
+            <h1 className="text-2xl font-black tracking-tighter text-white uppercase italic">{t('more')}</h1>
+            <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-[3px]">{t('getYourPlan')}</p>
           </div>
         </motion.div>
       </div>
 
-      <div className="p-6 max-w-md mx-auto space-y-8">
+      <div className="max-w-xl mx-auto px-6 py-8 space-y-8">
+        {/* Stats Section - Redesigned as a Slim Interactive Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative group"
+          className="bg-zinc-900/40 border border-zinc-800/60 rounded-[2.5rem] p-6 shadow-xl"
         >
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-600 rounded-[2rem] blur opacity-20 group-hover:opacity-30 transition duration-1000" />
-          <div className="relative bg-zinc-900 border border-zinc-800 rounded-[2rem] p-8 space-y-8">
-            <div className={`flex items-center gap-2 mb-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <div className="w-2 h-8 bg-orange-500 rounded-full" />
-              <h2 className="text-xl font-bold tracking-tight">{t('championStats')}</h2>
-            </div>
-
-            <div className="grid gap-6">
-              {[
-                { name: 'age', icon: User, placeholder: 'age', unit: '' },
-                { name: 'height', icon: Ruler, placeholder: 'height', unit: 'cm' },
-                { name: 'weight', icon: Weight, placeholder: 'weight', unit: 'kg' },
-              ].map((field) => (
-                <div key={field.name} className="space-y-2">
-                  <label className={`block text-xs font-bold text-zinc-500 uppercase tracking-widest ${isRTL ? 'text-right' : ''}`}>
-                    {t(field.placeholder)} {field.unit && `(${field.unit})`}
-                  </label>
-                  <div className={`flex items-center gap-3 p-4 bg-zinc-800/30 rounded-2xl border border-zinc-700/30 focus-within:border-orange-500/50 focus-within:bg-zinc-800/50 transition-all ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    <field.icon className="w-5 h-5 text-orange-500/70" />
-                    <input
-                      type="number"
-                      name={field.name}
-                      placeholder="..."
-                      value={formData[field.name]}
-                      onChange={handleInputChange}
-                      className={`bg-transparent w-full outline-none text-white text-lg font-medium placeholder:text-zinc-700 ${isRTL ? 'text-right' : ''}`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <button
-              onClick={generatePlan}
-              disabled={loading || !formData.age || !formData.height || !formData.weight}
-              className="w-full h-16 rounded-2xl bg-orange-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-orange-400 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_8px_30px_rgba(249,115,22,0.3)]"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-6 h-6 animate-spin" />
-                  {t('generating')}
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-6 h-6 text-black" />
-                  {t('generatePlan')}
-                </>
-              )}
-            </button>
+          <div className={`flex items-center gap-2 mb-6 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
+             <div className="w-1.5 h-6 bg-orange-500 rounded-full" />
+             <h2 className="text-lg font-black uppercase tracking-tight text-zinc-100">{t('championStats')}</h2>
           </div>
+
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            {[
+              { name: 'age', icon: User, placeholder: 'age', unit: '' },
+              { name: 'height', icon: Ruler, placeholder: 'height', unit: 'cm' },
+              { name: 'weight', icon: Weight, placeholder: 'weight', unit: 'kg' },
+            ].map((field) => (
+              <div key={field.name} className="relative">
+                <div className={`flex flex-col items-center gap-2 p-3 bg-zinc-800/20 border border-zinc-700/30 rounded-2xl focus-within:border-orange-500/50 focus-within:bg-zinc-800/40 transition-all`}>
+                  <field.icon className="w-4 h-4 text-zinc-500" />
+                  <input
+                    type="number"
+                    name={field.name}
+                    placeholder="..."
+                    value={formData[field.name]}
+                    onChange={handleInputChange}
+                    className="bg-transparent w-full text-center outline-none text-white text-lg font-black placeholder:text-zinc-800"
+                  />
+                  <span className="text-[10px] font-bold uppercase text-zinc-600 tracking-wider">
+                    {t(field.placeholder)}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={generatePlan}
+            disabled={loading || !formData.age || !formData.height || !formData.weight}
+            className="group relative w-full h-14 overflow-hidden rounded-2xl bg-orange-500 text-black font-black text-sm uppercase tracking-widest disabled:opacity-50 transition-all active:scale-[0.98] shadow-lg shadow-orange-500/20"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            <div className="relative flex items-center justify-center gap-2">
+              {loading ? (
+                <><Loader2 className="w-5 h-5 animate-spin" /> {t('generating')}</>
+              ) : (
+                <><Sparkles className="w-5 h-5" /> {t('generatePlan')}</>
+              )}
+            </div>
+          </button>
         </motion.div>
 
+        {/* Plan Section - Themed Cards for Sections */}
         <AnimatePresence>
           {plan && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative"
+              className="space-y-6"
             >
-              <div className="bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-3xl" />
-
-                <div className={`flex items-center justify-between mb-8 pb-6 border-b border-zinc-800 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
-                      <ClipboardList className="w-5 h-5 text-orange-500" />
-                    </div>
-                    <h3 className="text-xl font-bold tracking-tight">{t('yourCustomPlan')}</h3>
-                  </div>
-                  <button
-                    onClick={clearPlan}
-                    className="p-2.5 rounded-xl bg-zinc-800/50 text-zinc-500 hover:text-red-500 hover:bg-red-500/10 transition-all"
-                    title={t('clearPlan')}
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
+              <div className={`flex items-center justify-between px-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <ClipboardList className="w-5 h-5 text-orange-500" />
+                  <h3 className="text-xl font-black uppercase tracking-tight italic">{t('yourCustomPlan')}</h3>
                 </div>
+                <button
+                  onClick={clearPlan}
+                  className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-red-500 hover:border-red-500/30 transition-all"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
 
-                <div className={`prose prose-invert prose-orange max-w-none ${isRTL ? 'text-right' : ''}`}>
-                  <ReactMarkdown
-                    components={{
-                      h1: ({ node, ...props }) => <h1 className="text-2xl font-black text-white mt-8 mb-4 border-l-4 border-orange-500 pl-4" {...props} />,
-                      h2: ({ node, ...props }) => <h2 className="text-xl font-bold text-orange-500 mt-8 mb-4" {...props} />,
-                      p: ({ node, ...props }) => <p className="text-zinc-400 leading-relaxed mb-4" {...props} />,
-                      li: ({ node, ...props }) => <li className="text-zinc-300 mb-2 marker:text-orange-500" {...props} />,
-                    }}
-                  >
-                    {plan}
-                  </ReactMarkdown>
-                </div>
+              {/* Styled Plan Container */}
+              <div className={`prose prose-invert max-w-none ${isRTL ? 'text-right' : ''}`}>
+                <ReactMarkdown
+                  components={{
+                    h1: ({ node, ...props }) => {
+                      const isWorkout = props.children.toString().toLowerCase().includes('workout');
+                      const isNutrition = props.children.toString().toLowerCase().includes('nutrition');
+                      return (
+                        <div className={`relative mt-12 mb-6 group ${isRTL ? 'text-right' : 'text-left'}`}>
+                          <div className={`absolute -left-4 -right-4 top-0 bottom-0 bg-gradient-to-r ${isWorkout ? 'from-orange-500/10 to-transparent' : isNutrition ? 'from-emerald-500/10 to-transparent' : 'from-zinc-500/10 to-transparent'} rounded-2xl -z-10`} />
+                          <div className={`flex items-center gap-3 mb-2 px-1 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isWorkout ? 'bg-orange-500/20 text-orange-500' : isNutrition ? 'bg-emerald-500/20 text-emerald-500' : 'bg-zinc-800 text-zinc-400'}`}>
+                              {isWorkout ? <Dumbbell className="w-5 h-5" /> : isNutrition ? <Apple className="w-5 h-5" /> : <Info className="w-5 h-5" />}
+                            </div>
+                            <h1 className="text-2xl font-black text-white m-0 uppercase italic tracking-tight" {...props} />
+                          </div>
+                        </div>
+                      );
+                    },
+                    h2: ({ node, ...props }) => <h2 className="text-lg font-black text-zinc-100 mt-8 mb-4 border-b border-zinc-800 pb-2 uppercase tracking-wide" {...props} />,
+                    p: ({ node, ...props }) => <p className="text-zinc-400 leading-relaxed text-sm mb-4" {...props} />,
+                    li: ({ node, ...props }) => (
+                      <li className="list-none relative pl-6 mb-3 flex items-start group">
+                        <CheckCircle2 className="w-4 h-4 text-orange-500/50 absolute left-0 top-1 shrink-0 group-hover:text-orange-500 transition-colors" />
+                        <span className="text-zinc-300 text-sm">{props.children}</span>
+                      </li>
+                    ),
+                    strong: ({ node, ...props }) => <strong className="text-white font-black uppercase tracking-tight text-xs bg-zinc-800 px-1.5 py-0.5 rounded ml-1 mr-1" {...props} />,
+                  }}
+                >
+                  {plan}
+                </ReactMarkdown>
+              </div>
 
-                <div className="mt-12 pt-8 border-t border-zinc-800 flex justify-center">
-                  <button
-                    onClick={generatePlan}
-                    className="flex items-center gap-2 text-orange-500 font-bold hover:text-orange-400 transition-colors py-2 px-6 rounded-full bg-orange-500/5 border border-orange-500/20"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                    {t('updatePlan')}
-                  </button>
-                </div>
+              {/* Action Footer */}
+              <div className="flex justify-center pt-10">
+                <button
+                  onClick={generatePlan}
+                  className="flex items-center gap-2 bg-zinc-900 border border-zinc-800 text-zinc-400 font-bold hover:text-orange-500 hover:border-orange-500/30 transition-all py-3 px-8 rounded-2xl active:scale-95"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  <span className="text-sm uppercase tracking-widest font-black">{t('updatePlan')}</span>
+                </button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Empty State / Hint */}
+        {!plan && !loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center space-y-4 pt-10"
+          >
+            <div className="w-20 h-20 rounded-full bg-zinc-900/50 border border-dashed border-zinc-800 flex items-center justify-center mx-auto">
+              <ClipboardList className="w-8 h-8 text-zinc-700" />
+            </div>
+            <p className="text-zinc-500 text-sm font-medium italic">{t('noProgressYet')}</p>
+          </motion.div>
+        )}
       </div>
 
       <FooterCredit />
@@ -233,4 +278,5 @@ Please respond in ${getAIResponseLanguageName()} and format with clear headers f
     </div>
   );
 }
+
 
