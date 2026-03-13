@@ -96,17 +96,21 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
 
       const completion = await groq.chat.completions.create({
         messages: [{ role: 'user', content: prompt }],
-        model: 'llama-3.3-70b-versatile',
+        model: 'llama-3.1-8b-instant',
       });
 
       const responseText = completion.choices[0]?.message?.content || '';
       setPlan(responseText);
     } catch (error) {
       console.error('Plan Generation Error:', error);
-      if (String(error).includes('fetch')) {
+      if (error?.status === 401) {
+        alert("Invalid API Key (Unauthorized)");
+      } else if (error?.status === 429) {
+        alert("Rate limit reached. Try again in a minute.");
+      } else if (String(error).includes('fetch')) {
         alert(t('failedConnectAI'));
       } else {
-        alert(t('failedGeneratePlan'));
+        alert(t('failedGeneratePlan') + (error?.message ? `: ${error.message}` : ""));
       }
     } finally {
       setLoading(false);

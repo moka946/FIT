@@ -132,7 +132,7 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
           ...chatHistory,
           { role: 'user', content: currentInput },
         ],
-        model: 'llama-3.3-70b-versatile',
+        model: 'llama-3.1-8b-instant',
       });
 
       const responseText = completion.choices[0]?.message?.content || t('coachLostThought');
