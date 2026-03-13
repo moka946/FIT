@@ -18,7 +18,6 @@ import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
-import { Groq } from 'groq-sdk';
 import ReactMarkdown from 'react-markdown';
 
 export default function More() {
@@ -75,31 +74,27 @@ export default function More() {
     }
 
     try {
-      const groq = new Groq({
-        apiKey,
-        dangerouslyAllowBrowser: true,
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: prompt }],
+          model: 'llama-3.1-8b-instant',
+          temperature: 0.7,
+          max_tokens: 2048
+        })
       });
 
-      const prompt = `Create a complete personalized workout and nutrition plan for an Egyptian fitness enthusiast with these stats:
-- Age: ${formData.age}
-- Height: ${formData.height} cm
-- Weight: ${formData.weight} kg
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+      }
 
-The plan MUST include exactly two main sections with these EXACT headers:
-# Workout Plan
-# Nutrition Plan
-
-Inside Workout Plan, give a 7-day schedule.
-Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, etc.) with calorie estimates.
-
-Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
-
-      const completion = await groq.chat.completions.create({
-        messages: [{ role: 'user', content: prompt }],
-        model: 'llama-3.1-8b-instant',
-      });
-
-      const responseText = completion.choices[0]?.message?.content || '';
+      const data = await response.json();
+      const responseText = data.choices[0]?.message?.content || '';
       setPlan(responseText);
     } catch (error) {
       console.error('Plan Generation Error:', error);
