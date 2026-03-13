@@ -361,6 +361,7 @@ const translations = {
     currentWeight: 'Current Weight (kg)',
     saveProfile: 'Save Profile',
     goalLabel: 'Goal',
+    changeGoal: 'Change Goal',
 
     // Budget Meals
     budget: 'Budget',
@@ -747,6 +748,7 @@ const translations = {
     currentWeight: 'الوزن الحالي (كجم)',
     saveProfile: 'حفظ الملف الشخصي',
     goalLabel: 'الهدف',
+    changeGoal: 'تغيير الهدف',
 
     // Budget Meals
     budget: 'اقتصادي',
@@ -801,6 +803,7 @@ const translations = {
     portionSize: 'Porción',
     dietTip: 'Consejo',
     howMuchToEat: 'Ingesta',
+    changeGoal: 'Cambiar Meta',
 
     ex_bench_press: 'Press de Banca',
     ex_bench_press_desc: 'Mantén la espalda recta y empuja.',
@@ -831,6 +834,7 @@ const translations = {
     portionSize: 'Porzione',
     dietTip: 'Consiglio',
     howMuchToEat: 'Dose',
+    changeGoal: 'Cambia Obiettivo',
 
     ex_bench_press: 'Panca Piana',
     ex_bench_press_desc: 'Mantieni la schiena piatta.',

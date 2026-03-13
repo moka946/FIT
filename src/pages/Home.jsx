@@ -34,9 +34,22 @@ export default function Home() {
   };
 
   // Profile badge
-  const userProfile = (() => {
+  const [userProfile, setUserProfile] = useState(() => {
     try { return JSON.parse(localStorage.getItem('fitegypt_user_profile')); } catch { return null; }
-  })();
+  });
+
+  useEffect(() => {
+    const handleProfileUpdate = () => {
+      try {
+        const updatedProfile = JSON.parse(localStorage.getItem('fitegypt_user_profile'));
+        setUserProfile(updatedProfile);
+      } catch {
+        setUserProfile(null);
+      }
+    };
+    window.addEventListener('fitegypt_profile_updated', handleProfileUpdate);
+    return () => window.removeEventListener('fitegypt_profile_updated', handleProfileUpdate);
+  }, []);
 
   const quickActions = [
     {

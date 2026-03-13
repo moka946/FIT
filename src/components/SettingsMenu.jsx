@@ -6,10 +6,12 @@ import {
   CalendarDays,
   Check,
   LogOut,
-  Moon
+  Moon,
+  Target
 } from 'lucide-react';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
+import ProfileSetupModal from '@/components/ProfileSetupModal';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,6 +40,7 @@ export default function SettingsMenu() {
   const { t, language, setLanguage, supportedLanguages } = useLanguage();
   const { logout } = useAuth();
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const [ramadanMode, setRamadanMode] = useState(() => {
     return localStorage.getItem('fitegypt_ramadan_mode') === 'true';
@@ -130,6 +133,19 @@ export default function SettingsMenu() {
             <span>{t('changeSchedule')}</span>
           </DropdownMenuItem>
 
+          <DropdownMenuItem
+            onSelect={(e) => {
+              e.preventDefault(); // allow modal to show without instantly throwing away DOM if dropdown unmounts
+              // Actually radix dropdown menu handles this well if we just let it close or we can let it close normally
+              // But it's usually better to just set state
+              setShowProfileModal(true);
+            }}
+            className="focus:bg-zinc-800 focus:text-white"
+          >
+            <Target className="w-4 h-4" />
+            <span>{t('changeGoal')}</span>
+          </DropdownMenuItem>
+
           <DropdownMenuSeparator className="bg-zinc-700" />
 
           <DropdownMenuItem
@@ -164,6 +180,14 @@ export default function SettingsMenu() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {showProfileModal && (
+        <ProfileSetupModal onClose={() => {
+          setShowProfileModal(false);
+          // Dispatch a custom event to update HOME or other pages listening instead of full reload, OR just reload
+          window.dispatchEvent(new CustomEvent('fitegypt_profile_updated'));
+        }} />
+      )}
     </>
   );
 }
