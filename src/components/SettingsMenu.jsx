@@ -4,9 +4,11 @@ import {
   Settings,
   Languages,
   CalendarDays,
-  Check
+  Check,
+  LogOut
 } from 'lucide-react';
 import { useLanguage } from '@/components/LanguageContext';
+import { useAuth } from '@/lib/AuthContext';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,9 +25,14 @@ import {
 export default function SettingsMenu() {
   const navigate = useNavigate();
   const { t, language, setLanguage, supportedLanguages } = useLanguage();
+  const { logout } = useAuth();
 
   const openScheduleSettings = () => {
     navigate('/settings/schedule');
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -83,6 +90,16 @@ export default function SettingsMenu() {
         >
           <CalendarDays className="w-4 h-4" />
           <span>{t('changeSchedule')}</span>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator className="bg-zinc-700" />
+
+        <DropdownMenuItem
+          onSelect={handleLogout}
+          className="focus:bg-red-500/10 focus:text-red-500 text-red-500"
+        >
+          <LogOut className="w-4 h-4" />
+          <span>{t('logout')}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

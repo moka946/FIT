@@ -46,6 +46,10 @@ export default function MealCard({ meal, index }) {
               src={meal.image_url.startsWith('http') ? meal.image_url : (import.meta.env.BASE_URL + meal.image_url).replace(/\/+/g, '/')}
               alt={display.name}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=200&auto=format&fit=crop";
+              }}
             />
           </div>
         )}
@@ -73,6 +77,10 @@ export default function MealCard({ meal, index }) {
             src={meal.image_url.startsWith('http') ? meal.image_url : (import.meta.env.BASE_URL + meal.image_url).replace(/\/+/g, '/')}
             alt={display.name}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop";
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-bottom p-4">
             <span className="self-end text-xs font-medium text-emerald-400 uppercase tracking-widest bg-black/40 px-2 py-1 rounded backdrop-blur-sm">

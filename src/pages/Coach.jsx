@@ -6,9 +6,9 @@ import { useLanguage } from '@/components/LanguageContext';
 
 export default function Coach() {
   const { t, isRTL } = useLanguage();
-  
+
   return (
-    <div className="h-screen bg-black flex flex-col">
+    <div className="h-dvh bg-black flex flex-col safe-area-top">
       {/* Header */}
       <div className="bg-black/95 backdrop-blur-lg border-b border-zinc-800 px-6 py-4">
         <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>

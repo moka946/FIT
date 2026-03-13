@@ -204,7 +204,7 @@ Be enthusiastic, supportive, and use fitness terminology. Keep responses concise
         <FooterCredit />
       </div>
 
-      <div className="p-4 border-t border-zinc-800">
+      <div className="p-4 border-t border-zinc-800 safe-area-bottom">
         <div className="flex gap-3">
           <input
             type="text"

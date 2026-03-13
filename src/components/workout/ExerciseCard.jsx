@@ -60,7 +60,7 @@ export default function ExerciseCard({ exercise, index }) {
             <div className="p-5 space-y-4">
               {/* Optional: Larger preview when expanded */}
               <div className="w-full rounded-2xl overflow-hidden border border-zinc-800 bg-black/40">
-                {exercise.gif_url?.endsWith('.mp4') ? (
+                {exercise.gif_url?.toLowerCase().endsWith('.mp4') ? (
                   <video
                     src={(import.meta.env.BASE_URL + exercise.gif_url).replace(/\/+/g, '/')}
                     className="w-full aspect-video object-cover"

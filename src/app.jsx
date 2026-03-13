@@ -56,8 +56,9 @@ const AuthenticatedApp = () => {
 
   if (isLoadingAuth || isLoadingOnboarding) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+      <div className="fixed inset-0 bg-black flex flex-col items-center justify-center z-[100]">
+        <div className="w-12 h-12 border-4 border-orange-500/20 border-t-orange-500 rounded-full animate-spin mb-4 shadow-[0_0_20px_rgba(249,115,22,0.2)]"></div>
+        <p className="text-zinc-500 text-[10px] font-bold tracking-[0.3em] uppercase animate-pulse">FitEgypt</p>
       </div>
     );
   }

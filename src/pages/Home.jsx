@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Dumbbell, Utensils, MessageCircle, ChevronRight, Flame, Target, LogOut } from 'lucide-react';
+import { Dumbbell, Utensils, MessageCircle, ChevronRight, Flame, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
@@ -11,11 +11,6 @@ import { useAuth } from '@/lib/AuthContext';
 
 export default function Home() {
   const { t, isRTL, getDailyMotivationQuote } = useLanguage();
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
 
   const quickActions = [
     {
@@ -59,13 +54,6 @@ export default function Home() {
             </motion.div>
             <div className="flex items-center gap-2">
               <SettingsMenu />
-              <button
-                onClick={handleLogout}
-                className="w-10 h-10 rounded-xl bg-zinc-800/80 backdrop-blur flex items-center justify-center hover:bg-red-500/20 transition-colors"
-                title={t('logout')}
-              >
-                <LogOut className="w-5 h-5 text-zinc-400 hover:text-red-500" />
-              </button>
             </div>
           </div>
         </div>
