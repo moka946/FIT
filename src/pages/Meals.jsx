@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Utensils, Moon } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Utensils, Moon, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import MealCard from '@/components/meals/MealCard';
 import { useLanguage } from '@/components/LanguageContext';
+import { useAuth } from '@/lib/AuthContext';
+import { parseMealsFromPlan } from '@/utils/planParser';
 
 const egyptianMeals = [
   // Breakfast - Ultra Lean
@@ -273,11 +275,12 @@ const ramadanMeals = [
   },
 ];
 
-const normalMealTypes = ["All", "Breakfast", "Lunch", "Dinner", "Snack", "Pre-Workout", "Post-Workout", "Budget"];
-const ramadanMealTypes = ["All", "Suhoor", "Iftar", "Post-Tarawih"];
+const normalMealTypes = ["All", "custom", "Breakfast", "Lunch", "Dinner", "Snack", "Pre-Workout", "Post-Workout", "Budget"];
+const ramadanMealTypes = ["All", "custom", "Suhoor", "Iftar", "Post-Tarawih"];
 
 const mealTypeKeys = {
   "All": "all",
+  "custom": "aiPlan",
   "Breakfast": "breakfast",
   "Dinner": "dinner",
   "Lunch": "lunch",
@@ -292,18 +295,29 @@ const mealTypeKeys = {
 
 export default function Meals() {
   const { t, isRTL } = useLanguage();
+  const { user } = useAuth();
   const [selectedType, setSelectedType] = useState("All");
+  const [customPlan, setCustomPlan] = useState(null);
+
+  useEffect(() => {
+    const planKey = user ? `plan_saved_${user.uid}` : 'plan_saved_guest';
+    const saved = localStorage.getItem(planKey);
+    setCustomPlan(saved);
+  }, [user]);
 
   const isRamadanMode = localStorage.getItem('fitegypt_ramadan_mode') === 'true';
 
   const mealTypes = isRamadanMode ? ramadanMealTypes : normalMealTypes;
-  const allMeals = isRamadanMode ? ramadanMeals : [...egyptianMeals, ...budgetMeals];
+  const rawMeals = isRamadanMode ? ramadanMeals : [...egyptianMeals, ...budgetMeals];
+  
+  const aiMeals = selectedType === 'custom' ? parseMealsFromPlan(customPlan) : [];
+  const allMeals = selectedType === 'custom' ? aiMeals : rawMeals;
 
   const mealTypeOrder = { "Suhoor": 1, "Iftar": 2, "Post-Tarawih": 3, "Breakfast": 1, "Lunch": 2, "Dinner": 3, "Snack": 4, "Pre-Workout": 5, "Post-Workout": 6, "Budget": 7 };
 
   const filteredMeals = selectedType === "All"
     ? [...allMeals].sort((a, b) => (mealTypeOrder[a.meal_type] || 99) - (mealTypeOrder[b.meal_type] || 99))
-    : allMeals.filter(meal => meal.meal_type === selectedType);
+    : (selectedType === 'custom' ? allMeals : allMeals.filter(meal => meal.meal_type === selectedType));
 
   return (
     <div className="min-h-screen bg-black pb-24">
@@ -337,18 +351,21 @@ export default function Meals() {
         {/* Filter Pills */}
         <div className="px-6 pb-4 overflow-x-auto scrollbar-hide">
           <div className={`flex gap-2 min-w-max ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {mealTypes.map((type) => (
-              <button
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedType === type
-                  ? 'bg-orange-500 text-black'
-                  : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
-                  }`}
-              >
-                {t(mealTypeKeys[type])}
-              </button>
-            ))}
+            {mealTypes.map((type) => {
+              if (type === 'custom' && !customPlan) return null;
+              return (
+                <button
+                  key={type}
+                  onClick={() => setSelectedType(type)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedType === type
+                    ? 'bg-orange-500 text-black'
+                    : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
+                    }`}
+                >
+                  {type === 'custom' ? '✨ ' : ''}{t(mealTypeKeys[type])}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

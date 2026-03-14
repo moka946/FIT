@@ -125,7 +125,9 @@ The user only exercises on these specific days: ${exerciseDays?.length > 0 ? exe
    - Overhead Press, Lateral Raises, Pike Push-ups, Barbell Curls, Tricep Pushdowns, Tricep Dips, Hammer Curls, Face Pulls
    - Burpees, Mountain Climbers, Front Plank, Hanging Leg Raises, Cable Crunches
 
-5. Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, Mulukhiya, etc.) with calorie estimates.
+5. Inside Nutrition Plan, you MUST provide exactly one meal recommendation for each of these categories: Breakfast, Lunch, Dinner, Snack. Use this EXACT format for each meal:
+   - **[Meal Category]**: [Detailed measurement e.g. 150g] [Meal Name], [Detailed ingredients]. ([Number] cal)
+   Example: - **Breakfast**: 3 Boiled Eggs (150g), 1 Baladi Bread (80g), 50g Areesh Cheese. (350 cal)
 
 Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
 
