@@ -1,0 +1,6 @@
+{
+  "appId": "com.fitegypt.app",
+  "appName": "fitegypt",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
