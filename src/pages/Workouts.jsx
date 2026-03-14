@@ -119,13 +119,11 @@ export default function Workouts() {
   const [customPlan, setCustomPlan] = useState(null);
 
   useEffect(() => {
-    if (user) {
-      const planKey = `plan_saved_${user.uid}`;
-      const saved = localStorage.getItem(planKey);
-      setCustomPlan(saved);
-      if (!saved && workoutLocation === 'custom') {
-        setWorkoutLocation('gym');
-      }
+    const planKey = user ? `plan_saved_${user.uid}` : 'plan_saved_guest';
+    const saved = localStorage.getItem(planKey);
+    setCustomPlan(saved);
+    if (!saved && workoutLocation === 'custom') {
+      setWorkoutLocation('gym');
     }
   }, [user, workoutLocation]);
   const shareCardRef = useRef(null);

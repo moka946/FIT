@@ -40,7 +40,18 @@ export default function More() {
     return localStorage.getItem(planKey) || null;
   });
   const [generatedPlan, setGeneratedPlan] = useState(null);
-  const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(() => {
+    const saved = localStorage.getItem(planKey);
+    return !!saved;
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem(planKey);
+    if (saved && !activePlan) {
+      setActivePlan(saved);
+      setIsSaved(true);
+    }
+  }, [planKey, activePlan]);
 
   useEffect(() => {
     localStorage.setItem(formKey, JSON.stringify(formData));
@@ -93,12 +104,23 @@ export default function More() {
 - Weight: ${formData.weight} kg
 
 The user only exercises on these specific days: ${exerciseDays?.length > 0 ? exerciseDays.join(', ') : 'every day'}.
-The plan MUST include exactly two main sections with these EXACT headers:
+
+### IMPORTANT FORMATTING RULES:
+1. The plan MUST include exactly two main sections with these EXACT headers:
 # Workout Plan
 # Nutrition Plan
 
-Inside Workout Plan, create a schedule ONLY for the specified exercise days (${exerciseDays?.length > 0 ? exerciseDays.join(', ') : 'every day'}).
-Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, etc.) with calorie estimates.
+2. Inside Workout Plan, for EACH exercise day, use this EXACT header format:
+## Day: [Day Name]
+Example: ## Day: Monday
+
+3. For each day, provide the exercises in a MARKDOWN TABLE with these exact columns:
+| Exercise | Sets | Reps |
+|----------|------|------|
+| [Exercise Name] | [Number] | [Reps] |
+
+4. Use real exercise names like "Push-ups", "Squats", "Bench Press", etc.
+5. Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, etc.) with calorie estimates.
 
 Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
 
