@@ -28,7 +28,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Build Web App
-        run: npm run build
+        run: npx vite build --base=./
 
       - name: Sync Capacitor
         run: npx cap sync android
@@ -58,7 +58,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Build Web App
-        run: npm run build
+        run: npx vite build --base=./
 
       - name: Sync Capacitor
         run: npx cap sync ios
