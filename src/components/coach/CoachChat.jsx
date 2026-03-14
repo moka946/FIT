@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
@@ -323,7 +324,21 @@ export default function CoachChat() {
 
               <div className={`max-w-[85%] ${msg.role === 'user' ? (isRTL ? 'items-start' : 'items-end') : (isRTL ? 'items-end' : 'items-start')}`}>
                 <div className={`rounded-2xl px-4 py-3 shadow-md ${msg.role === 'coach' ? 'bg-zinc-900/90 border border-zinc-800/50' : 'bg-orange-500 text-black font-medium'}`}>
-                  <ReactMarkdown className={`text-sm leading-relaxed ${msg.role === 'coach' ? 'text-zinc-200' : 'text-black'} prose prose-sm prose-invert max-w-none`}>
+                  <ReactMarkdown 
+                    remarkPlugins={[remarkGfm]}
+                    className={`text-sm leading-relaxed ${msg.role === 'coach' ? 'text-zinc-200' : 'text-black'} prose prose-sm prose-invert max-w-none`}
+                    components={{
+                      table: ({ node, ...props }) => (
+                        <div className="overflow-x-auto my-4 rounded-xl border border-zinc-800 bg-black/20">
+                          <table className="w-full border-collapse text-xs" {...props} />
+                        </div>
+                      ),
+                      thead: ({ node, ...props }) => <thead className="bg-zinc-800/30" {...props} />,
+                      th: ({ node, ...props }) => <th className="px-3 py-2 text-left font-black uppercase tracking-widest text-[9px] text-orange-500 border-b border-zinc-800" {...props} />,
+                      td: ({ node, ...props }) => <td className="px-3 py-2 text-zinc-300 border-b border-zinc-800/30" {...props} />,
+                      strong: ({ node, ...props }) => <strong className="text-white font-bold" {...props} />,
+                    }}
+                  >
                     {msg.content}
                   </ReactMarkdown>
                 </div>

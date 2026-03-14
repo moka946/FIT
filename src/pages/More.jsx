@@ -20,6 +20,7 @@ import { useLanguage } from '@/components/LanguageContext';
 import { useAuth } from '@/lib/AuthContext';
 import { useExerciseDays } from '@/lib/useExerciseDays';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export default function More() {
   const { t, isRTL, getAIResponseLanguageName } = useLanguage();
@@ -229,10 +230,11 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
               {/* Styled Plan Container */}
               <div className={`prose prose-invert max-w-none ${isRTL ? 'text-right' : ''}`}>
                 <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
                   components={{
                     h1: ({ node, ...props }) => {
-                      const isWorkout = props.children.toString().toLowerCase().includes('workout');
-                      const isNutrition = props.children.toString().toLowerCase().includes('nutrition');
+                      const isWorkout = props.children?.toString().toLowerCase().includes('workout');
+                      const isNutrition = props.children?.toString().toLowerCase().includes('nutrition');
                       return (
                         <div className={`relative mt-12 mb-6 group ${isRTL ? 'text-right' : 'text-left'}`}>
                           <div className={`absolute -left-4 -right-4 top-0 bottom-0 bg-gradient-to-r ${isWorkout ? 'from-orange-500/10 to-transparent' : isNutrition ? 'from-emerald-500/10 to-transparent' : 'from-zinc-500/10 to-transparent'} rounded-2xl -z-10`} />
@@ -254,6 +256,14 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
                       </li>
                     ),
                     strong: ({ node, ...props }) => <strong className="text-white font-black uppercase tracking-tight text-xs bg-zinc-800 px-1.5 py-0.5 rounded ml-1 mr-1" {...props} />,
+                    table: ({ node, ...props }) => (
+                      <div className="overflow-x-auto my-6 rounded-2xl border border-zinc-800 bg-zinc-900/50">
+                        <table className="w-full border-collapse text-sm" {...props} />
+                      </div>
+                    ),
+                    thead: ({ node, ...props }) => <thead className="bg-zinc-800/50" {...props} />,
+                    th: ({ node, ...props }) => <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[10px] text-orange-500 border-b border-zinc-800" {...props} />,
+                    td: ({ node, ...props }) => <td className="px-4 py-3 text-zinc-300 border-b border-zinc-800/50" {...props} />,
                   }}
                 >
                   {plan}
