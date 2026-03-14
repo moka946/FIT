@@ -40,28 +40,55 @@ export const parseMealsFromPlan = (markdown) => {
       const match = line.match(typeRegex);
       
       if (match) {
-        const content = match[2];
-        // Try to extract calories from the end like "(400 cal)" or "(400 سعر)"
+        let content = match[2];
+        // Try to extract calories
         const calMatch = content.match(/(\d+)\s*(?:cal|calories|سعر|حراري)/i);
         const calories = calMatch ? parseInt(calMatch[1]) : 0;
         
-        // Clean up content to remove calorie mentions
+        // Clean up content
         const portion = content.replace(/\(\d+\s*(?:cal|calories|سعر|حراري)\)/i, '').trim();
+
+        // Extract a "Meal Name" from the content - usually everything before the first comma or a specific number
+        let mealName = portion.split(',')[0].trim();
+        // If it's too long, or starts with a measurement, try to find the actual name
+        if (mealName.length > 40) mealName = match[1]; // Fallback to category name
+
+        // Image Matching Logic
+        const getMealImage = (text) => {
+          const lower = text.toLowerCase();
+          if (lower.includes('egg') || lower.includes('بيض')) return "/meal-images/eggs.jpg";
+          if (lower.includes('foul') || lower.includes('ful') || lower.includes('فول')) return "/meal-images/full.jpg";
+          if (lower.includes('chicken') || lower.includes('دجاج') || lower.includes('فراخ')) return "/meal-images/chicken.jpg";
+          if (lower.includes('rice') || lower.includes('أرز') || lower.includes('رز')) return "/meal-images/chicken_and_rice.jpg";
+          if (lower.includes('tuna') || lower.includes('تونة')) return "/meal-images/tuna_salad.jpg";
+          if (lower.includes('areesh') || lower.includes('قريش')) return "/meal-images/areesh_cheese.jpg";
+          if (lower.includes('falafel') || lower.includes('taameya') || lower.includes('طعمية')) return "/meal-images/falafel.jpg";
+          if (lower.includes('koshary') || lower.includes('كشري')) return "/meal-images/koshary.jpg";
+          if (lower.includes('dates') || lower.includes('بلح') || lower.includes('تمر')) return "/meal-images/dates.jpg";
+          if (lower.includes('termes') || lower.includes('ترمس')) return "/meal-images/termes.jpg";
+          if (lower.includes('banana') || lower.includes('موز')) return "/meal-images/banana.jpg";
+          if (lower.includes('nuts') || lower.includes('مكسرات')) return "/meal-images/nuts.jpg";
+          if (lower.includes('shake') || lower.includes('شيك')) return "/meal-images/protien_shake.jpg";
+          
+          // Category default fallback
+          if (type.includes('Breakfast')) return "/meal-images/full.jpg";
+          if (type.includes('Lunch')) return "/meal-images/chicken.jpg";
+          if (type.includes('Dinner')) return "/meal-images/tuna_salad.jpg";
+          return "/meal-images/termes.jpg";
+        };
 
         meals.push({
           titleKey: null,
-          name: match[1], // Use the name found in the text
+          name: mealName, 
           portion_size: portion,
-          meal_type: type, // Standardized type for categorization
+          meal_type: type,
           calories: calories,
           protein: Math.round(calories * 0.1),
           carbs: Math.round(calories * 0.1),
           fats: Math.round(calories * 0.05),
           ingredients: portion,
           instructions: "Follow the portion measurements strictly.",
-          image_url: type.toLowerCase().includes('breakfast') ? "/meal-images/full.jpg" : 
-                     type.toLowerCase().includes('lunch') ? "/meal-images/chicken.jpg" :
-                     type.toLowerCase().includes('dinner') ? "/meal-images/tuna_salad.jpg" : "/meal-images/termes.jpg"
+          image_url: getMealImage(portion)
         });
       }
     });
