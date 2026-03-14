@@ -111,16 +111,21 @@ The user only exercises on these specific days: ${exerciseDays?.length > 0 ? exe
 # Nutrition Plan
 
 2. Inside Workout Plan, for EACH exercise day, use this EXACT header format:
-## Day: [Day Name]
-Example: ## Day: Monday
+## Day: [Day Name] (e.g., ## Day: Monday)
 
-3. For each day, provide the exercises in a MARKDOWN TABLE with these exact columns:
+3. For each day, provide the exercises in a MARKDOWN TABLE with these EXACT columns:
 | Exercise | Sets | Reps |
 |----------|------|------|
 | [Exercise Name] | [Number] | [Reps] |
 
-4. Use real exercise names like "Push-ups", "Squats", "Bench Press", etc.
-5. Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, etc.) with calorie estimates.
+4. CRITICAL: Use ONLY these standardized English exercise names in the "Exercise" column for better matching (even if the rest of the response is in Arabic):
+   - Bench Press, Incline Dumbbell Press, Cable Flyes, Push-ups, Wide Push-ups, Diamond Push-ups, Chest Dips
+   - Deadlift, Lat Pulldowns, Seated Cable Row, Barbell Row, Superman Holds, Romanian Deadlift
+   - Barbell Squats, Leg Press, Leg Extensions, Bodyweight Squats, Walking Lunges, Calf Raises, Jump Squats
+   - Overhead Press, Lateral Raises, Pike Push-ups, Barbell Curls, Tricep Pushdowns, Tricep Dips, Hammer Curls, Face Pulls
+   - Burpees, Mountain Climbers, Front Plank, Hanging Leg Raises, Cable Crunches
+
+5. Inside Nutrition Plan, include specific Egyptian meals (Foul, Ta'ameya, Grilled Chicken, Mulukhiya, etc.) with calorie estimates.
 
 Please respond in ${getAIResponseLanguageName()}. Format beautifully using markdown.`;
 
