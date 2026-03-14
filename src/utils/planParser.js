@@ -60,6 +60,8 @@ export const parseMealsFromPlan = (markdown) => {
           if (lower.includes('foul') || lower.includes('ful') || lower.includes('فول')) return "/meal-images/full.jpg";
           if (lower.includes('chicken') || lower.includes('دجاج') || lower.includes('فراخ')) return "/meal-images/chicken.jpg";
           if (lower.includes('rice') || lower.includes('أرز') || lower.includes('رز')) return "/meal-images/chicken_and_rice.jpg";
+          if (lower.includes('fish') || lower.includes('سمك')) return "/meal-images/sea_base.jpg";
+          if (lower.includes('yogurt') || lower.includes('زبادي')) return "/meal-images/greek_yogurt.jpg";
           if (lower.includes('tuna') || lower.includes('تونة')) return "/meal-images/tuna_salad.jpg";
           if (lower.includes('areesh') || lower.includes('قريش')) return "/meal-images/areesh_cheese.jpg";
           if (lower.includes('falafel') || lower.includes('taameya') || lower.includes('طعمية')) return "/meal-images/falafel.jpg";
