@@ -59,11 +59,11 @@ export default function ExerciseCard({ exercise, index }) {
           >
             <div className="p-5 space-y-4">
               {/* Optional: Larger preview when expanded */}
-              <div className="w-full rounded-2xl overflow-hidden border border-zinc-800 bg-black/40">
+              <div className="w-full rounded-2xl overflow-hidden border border-zinc-800 bg-white">
                 {exercise.gif_url?.toLowerCase().endsWith('.mp4') ? (
                   <video
                     src={(import.meta.env.BASE_URL + exercise.gif_url).replace(/\/+/g, '/')}
-                    className="w-full aspect-video object-cover"
+                    className="w-full aspect-video object-contain"
                     autoPlay
                     muted
                     loop
@@ -73,7 +73,7 @@ export default function ExerciseCard({ exercise, index }) {
                   <img
                     src={exercise.gif_url ? (import.meta.env.BASE_URL + exercise.gif_url).replace(/\/+/g, '/') : "https://via.placeholder.com/80"}
                     alt={title}
-                    className="w-full aspect-video object-cover"
+                    className="w-full aspect-video object-contain"
                   />
                 )}
               </div>
