@@ -36,21 +36,23 @@ export default function More() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [plan, setPlan] = useState(() => {
+  const [activePlan, setActivePlan] = useState(() => {
     return localStorage.getItem(planKey) || null;
   });
+  const [generatedPlan, setGeneratedPlan] = useState(null);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(formKey, JSON.stringify(formData));
   }, [formData, formKey]);
 
   useEffect(() => {
-    if (plan) {
-      localStorage.setItem(planKey, plan);
+    if (activePlan) {
+      localStorage.setItem(planKey, activePlan);
     } else {
       localStorage.removeItem(planKey);
     }
-  }, [plan, planKey]);
+  }, [activePlan, planKey]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -59,15 +61,23 @@ export default function More() {
 
   const clearPlan = () => {
     if (window.confirm(t('clearCurrentPlanConfirm'))) {
-      setPlan(null);
+      setActivePlan(null);
+      setGeneratedPlan(null);
+      setIsSaved(false);
     }
+  };
+
+  const saveToWorkouts = () => {
+    setActivePlan(generatedPlan);
+    setIsSaved(true);
   };
 
   const generatePlan = async () => {
     if (!formData.age || !formData.height || !formData.weight) return;
 
     setLoading(true);
-    setPlan(null);
+    setGeneratedPlan(null);
+    setIsSaved(false);
 
     const apiKey = import.meta.env.VITE_GROQ_API_KEY?.trim();
     if (!apiKey || apiKey === 'YOUR_GROQ_API_KEY') {
@@ -113,7 +123,8 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
 
       const data = await response.json();
       const responseText = data.choices[0]?.message?.content || '';
-      setPlan(responseText);
+      setGeneratedPlan(responseText);
+      // If no active plan exists, we show this one as generated but not yet "synced"
     } catch (error) {
       console.error('Plan Generation Error:', error);
       const errorMsg = error?.message || String(error);
@@ -207,7 +218,7 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
 
         {/* Plan Section - Themed Cards for Sections */}
         <AnimatePresence>
-          {plan && (
+          {(generatedPlan || activePlan) && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -219,12 +230,23 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
                   <ClipboardList className="w-5 h-5 text-orange-500" />
                   <h3 className="text-xl font-black uppercase tracking-tight italic">{t('yourCustomPlan')}</h3>
                 </div>
-                <button
-                  onClick={clearPlan}
-                  className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-red-500 hover:border-red-500/30 transition-all"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                <div className="flex gap-2">
+                  {generatedPlan && !isSaved && generatedPlan !== activePlan && (
+                    <button
+                      onClick={saveToWorkouts}
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-500 text-black font-bold text-xs uppercase tracking-wider hover:bg-orange-400 transition-all shadow-lg shadow-orange-500/20"
+                    >
+                      <CheckCircle2 className="w-4 h-4" />
+                      {t('addToPlan')}
+                    </button>
+                  )}
+                  <button
+                    onClick={clearPlan}
+                    className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-red-500 hover:border-red-500/30 transition-all"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
               {/* Styled Plan Container */}
@@ -266,7 +288,7 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
                     td: ({ node, ...props }) => <td className="px-4 py-3 text-zinc-300 border-b border-zinc-800/50" {...props} />,
                   }}
                 >
-                  {plan}
+                  {generatedPlan || activePlan}
                 </ReactMarkdown>
               </div>
 
@@ -285,7 +307,7 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
         </AnimatePresence>
 
         {/* Empty State / Hint */}
-        {!plan && !loading && (
+        {!generatedPlan && !activePlan && !loading && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -123,8 +123,11 @@ export default function Workouts() {
       const planKey = `plan_saved_${user.uid}`;
       const saved = localStorage.getItem(planKey);
       setCustomPlan(saved);
+      if (!saved && workoutLocation === 'custom') {
+        setWorkoutLocation('gym');
+      }
     }
-  }, [user]);
+  }, [user, workoutLocation]);
   const shareCardRef = useRef(null);
 
   useEffect(() => {
@@ -274,16 +277,18 @@ export default function Workouts() {
             >
               🏠 {t('homeWorkout')}
             </button>
-            <button
-              onClick={() => setWorkoutLocation('custom')}
-              className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${
-                workoutLocation === 'custom'
-                  ? 'bg-orange-500 text-black shadow-md'
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              ✨ {t('aiPlan')}
-            </button>
+            {customPlan && (
+              <button
+                onClick={() => setWorkoutLocation('custom')}
+                className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                  workoutLocation === 'custom'
+                    ? 'bg-orange-500 text-black shadow-md'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                ✨ {t('aiPlan')}
+              </button>
+            )}
           </div>
         </div>
 
