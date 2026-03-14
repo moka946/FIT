@@ -109,6 +109,8 @@ const translations = {
     Thursday: 'Thursday',
     Friday: 'Friday',
     Saturday: 'Saturday',
+    customPlan: 'Custom Plan',
+    aiPlan: 'AI Plan',
 
     chestWorkout: 'Chest & Triceps',
     backWorkout: 'Back & Biceps',
@@ -502,6 +504,8 @@ const translations = {
     Thursday: 'الخميس',
     Friday: 'الجمعة',
     Saturday: 'السبت',
+    customPlan: 'خطة مخصصة',
+    aiPlan: 'خطة AI',
 
     chestWorkout: 'صدر وترايسبس',
     backWorkout: 'ظهر وبايسبس',

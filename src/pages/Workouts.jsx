@@ -7,6 +7,8 @@ import FooterCredit from '@/components/FooterCredit';
 import ExerciseCard from '@/components/workout/ExerciseCard';
 import { useLanguage } from '@/components/LanguageContext';
 import { useExerciseDays } from '@/lib/useExerciseDays';
+import { useAuth } from '@/lib/AuthContext';
+import { parseExercisesFromPlan } from '@/utils/planParser';
 
 const workoutModules = {
   Chest: {
@@ -107,12 +109,22 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 export default function Workouts() {
   const { t, language, isRTL } = useLanguage();
   const { getTrainingDays, isTrainingDay } = useExerciseDays();
+  const { user } = useAuth();
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const [selectedDay, setSelectedDay] = useState(today);
   const [showShareCard, setShowShareCard] = useState(false);
   const [workoutLocation, setWorkoutLocation] = useState(() => {
     return localStorage.getItem('fitegypt_workout_location') || 'gym';
   });
+  const [customPlan, setCustomPlan] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      const planKey = `plan_saved_${user.uid}`;
+      const saved = localStorage.getItem(planKey);
+      setCustomPlan(saved);
+    }
+  }, [user]);
   const shareCardRef = useRef(null);
 
   useEffect(() => {
@@ -123,6 +135,18 @@ export default function Workouts() {
   const sortedTrainingDays = [...trainingDays].sort((a, b) => days.indexOf(a) - days.indexOf(b));
 
   const getWorkoutForDay = (dayName) => {
+    if (workoutLocation === 'custom') {
+      const exercises = parseExercisesFromPlan(customPlan, dayName);
+      if (exercises.length === 0) return { titleKey: 'restDay', muscleGroupKey: 'recovery', duration_minutes: 0, exercises: [] };
+      return {
+        title: `${dayName} ${t('customPlan')}`,
+        isCustom: true,
+        muscleGroupKey: 'mixed',
+        duration_minutes: exercises.length * 10,
+        exercises: exercises
+      };
+    }
+
     if (!isTrainingDay(dayName)) return { titleKey: 'restDay', muscleGroupKey: 'recovery', duration_minutes: 0, exercises: [] };
 
     const dayIndex = sortedTrainingDays.indexOf(dayName);
@@ -168,6 +192,7 @@ export default function Workouts() {
   const goToNextDay = () => setSelectedDay(days[(currentIndex + 1) % 7]);
 
   const renderWorkoutTitle = (workout) => {
+    if (workout.isCustom) return workout.title;
     if (workout.isCombined) {
       return workout.combinedTitles.map(key => t(key)).join(' + ');
     }
@@ -248,6 +273,16 @@ export default function Workouts() {
               }`}
             >
               🏠 {t('homeWorkout')}
+            </button>
+            <button
+              onClick={() => setWorkoutLocation('custom')}
+              className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                workoutLocation === 'custom'
+                  ? 'bg-orange-500 text-black shadow-md'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              ✨ {t('aiPlan')}
             </button>
           </div>
         </div>
