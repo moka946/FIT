@@ -37,7 +37,7 @@ const workoutModules = {
     duration_minutes: 70,
     exercises: [
       { name: 'Barbell Squats', titleKey: 'ex_squat', descKey: 'ex_squat_desc', sets: 4, reps: '8-10', calories: 85, fat: 10, gif_url: '/exercises/BARBELL-SQUAT.gif' },
-      { name: 'Leg Press', titleKey: 'ex_leg_press', descKey: 'ex_leg_press_desc', sets: 3, reps: '12-15', calories: 50, fat: 4, gif_url: '/exercises/Leg-Press.mp4' },
+      { name: 'Leg Press', titleKey: 'ex_leg_press', descKey: 'ex_leg_press_desc', sets: 3, reps: '12-15', calories: 50, fat: 4, gif_url: '/exercises/Leg-Press.gif' },
       { name: 'Leg Extensions', titleKey: 'ex_leg_extension', descKey: 'ex_leg_extension_desc', sets: 3, reps: '12-15', calories: 40, fat: 3, gif_url: '/exercises/LEG-EXTENSION.gif' },
       { name: 'Calf Raises', titleKey: 'ex_calf_raise', descKey: 'ex_calf_raise_desc', sets: 4, reps: '15-20', calories: 20, fat: 2, gif_url: '/exercises/Calf-Raise.gif' },
     ]
@@ -73,8 +73,8 @@ const homeWorkoutModules = {
     duration_minutes: 45,
     exercises: [
       { name: 'Burpees', titleKey: 'ex_burpee', descKey: 'ex_burpee_desc', sets: 4, reps: '15-20', calories: 60, fat: 6, gif_url: '/exercises/Burpee.gif' },
-      { name: 'Mountain Climbers', titleKey: 'ex_mountain_climber', descKey: 'ex_mountain_climber_desc', sets: 4, reps: '30s', calories: 45, fat: 4, gif_url: '/exercises/Mountain-Climber.mp4' },
-      { name: 'Cross-Body Mountain Climber', titleKey: 'ex_cross_body_mc', descKey: 'ex_cross_body_mc_desc', sets: 3, reps: '30s', calories: 45, fat: 5, gif_url: '/exercises/Cross-Body-Mountain-Climber.mp4' },
+      { name: 'Mountain Climbers', titleKey: 'ex_mountain_climber', descKey: 'ex_mountain_climber_desc', sets: 4, reps: '30s', calories: 45, fat: 4, gif_url: '/exercises/Mountain-Climber.gif' },
+      { name: 'Cross-Body Mountain Climber', titleKey: 'ex_cross_body_mc', descKey: 'ex_cross_body_mc_desc', sets: 3, reps: '30s', calories: 45, fat: 5, gif_url: '/exercises/Cross-Body-Mountain-Climber.gif' },
       { name: 'Superman Holds', titleKey: 'ex_superman', descKey: 'ex_superman_desc', sets: 3, reps: '30-45s', calories: 30, fat: 3, gif_url: '/exercises/Front-Plank.gif' },
     ]
   },
@@ -96,7 +96,7 @@ const homeWorkoutModules = {
     exercises: [
       { name: 'Pike Push-ups', titleKey: 'ex_pike_pushups', descKey: 'ex_pike_pushups_desc', sets: 4, reps: '10-15', calories: 40, fat: 4, gif_url: '/exercises/Push-Up.gif' },
       { name: 'Burpees', titleKey: 'ex_burpee', descKey: 'ex_burpee_desc', sets: 4, reps: '15 reps', calories: 50, fat: 5, gif_url: '/exercises/Burpee.gif' },
-      { name: 'Mountain Climbers', titleKey: 'ex_mountain_climber', descKey: 'ex_mountain_climber_desc', sets: 3, reps: '30s', calories: 45, fat: 4, gif_url: '/exercises/Mountain-Climber.mp4' },
+      { name: 'Mountain Climbers', titleKey: 'ex_mountain_climber', descKey: 'ex_mountain_climber_desc', sets: 3, reps: '30s', calories: 45, fat: 4, gif_url: '/exercises/Mountain-Climber.gif' },
       { name: 'Front Plank', titleKey: 'ex_plank', descKey: 'ex_plank_desc', sets: 3, reps: '60s', calories: 25, fat: 2, gif_url: '/exercises/Front-Plank.gif' },
     ]
   }
