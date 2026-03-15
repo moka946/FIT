@@ -60,6 +60,16 @@ export const AuthProvider = ({ children }) => {
     
     handleRedirect();
 
+    // Initialize GoogleAuth for Capacitor
+    if (Capacitor.isNativePlatform()) {
+      try {
+        GoogleAuth.initialize();
+      } catch (e) {
+        console.warn("GoogleAuth.initialize error (often safe to ignore):", e);
+      }
+    }
+
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setIsAuthenticated(!!user);
@@ -74,14 +84,23 @@ export const AuthProvider = ({ children }) => {
       ensureAuthIsReady();
       if (Capacitor.isNativePlatform()) {
         console.log("Starting Native Google Sign In...");
-        const googleUser = await GoogleAuth.signIn();
-        console.log("Native Google Sign In success:", googleUser);
+        const googleUser = await GoogleAuth.signIn().catch(err => {
+          console.error("Internal GoogleAuth.signIn native error:", err);
+          throw err;
+        });
+
+        console.log("Native Google Sign In raw result:", googleUser);
+        
         if (googleUser && googleUser.authentication && googleUser.authentication.idToken) {
            const credential = GoogleAuthProvider.credential(googleUser.authentication.idToken);
            await signInWithCredential(auth, credential);
+        } else if (googleUser && googleUser.idToken) {
+           // Fallback for some versions of the plugin
+           const credential = GoogleAuthProvider.credential(googleUser.idToken);
+           await signInWithCredential(auth, credential);
         } else {
-           console.error("Missing idToken in googleUser:", googleUser);
-           throw new Error("Google login failed to return token.");
+           console.error("Google login failed - no ID token found in response.", googleUser);
+           throw new Error("Google login failed to return a valid security token.");
         }
       } else {
         const provider = new GoogleAuthProvider();
