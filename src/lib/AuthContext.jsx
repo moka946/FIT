@@ -71,10 +71,16 @@ export const AuthProvider = ({ children }) => {
   const login = async () => {
     try {
       ensureAuthIsReady();
-      const provider = new GoogleAuthProvider();
       if (Capacitor.isNativePlatform()) {
-        await signInWithRedirect(auth, provider);
+        const googleUser = await GoogleAuth.signIn();
+        if (googleUser && googleUser.authentication && googleUser.authentication.idToken) {
+           const credential = GoogleAuthProvider.credential(googleUser.authentication.idToken);
+           await signInWithCredential(auth, credential);
+        } else {
+           throw new Error("Google login failed to return token.");
+        }
       } else {
+        const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
       }
     } catch (error) {

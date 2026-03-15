@@ -2,5 +2,12 @@
   "appId": "com.fitegypt.app",
   "appName": "fitegypt",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": ["profile", "email"],
+      "serverClientId": "635246831897-pralfts0dcnorogcgimnva77cq7hufk4.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+    }
+  }
 }
