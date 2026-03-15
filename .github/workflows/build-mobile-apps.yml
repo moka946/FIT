@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-android:
     runs-on: ubuntu-latest
@@ -42,6 +45,16 @@ jobs:
         with:
           name: app-debug.apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Create Direct APK Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "android/app/build/outputs/apk/debug/app-debug.apk"
+          tag: "latest"
+          name: "Latest Android APK"
+          body: "Click the `app-debug.apk` file below to download the app directly to your Android device."
+          allowUpdates: true
+          makeLatest: true
 
   build-ios:
     runs-on: macos-latest
