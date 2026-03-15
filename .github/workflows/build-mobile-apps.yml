@@ -46,7 +46,11 @@ jobs:
 
       - name: Generate Signing Report
         working-directory: ./android
-        run: ./gradlew signingReport
+        run: |
+          ./gradlew signingReport > signing_report.txt
+          echo "### Android Signing Report" >> $GITHUB_STEP_SUMMARY
+          grep -A 5 "Variant: debug" signing_report.txt >> $GITHUB_STEP_SUMMARY
+          echo "#### IMPORTANT: Copy the SHA-1 above to Firebase Console!" >> $GITHUB_STEP_SUMMARY
 
       - name: Build APK
         working-directory: ./android

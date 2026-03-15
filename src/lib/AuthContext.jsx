@@ -108,12 +108,17 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Login failed detailed error:", error);
-      if (error.message) console.error("Error message:", error.message);
-      if (error.code) console.error("Error code:", error.code);
-      if (!error.type) {
-        setAuthError(error);
+      let errorMessage = error.message || "Unknown Error";
+      
+      // If native error has a code (like 10: DEVELOPER_ERROR), show it
+      if (error.code) {
+        errorMessage = `(Code ${error.code}) ${errorMessage}`;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
       }
-      throw error;
+      
+      setAuthError({ message: errorMessage });
+      throw new Error(errorMessage);
     }
   };
 

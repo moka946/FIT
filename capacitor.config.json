@@ -5,9 +5,8 @@
   "bundledWebRuntime": false,
   "plugins": {
     "GoogleAuth": {
-      "scopes": ["profile", "email"],
+      "scopes": ["profile", "email", "openid"],
       "serverClientId": "635246831897-pralfts0dcnorogcgimnva77cq7hufk4.apps.googleusercontent.com",
-      "androidClientId": "635246831897-o7ae7popgbmrvdgt3pm3t8pgq4b4ohj6.apps.googleusercontent.com",
       "forceCodeForRefreshToken": true
     }
   }
