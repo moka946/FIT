@@ -10,7 +10,7 @@ import {
   signInWithEmailAndPassword
 } from 'firebase/auth';
 import { Capacitor } from '@capacitor/core';
-import { signInWithRedirect } from 'firebase/auth';
+import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
 
 const AuthContext = createContext(null);
 
@@ -40,6 +40,24 @@ export const AuthProvider = ({ children }) => {
       setIsLoadingAuth(false);
       return;
     }
+
+    // Handle the redirect result if returning from Google sign in
+    const handleRedirect = async () => {
+      if (Capacitor.isNativePlatform()) {
+        try {
+          const result = await getRedirectResult(auth);
+          if (result && result.user) {
+            setUser(result.user);
+            setIsAuthenticated(true);
+          }
+        } catch (error) {
+          console.error("Error with redirect login:", error);
+          setAuthError(error);
+        }
+      }
+    };
+    
+    handleRedirect();
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
