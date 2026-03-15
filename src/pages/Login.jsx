@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/lib/AuthContext';
+import { Capacitor } from '@capacitor/core';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dumbbell, Chrome, Mail, Lock, ArrowRight, Loader2, UserPlus } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -93,6 +94,8 @@ export default function Login() {
                             </h2>
 
                             <form onSubmit={handleEmailAuth} className="space-y-4">
+                                {!Capacitor.isNativePlatform() && (
+                                    <>
                                 <button
                                     type="button"
                                     onClick={handleGoogleLogin}
@@ -117,6 +120,9 @@ export default function Login() {
                                         <span className="bg-zinc-900 px-2 text-zinc-500">{t('orUseEmail')}</span>
                                     </div>
                                 </div>
+
+                                                                    </>
+                                )}
 
                                 <div className="space-y-3">
                                     <div className="relative group">
