@@ -94,8 +94,6 @@ export default function Login() {
                             </h2>
 
                             <form onSubmit={handleEmailAuth} className="space-y-4">
-                                {!Capacitor.isNativePlatform() && (
-                                    <>
                                 <button
                                     type="button"
                                     onClick={handleGoogleLogin}
@@ -121,8 +119,7 @@ export default function Login() {
                                     </div>
                                 </div>
 
-                                                                    </>
-                                )}
+
 
                                 <div className="space-y-3">
                                     <div className="relative group">
