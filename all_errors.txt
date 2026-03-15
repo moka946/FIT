@@ -1,0 +1,21 @@
+
+File: C:\Users\mokat\OneDrive\Documents\FIT\src\components\ProfileSetupModal.jsx
+  Line 2:18 - 'AnimatePresence' is defined but never used. (unused-imports/no-unused-imports)
+  Line 3:10 - 'Target' is defined but never used. (unused-imports/no-unused-imports)
+
+File: C:\Users\mokat\OneDrive\Documents\FIT\src\components\SettingsMenu.jsx
+  Line 1:27 - 'useEffect' is defined but never used. (unused-imports/no-unused-imports)
+
+File: C:\Users\mokat\OneDrive\Documents\FIT\src\components\coach\CoachChat.jsx
+  Line 6:3 - 'Loader2' is defined but never used. (unused-imports/no-unused-imports)
+
+File: C:\Users\mokat\OneDrive\Documents\FIT\src\pages\Home.jsx
+  Line 10:10 - 'useAuth' is defined but never used. (unused-imports/no-unused-imports)
+
+File: C:\Users\mokat\OneDrive\Documents\FIT\src\pages\Meals.jsx
+  Line 2:26 - 'Sparkles' is defined but never used. (unused-imports/no-unused-imports)
+
+File: C:\Users\mokat\OneDrive\Documents\FIT\src\pages\Workouts.jsx
+  Line 2:64 - 'Flame' is defined but never used. (unused-imports/no-unused-imports)
+  Line 2:71 - 'Zap' is defined but never used. (unused-imports/no-unused-imports)
+  Line 2:84 - 'Download' is defined but never used. (unused-imports/no-unused-imports)

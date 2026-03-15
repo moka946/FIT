@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Dumbbell, Calendar, Clock, ChevronLeft, ChevronRight, Flame, Zap, Share2, Download, CheckCircle } from 'lucide-react';
+import { Dumbbell, Calendar, Clock, ChevronLeft, ChevronRight, Share2, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import BottomNav from '@/components/navigation/BottomNav';

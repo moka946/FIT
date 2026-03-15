@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/lib/AuthContext';
-import { Capacitor } from '@capacitor/core';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dumbbell, Chrome, Mail, Lock, ArrowRight, Loader2, UserPlus } from 'lucide-react';
 import { toast } from 'react-hot-toast';

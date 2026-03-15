@@ -7,7 +7,6 @@ import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import SettingsMenu from '@/components/SettingsMenu';
 import { useLanguage } from '@/components/LanguageContext';
-import { useAuth } from '@/lib/AuthContext';
 
 function getWaterKey() {
   return `fitegypt_water_${new Date().toISOString().split('T')[0]}`;

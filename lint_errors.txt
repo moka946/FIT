@@ -1,0 +1,10 @@
+
+C:\Users\mokat\OneDrive\Documents\FIT\src\lib\AuthContext.jsx
+  0:0  warning  File ignored because no matching configuration was supplied
+
+C:\Users\mokat\OneDrive\Documents\FIT\src\pages\Login.jsx
+  3:10  error  'Capacitor' is defined but never used  unused-imports/no-unused-imports
+
+??? 2 problems (1 error, 1 warning)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

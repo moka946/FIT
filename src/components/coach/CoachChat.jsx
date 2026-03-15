@@ -3,7 +3,6 @@ import {
   Send, 
   Volume2, 
   VolumeX, 
-  Loader2, 
   Bot, 
   User, 
   Plus, 

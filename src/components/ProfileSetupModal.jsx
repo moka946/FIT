@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Target, Weight, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Weight, X } from 'lucide-react';
 import { useLanguage } from '@/components/LanguageContext';
 
 export default function ProfileSetupModal({ onClose }) {
