@@ -64,7 +64,7 @@ const homeWorkoutModules = {
     duration_minutes: 40,
     exercises: [
       { name: 'Push-ups', titleKey: 'ex_pushups', descKey: 'ex_pushups_desc', sets: 4, reps: '15-20', calories: 40, fat: 4, gif_url: '/exercises/Push-Up.gif' },
-      { name: 'Wide Push-ups', titleKey: 'ex_wide_pushups', descKey: 'ex_wide_pushups_desc', sets: 3, reps: '12-15', calories: 35, fat: 3, gif_url: '/exercises/Wide-Push-Up.gif' },
+      { name: 'Wide Push-ups', titleKey: 'ex_wide_pushups', descKey: 'ex_wide_pushups_desc', sets: 3, reps: '12-15', calories: 35, fat: 3, gif_url: '/exercises/Push-Up.gif' },
       { name: 'Diamond Push-ups', titleKey: 'ex_diamond_pushups', descKey: 'ex_diamond_pushups_desc', sets: 3, reps: '10-12', calories: 35, fat: 3, gif_url: '/exercises/Diamond-Push-Up.gif' },
       { name: 'Front Plank', titleKey: 'ex_plank', descKey: 'ex_plank_desc', sets: 3, reps: '60s', calories: 30, fat: 3, gif_url: '/exercises/Front-Plank.gif' },
     ]

@@ -9,6 +9,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword
 } from 'firebase/auth';
+import { Capacitor } from '@capacitor/core';
+import { signInWithRedirect } from 'firebase/auth';
 
 const AuthContext = createContext(null);
 
@@ -52,7 +54,11 @@ export const AuthProvider = ({ children }) => {
     try {
       ensureAuthIsReady();
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      if (Capacitor.isNativePlatform()) {
+        await signInWithRedirect(auth, provider);
+      } else {
+        await signInWithPopup(auth, provider);
+      }
     } catch (error) {
       console.error("Login failed", error);
       if (!error.type) {
