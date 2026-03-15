@@ -4,4 +4,5 @@
     <string name="title_activity_main">fitegypt</string>
     <string name="package_name">com.fitegypt.app</string>
     <string name="custom_url_scheme">com.fitegypt.app</string>
+    <string name="server_client_id">635246831897-pralfts0dcnorogcgimnva77cq7hufk4.apps.googleusercontent.com</string>
 </resources>

@@ -20,7 +20,9 @@ export default function Login() {
         try {
             await login();
         } catch (error) {
-            toast.error(t('googleLoginFailed'));
+            console.error("Google Login Error:", error);
+            const errorMessage = error.message || t('googleLoginFailed');
+            toast.error(errorMessage);
         } finally {
             setIsLoading(false);
         }

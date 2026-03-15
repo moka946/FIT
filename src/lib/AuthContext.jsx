@@ -10,7 +10,8 @@ import {
   signInWithEmailAndPassword
 } from 'firebase/auth';
 import { Capacitor } from '@capacitor/core';
-import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
+import { signInWithRedirect, getRedirectResult, signInWithCredential } from 'firebase/auth';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 const AuthContext = createContext(null);
 
@@ -72,11 +73,14 @@ export const AuthProvider = ({ children }) => {
     try {
       ensureAuthIsReady();
       if (Capacitor.isNativePlatform()) {
+        console.log("Starting Native Google Sign In...");
         const googleUser = await GoogleAuth.signIn();
+        console.log("Native Google Sign In success:", googleUser);
         if (googleUser && googleUser.authentication && googleUser.authentication.idToken) {
            const credential = GoogleAuthProvider.credential(googleUser.authentication.idToken);
            await signInWithCredential(auth, credential);
         } else {
+           console.error("Missing idToken in googleUser:", googleUser);
            throw new Error("Google login failed to return token.");
         }
       } else {
@@ -84,7 +88,9 @@ export const AuthProvider = ({ children }) => {
         await signInWithPopup(auth, provider);
       }
     } catch (error) {
-      console.error("Login failed", error);
+      console.error("Login failed detailed error:", error);
+      if (error.message) console.error("Error message:", error.message);
+      if (error.code) console.error("Error code:", error.code);
       if (!error.type) {
         setAuthError(error);
       }
