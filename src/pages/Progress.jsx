@@ -5,10 +5,11 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 import BottomNav from '@/components/navigation/BottomNav';
 import FooterCredit from '@/components/FooterCredit';
 import { useLanguage } from '@/components/LanguageContext';
+import { useAuth } from '@/lib/AuthContext';
 import toast from 'react-hot-toast';
 
-const PROGRESS_KEY = 'fitegypt_progress';
-const MEASUREMENTS_KEY = 'fitegypt_measurements';
+// Keys are now dynamic based on user in the component
+
 
 function getWeekDates() {
   const today = new Date();
@@ -48,27 +49,49 @@ function calcStreak(completedDays) {
 
 export default function Progress() {
   const { t, isRTL } = useLanguage();
+  const { user, isLoadingAuth } = useAuth();
 
-  const [progress, setProgress] = useState(() => {
-    const saved = localStorage.getItem(PROGRESS_KEY);
-    return saved ? JSON.parse(saved) : { completedDays: {} };
-  });
+  const PROGRESS_KEY = user ? `fitegypt_progress_${user.uid}` : 'fitegypt_progress_guest';
+  const MEASUREMENTS_KEY = user ? `fitegypt_measurements_${user.uid}` : 'fitegypt_measurements_guest';
 
-  const [measurements, setMeasurements] = useState(() => {
-    const saved = localStorage.getItem(MEASUREMENTS_KEY);
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [progress, setProgress] = useState({ completedDays: {} });
+  const [measurements, setMeasurements] = useState([]);
+
+  // Load data when user changes
+  useEffect(() => {
+    if (isLoadingAuth) return;
+    const savedProgress = localStorage.getItem(PROGRESS_KEY);
+    if (savedProgress) {
+      setProgress(JSON.parse(savedProgress));
+    } else {
+      setProgress({ completedDays: {} });
+    }
+
+    const savedMeasurements = localStorage.getItem(MEASUREMENTS_KEY);
+    if (savedMeasurements) {
+      setMeasurements(JSON.parse(savedMeasurements));
+    } else {
+      setMeasurements([]);
+    }
+  }, [PROGRESS_KEY, MEASUREMENTS_KEY]);
 
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [measureForm, setMeasureForm] = useState({ weight: '', waist: '', arms: '', chest: '' });
 
+  // Save progress when it changes
   useEffect(() => {
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
-  }, [progress]);
+    // Only save if we have data or it's been initialized
+    if (Object.keys(progress.completedDays).length > 0) {
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    }
+  }, [progress, PROGRESS_KEY]);
 
+  // Save measurements when they change
   useEffect(() => {
-    localStorage.setItem(MEASUREMENTS_KEY, JSON.stringify(measurements));
-  }, [measurements]);
+    if (measurements.length > 0) {
+      localStorage.setItem(MEASUREMENTS_KEY, JSON.stringify(measurements));
+    }
+  }, [measurements, MEASUREMENTS_KEY]);
 
   const weekDates = getWeekDates();
   const todayKey = formatDateKey(new Date());
@@ -104,6 +127,14 @@ export default function Progress() {
     setMeasureForm({ weight: '', waist: '', arms: '', chest: '' });
     toast.success(t('measurementSaved'));
   };
+
+  if (isLoadingAuth) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   const chartData = measurements
     .filter(m => m.weight > 0)
