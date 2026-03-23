@@ -130,55 +130,7 @@ const egyptianMeals = [
   }
 ];
 
-// Budget meals (under 20 EGP per serving)
-const budgetMeals = [
-  {
-    titleKey: "meal_ful",
-    portionKey: "meal_ful_portion",
-    howMuchKey: "meal_ful_how",
-    tipKey: "meal_ful_tip",
-    ingredientsKey: "meal_ful_ingredients",
-    instructionsKey: "meal_ful_instr",
-    meal_type: "Budget",
-    calories: 180, protein: 14, carbs: 20, fats: 2,
-    cost_egp: 10,
-    image_url: "/meal-images/full.jpg"
-  },
-  {
-    titleKey: "meal_lentil_soup",
-    portionKey: "meal_lentil_soup_portion",
-    howMuchKey: "meal_lentil_soup_how",
-    tipKey: "meal_lentil_soup_tip",
-    ingredientsKey: "meal_lentil_soup_ingredients",
-    instructionsKey: "meal_lentil_soup_instr",
-    meal_type: "Budget",
-    calories: 200, protein: 12, carbs: 30, fats: 3,
-    cost_egp: 8,
-  },
-  {
-    titleKey: "meal_egg_omelette",
-    portionKey: "meal_egg_omelette_portion",
-    howMuchKey: "meal_egg_omelette_how",
-    tipKey: "meal_egg_omelette_tip",
-    ingredientsKey: "meal_egg_omelette_ingredients",
-    instructionsKey: "meal_egg_omelette_instr",
-    meal_type: "Budget",
-    calories: 210, protein: 18, carbs: 2, fats: 15,
-    cost_egp: 12,
-    image_url: "/meal-images/egg_omelete.jpg"
-  },
-  {
-    titleKey: "meal_koshary",
-    portionKey: "meal_koshary_portion",
-    howMuchKey: "meal_koshary_how",
-    tipKey: "meal_koshary_tip",
-    ingredientsKey: "meal_koshary_ingredients",
-    instructionsKey: "meal_koshary_instr",
-    meal_type: "Budget",
-    calories: 450, protein: 12, carbs: 85, fats: 8,
-    cost_egp: 15,
-  },
-];
+// Budget meals removed per request
 
 // Ramadan-specific meals
 const ramadanMeals = [
@@ -275,7 +227,7 @@ const ramadanMeals = [
   },
 ];
 
-const normalMealTypes = ["All", "custom", "Breakfast", "Lunch", "Dinner", "Snack", "Pre-Workout", "Post-Workout", "Budget"];
+const normalMealTypes = ["All", "custom", "Breakfast", "Lunch", "Dinner", "Snack", "Pre-Workout", "Post-Workout"];
 const ramadanMealTypes = ["All", "custom", "Suhoor", "Iftar", "Post-Tarawih"];
 
 const mealTypeKeys = {
@@ -287,7 +239,6 @@ const mealTypeKeys = {
   "Snack": "snack",
   "Pre-Workout": "preWorkout",
   "Post-Workout": "postWorkout",
-  "Budget": "budget",
   "Suhoor": "suhoor",
   "Iftar": "iftar",
   "Post-Tarawih": "postTarawih",
@@ -308,12 +259,12 @@ export default function Meals() {
   const isRamadanMode = localStorage.getItem('fitegypt_ramadan_mode') === 'true';
 
   const mealTypes = isRamadanMode ? ramadanMealTypes : normalMealTypes;
-  const rawMeals = isRamadanMode ? ramadanMeals : [...egyptianMeals, ...budgetMeals];
+  const rawMeals = isRamadanMode ? ramadanMeals : [...egyptianMeals];
   
   const aiMeals = selectedType === 'custom' ? parseMealsFromPlan(customPlan) : [];
   const allMeals = selectedType === 'custom' ? aiMeals : rawMeals;
 
-  const mealTypeOrder = { "Suhoor": 1, "Iftar": 2, "Post-Tarawih": 3, "Breakfast": 1, "Lunch": 2, "Dinner": 3, "Snack": 4, "Pre-Workout": 5, "Post-Workout": 6, "Budget": 7 };
+  const mealTypeOrder = { "Suhoor": 1, "Iftar": 2, "Post-Tarawih": 3, "Breakfast": 1, "Lunch": 2, "Dinner": 3, "Snack": 4, "Pre-Workout": 5, "Post-Workout": 6 };
 
   const filteredMeals = selectedType === "All"
     ? [...allMeals].sort((a, b) => (mealTypeOrder[a.meal_type] || 99) - (mealTypeOrder[b.meal_type] || 99))

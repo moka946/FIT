@@ -153,7 +153,9 @@ Please respond in ${getAIResponseLanguageName()}. Format beautifully using markd
       const data = await response.json();
       const responseText = data.choices[0]?.message?.content || '';
       setGeneratedPlan(responseText);
-      // If no active plan exists, we show this one as generated but not yet "synced"
+      setActivePlan(responseText);
+      setIsSaved(true);
+      // Plan is now auto-saved immediately upon generation
     } catch (error) {
       console.error('Plan Generation Error:', error);
       const errorMsg = error?.message || String(error);

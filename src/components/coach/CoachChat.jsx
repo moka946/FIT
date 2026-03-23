@@ -321,21 +321,26 @@ export default function CoachChat() {
                 )}
               </div>
 
-              <div className={`max-w-[85%] ${msg.role === 'user' ? (isRTL ? 'items-start' : 'items-end') : (isRTL ? 'items-end' : 'items-start')}`}>
-                <div className={`rounded-2xl px-4 py-3 shadow-md ${msg.role === 'coach' ? 'bg-zinc-900/90 border border-zinc-800/50' : 'bg-orange-500 text-black font-medium'}`}>
+              <div className={`max-w-[85%] md:max-w-[80%] ${msg.role === 'user' ? (isRTL ? 'items-start' : 'items-end') : (isRTL ? 'items-end' : 'items-start')}`}>
+                <div className={`rounded-3xl px-5 py-4 shadow-xl ${msg.role === 'coach' ? 'bg-zinc-900/95 border border-zinc-700/50' : 'bg-gradient-to-br from-orange-400 to-orange-500 text-black font-bold'}`}>
                   <ReactMarkdown 
                     remarkPlugins={[remarkGfm]}
-                    className={`text-sm leading-relaxed ${msg.role === 'coach' ? 'text-zinc-200' : 'text-black'} prose prose-sm prose-invert max-w-none`}
+                    className={`text-[15px] sm:text-base leading-8 tracking-wide ${msg.role === 'coach' ? 'text-zinc-100' : 'text-black'} prose prose-invert max-w-none`}
                     components={{
                       table: ({ node, ...props }) => (
-                        <div className="overflow-x-auto my-4 rounded-xl border border-zinc-800 bg-black/20">
-                          <table className="w-full border-collapse text-xs" {...props} />
+                        <div className="overflow-x-auto my-6 rounded-2xl border border-zinc-700/50 bg-black/40">
+                          <table className="w-full border-collapse text-sm" {...props} />
                         </div>
                       ),
-                      thead: ({ node, ...props }) => <thead className="bg-zinc-800/30" {...props} />,
-                      th: ({ node, ...props }) => <th className="px-3 py-2 text-left font-black uppercase tracking-widest text-[9px] text-orange-500 border-b border-zinc-800" {...props} />,
-                      td: ({ node, ...props }) => <td className="px-3 py-2 text-zinc-300 border-b border-zinc-800/30" {...props} />,
-                      strong: ({ node, ...props }) => <strong className="text-white font-bold" {...props} />,
+                      thead: ({ node, ...props }) => <thead className="bg-zinc-800/50" {...props} />,
+                      th: ({ node, ...props }) => <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[10px] text-orange-500 border-b border-zinc-700/50" {...props} />,
+                      td: ({ node, ...props }) => <td className="px-4 py-3 text-zinc-300 border-b border-zinc-800/30 font-medium" {...props} />,
+                      strong: ({ node, ...props }) => <strong className={`font-black ${msg.role === 'coach' ? 'text-white' : 'text-black'}`} {...props} />,
+                      p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,
+                      li: ({ node, ...props }) => <li className="mb-2 marker:text-orange-500" {...props} />,
+                      h1: ({ node, ...props }) => <h1 className="text-xl font-black mb-4 mt-6 text-white" {...props} />,
+                      h2: ({ node, ...props }) => <h2 className="text-lg font-bold mb-3 mt-5 text-white" {...props} />,
+                      h3: ({ node, ...props }) => <h3 className="text-base font-bold mb-3 mt-4 text-orange-400" {...props} />,
                     }}
                   >
                     {msg.content}
